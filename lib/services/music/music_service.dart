@@ -5,6 +5,8 @@ import 'package:tunehive/core/storage/storage_service.dart';
 import 'package:tunehive/models/album_model.dart';
 import 'package:tunehive/models/artist_model.dart';
 import 'package:tunehive/models/genre_model.dart';
+import 'package:tunehive/models/mood_model.dart';
+import 'package:tunehive/models/playlist_model.dart';
 import 'package:tunehive/models/song_model.dart';
 import 'package:tunehive/providers/apple_music/apple_music_provider.dart';
 import 'package:tunehive/providers/local/local_music_provider.dart';
@@ -20,20 +22,24 @@ class MusicService {
   MusicService({
     StorageService? storage,
     List<MusicProvider>? providers,
-  }) : _storage = storage ?? const _NoopStorage(),
+  }) : _storage = storage ?? _NoopStorage(),
        _activeId = 'mock' {
     _providers = providers ??
         <MusicProvider>[
-          const MockMusicProvider(),
-          const LocalMusicProvider(),
+          MockMusicProvider(),
+          LocalMusicProvider(),
           SpotifyProvider(),
           AppleMusicProvider(),
         ];
+    _active = _providers.firstWhere(
+      (p) => p.id == _activeId,
+      orElse: () => _providers.first,
+    );
     _loadPersistedSelection();
   }
 
   final StorageService _storage;
-  MusicProvider _active;
+  late MusicProvider _active;
   String _activeId;
   late List<MusicProvider> _providers;
 
@@ -56,8 +62,14 @@ class MusicService {
   }
 
   void _loadPersistedSelection() {
-    // In-memory default is the mock provider; persisted value is applied
-    // after storage boots.
+    try {
+      final persisted = _storage.getString('active_music_provider');
+      if (persisted == null) return;
+      _active = providerFor(persisted);
+      _activeId = persisted;
+    } catch (_) {
+      // Storage unavailable during startup — fall back gracefully.
+    }
   }
 
   // ---- Delegated provider calls ------------------------------------------
@@ -91,6 +103,30 @@ class MusicService {
   Future<List<GenreModel>> getCategories() async =>
       _guard(() => _active.getCategories());
 
+  Future<List<MoodModel>> getMoods() async => _guard(
+        () => _active.getMoods(),
+      );
+
+  Future<List<HeroFeature>> getHeroFeatures() async => _guard(
+        () => _active.getHeroFeatures(),
+      );
+
+  Future<List<PlaylistModel>> getDailyMixes() async => _guard(
+        () => _active.getDailyMixes(),
+      );
+
+  Future<List<PlaylistModel>> getEditorialPlaylists() async => _guard(
+        () => _active.getEditorialPlaylists(),
+      );
+
+  Future<List<String>> getTrendingSearches() async => _guard(
+        () => _active.getTrendingSearches(),
+      );
+
+  Future<List<SongModel>> getSongsForMood(String moodId) async => _guard(
+        () => _active.getSongsForMood(moodId),
+      );
+
   Future<SongModel?> getSong(String id) async =>
       _guard(() => _active.getSong(id));
 
@@ -116,5 +152,5 @@ class MusicService {
 }
 
 class _NoopStorage extends StorageService {
-  const _NoopStorage() : super.noop();
+  _NoopStorage() : super.noop();
 }

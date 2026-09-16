@@ -7,12 +7,6 @@ import 'package:tunehive/providers/music_provider.dart';
 class AppleMusicMapper {
   const AppleMusicMapper();
 
-  static String _attr(Map<String, dynamic> json, String key) {
-    final attributes = json['attributes'];
-    if (attributes is Map) return attributes[key]?.toString() ?? '';
-    return '';
-  }
-
   static String imageUrl(Map<String, dynamic> json) {
     final art = json['attributes']?['artwork'];
     if (art is Map) {
@@ -53,7 +47,7 @@ class AppleMusicMapper {
       name: attributes['name'] as String? ?? 'Unknown Album',
       artistName: attributes['artistName'] as String? ?? 'Unknown Artist',
       artworkUrl: imageUrl(json),
-      releaseYear: int.tryParse('${attributes['releaseDate'] ?? ''}'.substring(0, 4)) as int?,
+      releaseYear: int.tryParse('${attributes['releaseDate'] ?? ''}'.substring(0, 4)),
       totalTracks: trackCount,
     );
   }

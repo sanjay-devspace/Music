@@ -10,17 +10,15 @@ import 'package:tunehive/providers/spotify/spotify_mapper.dart';
 /// Spotify-backed [MusicProvider].
 ///
 /// Isolated from the rest of the app: the UI only ever sees domain models.
-class SpotifyProvider implements MusicProvider {
+class SpotifyProvider extends MusicProvider {
   SpotifyProvider({
     SpotifyApi? api,
     SpotifyAuthService auth = const SpotifyAuthService(),
   })  : _api = api ?? SpotifyApi(auth: auth),
-        _auth = auth,
-        _mapper = const SpotifyMapper();
+        _auth = auth;
 
   final SpotifyApi _api;
   final SpotifyAuthService _auth;
-  final SpotifyMapper _mapper;
 
   @override
   String get id => spotifyProviderId;
@@ -34,25 +32,25 @@ class SpotifyProvider implements MusicProvider {
   @override
   Future<List<SongModel>> searchSongs(String query) async {
     final raw = await _api.search(query, 'track');
-    return raw.map(_mapper.song).toList();
+    return raw.map(SpotifyMapper.song).toList();
   }
 
   @override
   Future<List<AlbumModel>> searchAlbums(String query) async {
     final raw = await _api.search(query, 'album');
-    return raw.map(_mapper.album).toList();
+    return raw.map(SpotifyMapper.album).toList();
   }
 
   @override
   Future<List<ArtistModel>> searchArtists(String query) async {
     final raw = await _api.search(query, 'artist');
-    return raw.map(_mapper.artist).toList();
+    return raw.map(SpotifyMapper.artist).toList();
   }
 
   @override
   Future<List<SongModel>> getTrendingSongs() async {
     final raw = await _api.topTracks(limit: 20);
-    return raw.map(_mapper.song).toList();
+    return raw.map(SpotifyMapper.song).toList();
   }
 
   @override
@@ -63,25 +61,25 @@ class SpotifyProvider implements MusicProvider {
   @override
   Future<List<SongModel>> getRecommendedForYou() async {
     final raw = await _api.topTracks(limit: 20);
-    return raw.map(_mapper.song).toList();
+    return raw.map(SpotifyMapper.song).toList();
   }
 
   @override
   Future<List<SongModel>> getRecentlyPlayed() async {
     final raw = await _api.topTracks(limit: 10);
-    return raw.map(_mapper.song).toList();
+    return raw.map(SpotifyMapper.song).toList();
   }
 
   @override
   Future<List<AlbumModel>> getNewAlbums() async {
     final raw = await _api.newReleases(limit: 20);
-    return raw.map(_mapper.album).toList();
+    return raw.map(SpotifyMapper.album).toList();
   }
 
   @override
   Future<List<ArtistModel>> getPopularArtists() async {
     final raw = await _api.search('year:2025', 'artist');
-    return raw.map(_mapper.artist).toList();
+    return raw.map(SpotifyMapper.artist).toList();
   }
 
   @override
@@ -90,19 +88,19 @@ class SpotifyProvider implements MusicProvider {
   @override
   Future<SongModel?> getSong(String id) async {
     final raw = await _api.track(_stripPrefix(id));
-    return raw == null ? null : _mapper.song(raw);
+    return raw == null ? null : SpotifyMapper.song(raw);
   }
 
   @override
   Future<AlbumModel?> getAlbum(String id) async {
     final raw = await _api.album(_stripPrefix(id));
-    return raw == null ? null : _mapper.album(raw);
+    return raw == null ? null : SpotifyMapper.album(raw);
   }
 
   @override
   Future<ArtistModel?> getArtist(String id) async {
     final raw = await _api.artist(_stripPrefix(id));
-    return raw == null ? null : _mapper.artist(raw);
+    return raw == null ? null : SpotifyMapper.artist(raw);
   }
 
   @override

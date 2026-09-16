@@ -16,6 +16,12 @@ abstract class RouteNames {
   static const String profile = '/profile';
   static const String settings = '/settings';
   static const String queue = '/queue';
+  static const String notificationCenter = '/notifications';
+  static const String connectedProviders = '/connected-providers';
+  static const String likedSongs = '/liked-songs';
+  static const String playlists = '/playlists';
+  static const String recentlyPlayed = '/recently-played';
+  static const String searchResults = '/search-results';
 }
 
 /// Central path strings (using GoRouter URL syntax).
@@ -36,6 +42,12 @@ abstract class RoutePaths {
   static const String profile = '/profile';
   static const String settings = '/settings';
   static const String queue = '/queue';
+  static const String notificationCenter = '/notifications';
+  static const String connectedProviders = '/connected-providers';
+  static const String likedSongs = '/library/liked-songs';
+  static const String playlists = '/library/playlists';
+  static const String recentlyPlayed = '/library/recently-played';
+  static const String searchResults = '/search-results';
 
   static String songWith(String id) => song.replaceFirst(':id', id);
   static String albumWith(String id) => album.replaceFirst(':id', id);

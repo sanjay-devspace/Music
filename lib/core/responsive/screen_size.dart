@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:ui';
 /// Captures the current available screen metrics at build time.
 ///
 /// Created once per layout pass inside `ResponsiveLayoutBuilder` and passed

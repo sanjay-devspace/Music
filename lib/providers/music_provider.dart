@@ -1,8 +1,8 @@
 import 'package:tunehive/models/album_model.dart';
 import 'package:tunehive/models/artist_model.dart';
 import 'package:tunehive/models/genre_model.dart';
+import 'package:tunehive/models/mood_model.dart';
 import 'package:tunehive/models/playlist_model.dart';
-import 'package:tunehive/models/recommendation_model.dart';
 import 'package:tunehive/models/song_model.dart';
 
 /// Core contract every music provider (Spotify, Apple Music, Local, Mock)
@@ -31,6 +31,28 @@ abstract class MusicProvider {
   Future<List<AlbumModel>> getNewAlbums();
   Future<List<ArtistModel>> getPopularArtists();
   Future<List<GenreModel>> getCategories();
+
+  // ---- Home editorial content ----------------------------------------------
+  /// Curated mood row ("Your Mood"). Providers without canonical mood data
+  /// return an empty list and Home falls back to defaults.
+  Future<List<MoodModel>> getMoods() async => const [];
+
+  /// Featured hero cards shown at the top of Home.
+  Future<List<HeroFeature>> getHeroFeatures() async => const [];
+
+  /// Personalized mixes shown in the "Your Daily Mix" section.
+  Future<List<PlaylistModel>> getDailyMixes() async => const [];
+
+  /// Playlist recommendations shown in "Recommended For You".
+  Future<List<PlaylistModel>> getEditorialPlaylists() async => const [];
+
+  /// Searchable trending terms shown on the Search screen.
+  Future<List<String>> getTrendingSearches() async => const [];
+
+  /// Songs matching a mood id ("Your Mood" selection). Providers without a
+  /// mood taxonomy return an empty list.
+  Future<List<SongModel>> getSongsForMood(String moodId) async =>
+      const [];
 
   // ---- Details ------------------------------------------------------------
   Future<SongModel?> getSong(String id);

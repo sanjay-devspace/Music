@@ -31,14 +31,14 @@ class CategoryChip extends StatelessWidget {
           onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-            child: Text(
-              label,
-              style: TextStyle(
-                color: selected ? const Color(0xFF0B1200) : AppColors.textSecondary,
-                fontWeight: selected ? FontWeight.w800 : FontWeight.w500,
-                fontSize: 14,
+child: Text(
+                label,
+                style: TextStyle(
+                  color: selected ? AppColors.onPrimary : AppColors.textSecondary,
+                  fontWeight: selected ? FontWeight.w800 : FontWeight.w500,
+                  fontSize: 14,
+                ),
               ),
-            ),
           ),
         ),
       ),

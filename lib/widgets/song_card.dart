@@ -3,6 +3,7 @@ import 'package:tunehive/app/theme/app_colors.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/models/song_model.dart';
 import 'package:tunehive/widgets/artwork_image.dart';
+import 'package:tunehive/widgets/favorite_button.dart';
 
 /// Song card supporting multiple layout variants.
 class SongCard extends StatelessWidget {
@@ -39,6 +40,7 @@ class SongCard extends StatelessWidget {
           onTap: onTap,
           onPlay: onPlay,
           onMore: onMore,
+          onFavorite: onFavorite,
           width: width,
         );
     }
@@ -109,6 +111,7 @@ class ArtworkSongCard extends StatelessWidget {
     this.onTap,
     this.onPlay,
     this.onMore,
+    this.onFavorite,
     this.width,
   });
 
@@ -116,6 +119,7 @@ class ArtworkSongCard extends StatelessWidget {
   final VoidCallback? onTap;
   final VoidCallback? onPlay;
   final VoidCallback? onMore;
+  final VoidCallback? onFavorite;
   final double? width;
 
   @override
@@ -142,6 +146,24 @@ class ArtworkSongCard extends StatelessWidget {
                   bottom: 8,
                   child: _PlayOverlay(onPlay: onPlay, size: 40),
                 ),
+                if (onFavorite != null)
+                  Positioned(
+                    top: 6,
+                    right: 6,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Color(0x33050807),
+                        shape: BoxShape.circle,
+                      ),
+                      padding: const EdgeInsets.all(1),
+                      child: FavoriteButton(
+                        isFavorited: song.isFavorited,
+                        onPressed: onFavorite,
+                        size: 16,
+                        iconColor: AppColors.white,
+                      ),
+                    ),
+                  ),
               ],
             ),
             const SizedBox(height: 8),
@@ -191,7 +213,7 @@ class _PlayOverlay extends StatelessWidget {
         child: SizedBox(
           width: size,
           height: size,
-          child: const Icon(Icons.play_arrow_rounded, color: Color(0xFF0B1200), size: 24),
+          child: Icon(Icons.play_arrow_rounded, color: AppColors.onPrimary, size: size * 0.55),
         ),
       ),
     );

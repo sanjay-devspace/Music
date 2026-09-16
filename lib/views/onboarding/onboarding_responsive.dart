@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tunehive/core/responsive/responsive.dart';
+import 'package:tunehive/core/responsive/responsive_values.dart';
 
 class OnboardingResponsive {
   final BuildContext context;
@@ -49,4 +50,6 @@ class OnboardingResponsive {
       return baseStyle!.copyWith(fontSize: 40);
     }
   }
+
+  FontSizeScale get fontSize => Responsive.of(context).fontSize;
 }

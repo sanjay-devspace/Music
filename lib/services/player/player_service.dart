@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:just_audio/just_audio.dart';
 
 import 'package:tunehive/core/errors/app_exception.dart';
@@ -13,8 +14,7 @@ import 'package:tunehive/services/music/music_service.dart';
 /// subscribes to. The service stays active while the app navigates, which
 /// keeps music playing across screens.
 class PlayerService {
-  PlayerService({required MusicService musicService})
-      : _musicService = musicService {
+  PlayerService({required this._musicService}) {
     _player.positionStream.listen((position) {
       _position = position;
       _emit();

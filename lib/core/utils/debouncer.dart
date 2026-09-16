@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 
 /// Debounces rapid invocations of a callback.
 class Debouncer {

@@ -10,11 +10,15 @@ class ArtistCard extends StatelessWidget {
     required this.artist,
     this.onTap,
     this.onFollow,
+    this.avatarSize = 110,
+    this.showFollowers = true,
   });
 
   final ArtistModel artist;
   final VoidCallback? onTap;
   final VoidCallback? onFollow;
+  final double avatarSize;
+  final bool showFollowers;
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +27,9 @@ class ArtistCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(16),
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          ArtistAvatar(imageUrl: artist.avatarUrl, size: 110),
+          ArtistAvatar(imageUrl: artist.avatarUrl, size: avatarSize),
           const SizedBox(height: 10),
           Text(
             artist.name,
@@ -36,10 +41,12 @@ class ArtistCard extends StatelessWidget {
               color: AppColors.textPrimary,
             ),
           ),
-          if (artist.followersText.isNotEmpty) ...[
+          if (showFollowers && artist.followersText.isNotEmpty) ...[
             const SizedBox(height: 2),
             Text(
               artist.followersText,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontSize: 11, color: AppColors.textMuted),
             ),
           ],

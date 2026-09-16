@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:tunehive/widgets/skeleton_loader.dart';
 import 'package:tunehive/app/theme/app_colors.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 
@@ -29,6 +30,14 @@ class ArtworkImage extends StatelessWidget {
     final radius = borderRadius ?? AppRadius.lg;
 
     Widget buildPlaceholder(BuildContext ctx) {
+      return ShimmerBox(
+        width: width,
+        height: height,
+        borderRadius: radius,
+      );
+    }
+
+    if (imageUrl == null || imageUrl!.isEmpty) {
       return Container(
         width: width,
         height: height,
@@ -38,10 +47,6 @@ class ArtworkImage extends StatelessWidget {
         ),
         child: Icon(placeholderIcon, size: height * 0.32, color: AppColors.textMuted),
       );
-    }
-
-    if (imageUrl == null || imageUrl!.isEmpty) {
-      return buildPlaceholder(context);
     }
 
     return ClipRRect(

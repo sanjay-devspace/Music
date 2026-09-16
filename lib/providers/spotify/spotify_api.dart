@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 
 import 'package:tunehive/core/errors/app_exception.dart';
@@ -15,9 +13,8 @@ import 'package:tunehive/providers/spotify/spotify_auth_service.dart';
 class SpotifyApi {
   SpotifyApi({
     http.Client? client,
-    SpotifyAuthService auth = const SpotifyAuthService(),
-  })  : _client = ApiClient(client: client),
-        _auth = auth;
+    this._auth = const SpotifyAuthService(),
+  }) : _client = ApiClient(client: client);
 
   static const String baseUrl = 'https://api.spotify.com/v1';
 
@@ -98,8 +95,4 @@ class SpotifyApi {
     final response = await _client.get(uri, headers: await _headers());
     return response.isSuccess ? response.data : null;
   }
-}
-
-extension on Map {
-  Map<String, dynamic> asStringMap() => Map<String, dynamic>.from(this);
 }

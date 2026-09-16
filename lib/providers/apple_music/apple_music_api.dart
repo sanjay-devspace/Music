@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 
 import 'package:tunehive/core/errors/app_exception.dart';
 import 'package:tunehive/core/network/api_client.dart';
-import 'package:tunehive/core/network/network_response.dart';
 
 /// Raw Apple Music / Musickit API client.
 ///
@@ -60,6 +57,14 @@ class AppleMusicApi {
 
   Future<List<Map<String, dynamic>>> newReleases() =>
       _data('/catalog/us/new-releases');
+
+  Future<List<Map<String, dynamic>>> catalogAlbums(String term) =>
+      _data('/catalog/us/search',
+          query: {'term': term, 'types': 'albums', 'limit': '20'});
+
+  Future<List<Map<String, dynamic>>> catalogArtists(String term) =>
+      _data('/catalog/us/search',
+          query: {'term': term, 'types': 'artists', 'limit': '20'});
 
   Future<Map<String, dynamic>?> song(String id) async {
     final uri = '$baseUrl/catalog/us/songs/$id';

@@ -3,14 +3,15 @@ import 'package:tunehive/models/artist_model.dart';
 import 'package:tunehive/models/genre_model.dart';
 import 'package:tunehive/models/song_model.dart';
 import 'package:tunehive/providers/music_provider.dart';
+import 'package:tunehive/providers/mock/mock_music_provider.dart';
 import 'package:tunehive/services/music/mock_data.dart';
 
 /// Provider backed by the user's on-device library.
 ///
 /// At present it wraps the bundled development catalog; a real
 /// implementation would read scan results from a media store index.
-class LocalMusicProvider implements MusicProvider {
-  const LocalMusicProvider();
+class LocalMusicProvider extends MusicProvider {
+  LocalMusicProvider();
 
   @override
   String get id => localProviderId;

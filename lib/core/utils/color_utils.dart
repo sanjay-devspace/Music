@@ -1,6 +1,3 @@
-import 'dart:typed_data';
-import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:palette_generator/palette_generator.dart';
@@ -19,9 +16,10 @@ class ArtworkPalette {
   final Color ambient;
   final Color glow;
 
-  static const ArtworkPalette fallback = ArtworkPalette(
-    ambient: Color(0xFF151F08),
-    glow: Color(0xFFC7FF19),
+  /// Deep-navy theme fallback used when artwork can't be resolved.
+  static final ArtworkPalette fallback = ArtworkPalette(
+    ambient: const Color(0xFF15262D),
+    glow: const Color(0xFFFF5B63),
   );
 
   static final Map<String, ArtworkPalette> _cache = {};
@@ -63,11 +61,4 @@ class ArtworkPalette {
         .withLightness((hsl.lightness * factor).clamp(0.04, 0.55))
         .toColor();
   }
-}
-
-/// Decode raw bytes into a Flutter-compatible image provider.
-Future<MemoryImage> _asMemoryImage(Uint8List bytes) async {
-  final codec = await ui.instantiateImageCodec(bytes);
-  await codec.getNextFrame();
-  return MemoryImage(bytes);
 }

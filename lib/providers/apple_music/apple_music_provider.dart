@@ -7,12 +7,11 @@ import 'package:tunehive/providers/apple_music/apple_music_mapper.dart';
 import 'package:tunehive/providers/music_provider.dart';
 
 /// Apple Music backed [MusicProvider].
-class AppleMusicProvider implements MusicProvider {
+class AppleMusicProvider extends MusicProvider {
   AppleMusicProvider({AppleMusicApi? api})
       : _api = api ?? AppleMusicApi();
 
   final AppleMusicApi _api;
-  static const _mapper = AppleMusicMapper();
 
   @override
   String get id => appleMusicProviderId;
@@ -26,21 +25,19 @@ class AppleMusicProvider implements MusicProvider {
   @override
   Future<List<SongModel>> searchSongs(String query) async {
     final raw = await _api.catalogSongs(query);
-    return raw.map(_mapper.song).toList();
+    return raw.map(AppleMusicMapper.song).toList();
   }
 
   @override
   Future<List<AlbumModel>> searchAlbums(String query) async {
-    final raw = await _api._data('/catalog/us/search',
-        query: {'term': query, 'types': 'albums', 'limit': '20'});
-    return raw.map(_mapper.album).toList();
+    final raw = await _api.catalogAlbums(query);
+    return raw.map(AppleMusicMapper.album).toList();
   }
 
   @override
   Future<List<ArtistModel>> searchArtists(String query) async {
-    final raw = await _api._data('/catalog/us/search',
-        query: {'term': query, 'types': 'artists', 'limit': '20'});
-    return raw.map(_mapper.artist).toList();
+    final raw = await _api.catalogArtists(query);
+    return raw.map(AppleMusicMapper.artist).toList();
   }
 
   @override
@@ -58,7 +55,7 @@ class AppleMusicProvider implements MusicProvider {
   @override
   Future<List<AlbumModel>> getNewAlbums() async {
     final raw = await _api.newReleases();
-    return raw.map(_mapper.album).toList();
+    return raw.map(AppleMusicMapper.album).toList();
   }
 
   @override
@@ -70,7 +67,7 @@ class AppleMusicProvider implements MusicProvider {
   @override
   Future<SongModel?> getSong(String id) async {
     final raw = await _api.song(_stripPrefix(id));
-    return raw == null ? null : _mapper.song(raw);
+    return raw == null ? null : AppleMusicMapper.song(raw);
   }
 
   @override

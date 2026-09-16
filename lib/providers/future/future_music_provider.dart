@@ -8,8 +8,8 @@ import 'package:tunehive/providers/music_provider.dart';
 ///
 /// Implements the same contract. Until wired to a live backend it behaves as
 /// an unconfigured provider so the app never breaks if selected.
-class FutureMusicProvider implements MusicProvider {
-  const FutureMusicProvider({this.futureId = 'future'});
+class FutureMusicProvider extends MusicProvider {
+  FutureMusicProvider({this.futureId = 'future'});
 
   final String futureId;
 

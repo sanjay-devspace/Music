@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/app/theme/app_motion.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 
-/// Desktop sidebar navigation with compact + expanded modes.
+/// Desktop sidebar navigation — deep navy, coral accent.
 class AppSidebar extends StatefulWidget {
   const AppSidebar({
     super.key,
@@ -33,11 +34,11 @@ class _AppSidebarState extends State<AppSidebar> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 250),
-      curve: Curves.easeOutCubic,
+      duration: AppMotion.large,
+      curve: AppMotion.easeOut,
       width: _expanded ? 220 : 72,
       decoration: const BoxDecoration(
-        color: AppColors.backgroundAlt,
+        color: AppColors.backgroundDeep,
         border: Border(right: BorderSide(color: AppColors.divider)),
       ),
       child: Column(
@@ -53,28 +54,36 @@ class _AppSidebarState extends State<AppSidebar> {
                     icon: const Icon(Icons.menu_rounded, color: AppColors.primary),
                   )
                 else ...[
-                  const Icon(Icons.graphic_eq_rounded, color: AppColors.primary, size: 30),
+                  const Icon(Icons.equalizer_rounded, color: AppColors.primary, size: 28),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text(
-                          'TUNE',
-                          style: TextStyle(
-                            color: AppColors.textPrimary,
-                            fontWeight: FontWeight.w900,
-                            fontSize: 18,
-                            letterSpacing: 1,
+                        const Flexible(
+                          child: Text(
+                            'TUNE',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: AppColors.textPrimary,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 18,
+                              letterSpacing: 1,
+                            ),
                           ),
                         ),
-                        const Text(
-                          'HIVE',
-                          style: TextStyle(
-                            color: AppColors.primary,
-                            fontWeight: FontWeight.w900,
-                            fontSize: 18,
-                            letterSpacing: 1,
+                        const Flexible(
+                          child: Text(
+                            'HIVE',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: AppColors.primary,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 18,
+                              letterSpacing: 1,
+                            ),
                           ),
                         ),
                         const Spacer(),
@@ -160,7 +169,9 @@ class _SidebarItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
       child: Material(
-        color: selected ? const Color(0x1AC7FF19) : Colors.transparent,
+        color: selected
+            ? AppColors.primary.withValues(alpha: 0.12)
+            : Colors.transparent,
         borderRadius: BorderRadius.circular(AppRadius.md),
         child: InkWell(
           onTap: onTap,
@@ -172,7 +183,11 @@ class _SidebarItem extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     child: Row(
                       children: [
-                        Icon(icon, size: 22, color: selected ? AppColors.primary : AppColors.textMuted),
+                        Icon(
+                          icon,
+                          size: 22,
+                          color: selected ? AppColors.primary : AppColors.textMuted,
+                        ),
                         const SizedBox(width: 12),
                         Text(
                           label,
@@ -185,7 +200,11 @@ class _SidebarItem extends StatelessWidget {
                     ),
                   )
                 : Center(
-                    child: Icon(icon, size: 22, color: selected ? AppColors.primary : AppColors.textMuted),
+                    child: Icon(
+                      icon,
+                      size: 22,
+                      color: selected ? AppColors.primary : AppColors.textMuted,
+                    ),
                   ),
           ),
         ),

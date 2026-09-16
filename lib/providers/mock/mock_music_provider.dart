@@ -1,6 +1,8 @@
 import 'package:tunehive/models/album_model.dart';
 import 'package:tunehive/models/artist_model.dart';
 import 'package:tunehive/models/genre_model.dart';
+import 'package:tunehive/models/mood_model.dart';
+import 'package:tunehive/models/playlist_model.dart';
 import 'package:tunehive/models/song_model.dart';
 import 'package:tunehive/providers/music_provider.dart';
 import 'package:tunehive/services/music/mock_data.dart';
@@ -98,6 +100,27 @@ class MockMusicProvider implements MusicProvider {
 
   @override
   Future<List<GenreModel>> getCategories() async => MockData.genres;
+
+  @override
+  Future<List<MoodModel>> getMoods() async => MockData.moods;
+
+  @override
+  Future<List<HeroFeature>> getHeroFeatures() async => MockData.heroFeatures;
+
+  @override
+  Future<List<PlaylistModel>> getDailyMixes() async => MockData.dailyMixes;
+
+  @override
+  Future<List<PlaylistModel>> getEditorialPlaylists() async =>
+      MockData.editorialPlaylists;
+
+  @override
+  Future<List<String>> getTrendingSearches() async =>
+      MockData.trendingSearches;
+
+  @override
+  Future<List<SongModel>> getSongsForMood(String moodId) async =>
+      MockData.songsForMood(moodId);
 
   @override
   Future<SongModel?> getSong(String id) async {

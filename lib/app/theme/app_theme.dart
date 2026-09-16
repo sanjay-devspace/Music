@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'app_colors.dart';
-import 'app_motion.dart';
 import 'app_radius.dart';
 import 'app_typography.dart';
 
@@ -29,8 +28,6 @@ class AppTheme {
         surfaceContainerHighest: AppColors.surfaceLight,
         onSurfaceVariant: AppColors.textSecondary,
         outline: AppColors.divider,
-        background: AppColors.background,
-        onBackground: AppColors.textPrimary,
         error: AppColors.error,
       ),
       splashFactory: InkSparkle.splashFactory,
@@ -114,15 +111,6 @@ class AppTheme {
       progressIndicatorTheme: const ProgressIndicatorThemeData(
         color: AppColors.primary,
         linearTrackColor: AppColors.dividerStrong,
-      ),
-      pageTransitionsTheme: const PageTransitionsTheme(
-        builders: {
-          TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
-          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-          TargetPlatform.windows: FadeUpwardsPageTransitionsBuilder(),
-          TargetPlatform.macOS: FadeUpwardsPageTransitionsBuilder(),
-          TargetPlatform.linux: FadeUpwardsPageTransitionsBuilder(),
-        },
       ),
       sliderTheme: SliderThemeData(
         activeTrackColor: AppColors.primary,

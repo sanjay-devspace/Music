@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tunehive/app/theme/app_colors.dart';
-import 'package:tunehive/app/theme/app_radius.dart';
 
 /// A single large circular playback control (play, next, shuffle, repeat).
 class PlayerControl extends StatelessWidget {
@@ -78,7 +77,11 @@ class PlayPauseButton extends StatelessWidget {
 }
 
 class SizedAnimatedIcon extends StatefulWidget {
-  const SizedAnimatedIcon({required this.isPlaying, required this.size});
+  const SizedAnimatedIcon({
+    super.key,
+    required this.isPlaying,
+    required this.size,
+  });
   final bool isPlaying;
   final double size;
 

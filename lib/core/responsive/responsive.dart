@@ -21,6 +21,7 @@ class Responsive {
   bool get isPhoneSmall => device == DeviceType.phoneSmall;
   bool get isTablet => device.isTablet;
   bool get isDesktop => device.isDesktop;
+  bool get isLargeDesktop => device == DeviceType.largeDesktop;
   bool get isLandscape => screen.isLandscape;
   bool get isPortrait => screen.isPortrait;
 
@@ -38,14 +39,26 @@ class Responsive {
   int get gridColumns => values.gridColumns;
   double get cardAspectRatio => values.cardAspectRatio;
 
+  /// Comfortable content width for centered desktop layouts. On phones and
+  /// tablets it degrades to the full available width.
+  double get maxContentWidth {
+    if (isPhone) return width;
+    return device == DeviceType.largeDesktop ? 1440 : 1240;
+  }
+
+  /// Padding used around the main (non-sidebar) content area.
+  EdgeInsets get contentPadding {
+    if (isMobile) return padding;
+    return EdgeInsets.symmetric(
+      horizontal: (width - maxContentWidth) / 2,
+      vertical: padding.top,
+    );
+  }
+
   FontSizeScale get fontSize => values.fontSize;
   RadiusScale get radius => values.radius;
 
   // ---- Statically resolved from context ---------------------------------
-  static Responsive? _current;
-
-  /// Returns the [Responsive] for the current build context (requires the
-  /// app to be wrapped in [ResponsiveLayout]).
   static Responsive of(BuildContext context, {Size? overrideSize}) {
     final query = MediaQuery.sizeOf(context);
     final size = overrideSize ?? query;
