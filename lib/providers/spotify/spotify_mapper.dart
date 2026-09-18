@@ -23,12 +23,20 @@ class SpotifyMapper {
             (b['width'] as int? ?? 0).compareTo(a['width'] as int? ?? 0));
       if (best.isNotEmpty) return best.last['url'] as String;
     }
-    return '';
+    return (json['image'] as String?) ??
+        (json['thumbnail'] as String?) ??
+        (json['artwork'] as String?) ??
+        (json['album_image'] as String?) ??
+        '';
   }
 
   static Duration trackDuration(Map<String, dynamic> json) {
-    final ms = json['duration_ms'];
+    final ms = json['duration_ms'] ?? json['duration'];
     if (ms is int) return Duration(milliseconds: ms);
+    if (ms is String) {
+      final parsed = int.tryParse(ms);
+      if (parsed != null) return Duration(milliseconds: parsed);
+    }
     return Duration.zero;
   }
 
@@ -64,16 +72,40 @@ class SpotifyMapper {
   static SongModel song(Map<String, dynamic> json) {
     final albumMap = json['album'];
     final id = (json['id'] ?? json['uri'])?.toString() ?? '';
+    
+    String? dateStr = json['release_date'] ?? (albumMap is Map ? albumMap['release_date'] : null);
+    DateTime? releaseDate;
+    if (dateStr != null && dateStr.isNotEmpty) {
+      // Handle YYYY, YYYY-MM, or YYYY-MM-DD
+      if (dateStr.length == 4) dateStr = '$dateStr-01-01';
+      if (dateStr.length == 7) dateStr = '$dateStr-01';
+      releaseDate = DateTime.tryParse(dateStr);
+    }
+
+    final previewUrl = json['preview_url'] as String? ?? json['previewUrl'] as String?;
+    final audioUrl = json['audio_url'] as String? ?? json['audioUrl'] as String?;
+    
+    // Ensure we don't fall back to empty string for artwork if album image is null, but we do want fallback.
+    final artworkUrl = albumMap is Map ? imageUrl(Map<String, dynamic>.from(albumMap)) : imageUrl(json);
+
     return SongModel(
       id: id.contains('spotify:track:') ? id : 'spotify:$id',
       title: json['name'] as String? ?? 'Unknown Track',
       artistName: _firstArtist(json),
+      artists: _allArtists(json),
       artistId: _firstArtistId(json),
       albumName: albumMap is Map ? albumMap['name'] as String? : null,
       albumId: albumMap is Map && albumMap['id'] != null ? 'spotify:${albumMap['id']}' : null,
-      artworkUrl: albumMap is Map ? imageUrl(Map<String, dynamic>.from(albumMap)) : null,
+      artworkUrl: artworkUrl.isNotEmpty ? artworkUrl : null,
       duration: trackDuration(json),
+      releaseDate: releaseDate,
       isExplicit: json['explicit'] == true,
+      previewUrl: previewUrl,
+      audioUrl: audioUrl,
+      isPlayable: audioUrl != null || previewUrl != null,
+      spotifyUrl: json['external_urls']?['spotify'] as String?,
+      language: json['language'] as String?,
+      languages: (json['languages'] as List?)?.whereType<String>().toList() ?? const [],
       sourceProvider: spotifyProviderId,
     );
   }
@@ -85,6 +117,14 @@ class SpotifyMapper {
       if (first is Map) return first['name'] as String? ?? 'Unknown Artist';
     }
     return 'Unknown Artist';
+  }
+  
+  static List<String> _allArtists(Map<String, dynamic> json) {
+    final artists = json['artists'];
+    if (artists is List) {
+      return artists.whereType<Map>().map((e) => e['name'] as String? ?? '').where((e) => e.isNotEmpty).toList();
+    }
+    return [];
   }
 
   static String? _firstArtistId(Map<String, dynamic> json) {

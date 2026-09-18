@@ -9,6 +9,8 @@ import 'package:tunehive/app/theme/app_typography.dart';
 /// The selected item expands to reveal `ICON + LABEL` on a coral pill; every
 /// other item stays compact as `ICON ONLY`. Expansion is driven by
 /// [AnimatedSize] so it remains smooth and subtle across all device widths.
+import 'package:flutter/services.dart';
+
 class NavigationItem extends StatelessWidget {
   const NavigationItem({
     super.key,
@@ -41,56 +43,74 @@ class NavigationItem extends StatelessWidget {
       label: label,
       selected: selected,
       button: true,
-      child: AnimatedSize(
+      child: AnimatedSlide(
         duration: AppMotion.standard,
         curve: AppMotion.easeOut,
-        alignment: Alignment.centerLeft,
-        child: Material(
-          color: Colors.transparent,
-          borderRadius: radius,
-          child: InkWell(
-            onTap: onTap,
+        offset: Offset(0, selected ? -0.05 : 0),
+        child: AnimatedSize(
+          duration: AppMotion.standard,
+          curve: AppMotion.easeOut,
+          alignment: Alignment.centerLeft,
+          child: Material(
+            color: Colors.transparent,
             borderRadius: radius,
-            splashColor: Colors.white.withValues(alpha: 0.16),
-            highlightColor: Colors.transparent,
-            child: AnimatedContainer(
-              duration: AppMotion.standard,
-              curve: AppMotion.easeOut,
-              height: itemHeight,
-              padding: EdgeInsets.symmetric(
-                horizontal: selected ? activePadding : inactivePadding,
-              ),
-              decoration: BoxDecoration(
-                color: selected ? AppColors.primary : Colors.transparent,
-                borderRadius: radius,
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    icon,
-                    size: iconSize,
-                    color: selected ? AppColors.white : AppColors.textMuted,
-                  ),
-                  if (selected) ...[
-                    const SizedBox(width: 8),
-                    ConstrainedBox(
-                      constraints: BoxConstraints(maxWidth: labelMaxWidth),
-                      child: Text(
-                        label,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontFamily: AppTypography.fontFamily,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 0.1,
-                          color: AppColors.white,
-                        ),
+            child: InkWell(
+              onTap: () {
+                HapticFeedback.lightImpact();
+                onTap();
+              },
+              borderRadius: radius,
+              splashColor: Colors.white.withValues(alpha: 0.16),
+              highlightColor: Colors.transparent,
+              child: AnimatedContainer(
+                duration: AppMotion.standard,
+                curve: AppMotion.easeOut,
+                height: itemHeight,
+                padding: EdgeInsets.symmetric(
+                  horizontal: selected ? activePadding : inactivePadding,
+                ),
+                decoration: BoxDecoration(
+                  color: selected ? AppColors.primary : Colors.transparent,
+                  borderRadius: radius,
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    AnimatedScale(
+                      scale: selected ? 1.08 : 1.0,
+                      duration: const Duration(milliseconds: 250),
+                      curve: Curves.easeOutCubic,
+                      child: Icon(
+                        icon,
+                        size: iconSize,
+                        color: selected ? AppColors.white : AppColors.textMuted,
                       ),
                     ),
+                    if (selected) ...[
+                      const SizedBox(width: 8),
+                      ConstrainedBox(
+                        constraints: BoxConstraints(maxWidth: labelMaxWidth),
+                        child: AnimatedOpacity(
+                          opacity: selected ? 1.0 : 0.0,
+                          duration: const Duration(milliseconds: 200),
+                          curve: Curves.easeIn,
+                          child: Text(
+                            label,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontFamily: AppTypography.fontFamily,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 0.1,
+                              color: AppColors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ],
-                ],
+                ),
               ),
             ),
           ),

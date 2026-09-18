@@ -19,33 +19,50 @@ import 'package:tunehive/widgets/hero_card.dart';
 import 'package:tunehive/widgets/mood_chip.dart';
 import 'package:tunehive/widgets/skeleton_loader.dart';
 import 'package:tunehive/widgets/song_card.dart';
+import 'package:tunehive/widgets/branding/animated_home_logo.dart';
+import 'package:tunehive/controllers/shell_controller.dart';
 
 import 'home_responsive.dart';
 
 /// Premium Home — editorial hero, moods, trending, recommendations, daily
 /// mixes, artists and recently played, all adapted to phones/tablets/desktops.
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
   @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  @override
   Widget build(BuildContext context) {
     final home = Get.find<HomeController>();
+    final shell = Get.find<ShellController>(); // Add ShellController to access shared scroll offset
+
     return Scaffold(
-      backgroundColor: AppColors.background,
-      body: Obx(() {
-        if (home.isLoading.value &&
-            home.trending.isEmpty &&
-            home.moods.isEmpty) {
-          return const HomeSkeleton();
-        }
-        if (home.errorMessage.value != null && home.trending.isEmpty) {
-          return ErrorState(
-            message: home.errorMessage.value,
-            onRetry: home.refreshHome,
-          );
-        }
-        return _HomeFeed(home: home);
-      }),
+      backgroundColor: Colors.transparent, // Let global background show through
+      body: NotificationListener<ScrollNotification>(
+        onNotification: (scrollInfo) {
+          if (scrollInfo.metrics.axis == Axis.vertical) {
+            shell.backgroundScrollOffset.value = scrollInfo.metrics.pixels;
+          }
+          return false;
+        },
+        child: Obx(() {
+          if (home.isLoading.value &&
+              home.trending.isEmpty &&
+              home.moods.isEmpty) {
+            return const HomeSkeleton();
+          }
+          if (home.errorMessage.value != null && home.trending.isEmpty) {
+            return ErrorState(
+              message: home.errorMessage.value,
+              onRetry: home.refreshHome,
+            );
+          }
+          return _HomeFeed(home: home);
+        }),
+      ),
     );
   }
 }
@@ -67,69 +84,46 @@ class _HomeFeed extends StatelessWidget {
       onRefresh: home.refreshHome,
       color: AppColors.primary,
       backgroundColor: AppColors.surface,
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final hr = HomeResponsive(r);
-          return Center(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: constraints.maxHeight,
-                maxHeight: constraints.maxHeight,
-                maxWidth: constraints.maxWidth,
+      child: SafeArea(
+        bottom: false,
+        child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+          slivers: [
+            SliverPadding(
+              padding: EdgeInsets.only(
+                top: hr.headerTop,
+                bottom: MediaQuery.paddingOf(context).bottom + 24,
               ),
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                alignment: Alignment.topCenter,
-                child: SizedBox(
-                  width: constraints.maxWidth, // Lock width to viewport width
-                  child: Center(
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(maxWidth: hr.contentWidth),
-                      child: SafeArea(
-                        bottom: true,
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                            top: hr.headerTop,
-                            bottom: 12,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min, // shrink-wrap height
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: hr.horizontalPadding),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    _HomeHeader(home: home, r: r),
-                                    SizedBox(height: r.isPhoneSmall ? 8 : 12),
-                                    _Greeting(home: home, r: r),
-                                    SizedBox(height: r.isPhoneSmall ? 10 : 16),
-                                    _SearchBar(r: r),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(height: hr.sectionGap),
-                              _MoodRow(home: home, r: r, staggerStep: hr.staggerStep),
-                              SizedBox(height: hr.sectionGap),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: hr.horizontalPadding),
-                                child: _HeroSection(home: home, r: r),
-                              ),
-                              SizedBox(height: hr.sectionGap),
-                              _TrendingSection(home: home, r: r, hr: hr),
-                            ],
-                          ),
-                        ),
-                      ),
+              sliver: SliverList(
+                delegate: SliverChildListDelegate([
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: hr.horizontalPadding),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        _HomeHeader(home: home, r: r),
+                        SizedBox(height: r.isPhoneSmall ? 16 : 24),
+                        _Greeting(home: home, r: r),
+                        SizedBox(height: r.isPhoneSmall ? 16 : 20),
+                        _SearchBar(r: r),
+                      ],
                     ),
                   ),
-                ),
+                  SizedBox(height: hr.sectionGap),
+                  _MoodRow(home: home, r: r, staggerStep: hr.staggerStep),
+                  SizedBox(height: hr.sectionGap),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: hr.horizontalPadding),
+                    child: _HeroSection(home: home, r: r),
+                  ),
+                  SizedBox(height: hr.sectionGap),
+                  _TrendingSection(home: home, r: r, hr: hr),
+                ]),
               ),
             ),
-          );
-        },
+          ],
+        ),
       ),
     );
   }
@@ -153,9 +147,9 @@ class _Entrance extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FadeSlide(
-      delay: Duration(milliseconds: step * 45),
-      duration: duration,
-      offset: const Offset(0, 0.03),
+      delay: Duration(milliseconds: step * 80),
+      duration: const Duration(milliseconds: 550),
+      offset: const Offset(0, 0.15),
       child: child,
     );
   }
@@ -179,28 +173,7 @@ class _HomeHeader extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(Icons.equalizer_rounded,
-                    color: AppColors.primary, size: 26),
-                const SizedBox(width: 8),
-                Flexible(
-                  child: Text(
-                    'TUNEHIVE',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontFamily: AppTypography.fontFamily,
-                      fontSize: r.isPhone ? 18 : 20,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 3,
-                      color: AppColors.textPrimary,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            child: AnimatedHomeLogo(responsive: r),
           ),
           const Spacer(),
           _BellButton(),
@@ -307,6 +280,8 @@ class _Greeting extends StatelessWidget {
           offset: const Offset(0, -0.02),
           child: Text(
             home.userName.value,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: TextStyle(
               fontFamily: AppTypography.fontFamily,
               fontSize: r.fontSize.headline,
@@ -498,17 +473,20 @@ class _HeroSection extends StatelessWidget {
           delay: const Duration(milliseconds: 200),
           duration: AppMotion.hero,
           curve: AppMotion.easeOut,
-          child: HeroCard(
-            feature: feature,
-            height: hr.heroHeight, // Will be ignored by Expanded but kept for safety if used elsewhere
-            onPlay: () {
-              final list = home.trending;
-              if (list.isNotEmpty) home.playSong(list.first, fromList: list);
-            },
-            onFavorite: () => Get.find<PlayerController>()
-                .toggleFavorite(home.trending.isNotEmpty ? home.trending.first : null),
-            isFavorited: home.trending.isNotEmpty &&
-                Get.find<PlayerController>().isLiked(home.trending.first.id),
+          child: AspectRatio(
+            aspectRatio: r.isPhoneSmall ? 1.4 : r.isTablet ? 1.8 : 1.6,
+            child: HeroCard(
+              feature: feature,
+              height: double.infinity,
+              onPlay: () {
+                final list = home.trending;
+                if (list.isNotEmpty) home.playSong(list.first, fromList: list);
+              },
+              onFavorite: () => Get.find<PlayerController>()
+                  .toggleFavorite(home.trending.isNotEmpty ? home.trending.first : null),
+              isFavorited: home.trending.isNotEmpty &&
+                  Get.find<PlayerController>().isLiked(home.trending.first.id),
+            ),
           ),
         ),
         const SizedBox(height: 10),

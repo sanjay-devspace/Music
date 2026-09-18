@@ -10,7 +10,9 @@ import 'package:tunehive/core/responsive/responsive.dart';
 import 'package:tunehive/core/responsive/responsive_layout.dart';
 import 'package:tunehive/widgets/app_sidebar.dart';
 import 'package:tunehive/widgets/mini_player.dart';
+import 'package:tunehive/controllers/auth_controller.dart';
 import 'package:tunehive/widgets/navigation/floating_pill_navigation.dart';
+import 'package:tunehive/views/shell/app_background.dart';
 
 /// The application shell — shared chrome around the tab surfaces.
 ///
@@ -131,9 +133,8 @@ class AppShellView extends StatelessWidget {
         final isSmall = responsive.isPhoneSmall;
         final safeBottom = MediaQuery.viewPaddingOf(context).bottom;
         
-        // Navigation Pill Height (matching floating_pill_navigation.dart)
         final navHeight = isSmall ? 52.0 : responsive.isPhone ? 56.0 : 62.0;
-        final navBottomGap = isSmall ? 8.0 : 10.0;
+        final navBottomGap = isSmall ? 16.0 : responsive.isPhone ? 20.0 : 24.0;
         
         // MiniPlayer Height (64 container + 8 padding = 72.0)
         final miniPlayerTotalHeight = player.hasSong ? 72.0 : 0.0;
@@ -142,23 +143,59 @@ class AppShellView extends StatelessWidget {
         final totalBottomInset = navHeight + safeBottom + navBottomGap + miniPlayerTotalHeight + 16.0;
 
         return Scaffold(
-          backgroundColor: AppColors.background,
+          backgroundColor: Colors.transparent, // Background handled by AppBackground
+          resizeToAvoidBottomInset: false, // Prevents floating nav from jumping above keyboard
           body: Stack(
             children: [
               Positioned.fill(
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: totalBottomInset),
-                  child: navigationShell,
+                child: AppBackground(
+                  scrollOffset: shell.backgroundScrollOffset,
                 ),
               ),
+              Positioned.fill(
+                child: Obx(() {
+                  final loggingOut = Get.find<AuthController>().isLoggingOut.value;
+                  return AnimatedOpacity(
+                    duration: const Duration(milliseconds: 700),
+                    curve: Curves.easeOut,
+                    opacity: loggingOut ? 0.0 : 1.0,
+                    child: AnimatedScale(
+                      duration: const Duration(milliseconds: 700),
+                      curve: Curves.easeOut,
+                      scale: loggingOut ? 0.98 : 1.0,
+                      child: MediaQuery(
+                        data: MediaQuery.of(context).copyWith(
+                          padding: MediaQuery.paddingOf(context).copyWith(
+                            bottom: totalBottomInset,
+                          ),
+                        ),
+                        child: navigationShell,
+                      ),
+                    ),
+                  );
+                }),
+              ),
               Positioned(
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: IgnorePointer(
-                  ignoring: false,
-                  child: bottomBar,
-                ),
+                left: isSmall ? 10.0 : 16.0,
+                right: isSmall ? 10.0 : 16.0,
+                bottom: safeBottom + navBottomGap,
+                child: Obx(() {
+                  final loggingOut = Get.find<AuthController>().isLoggingOut.value;
+                  return AnimatedSlide(
+                    duration: const Duration(milliseconds: 600),
+                    curve: Curves.easeIn,
+                    offset: loggingOut ? const Offset(0, 0.6) : Offset.zero,
+                    child: AnimatedOpacity(
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeIn,
+                      opacity: loggingOut ? 0.0 : 1.0,
+                      child: IgnorePointer(
+                        ignoring: loggingOut,
+                        child: bottomBar,
+                      ),
+                    ),
+                  );
+                }),
               ),
             ],
           ),

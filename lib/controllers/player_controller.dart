@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/widgets.dart' show EdgeInsets;
 
 import 'package:get/get.dart';
 import 'package:tunehive/models/player_state_model.dart';
@@ -66,7 +67,18 @@ class PlayerController extends GetxController {
       _buildQueue(track, fromList);
     }
     _applySong(track);
-    await _playerService.play(track);
+    try {
+      await _playerService.play(track);
+    } catch (e) {
+      isLoading.value = false;
+      isPlaying.value = false;
+      Get.snackbar(
+        'Playback Error',
+        'Could not stream this track right now.',
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.only(bottom: 80, left: 16, right: 16),
+      );
+    }
   }
 
   Future<void> togglePlayPause() async {

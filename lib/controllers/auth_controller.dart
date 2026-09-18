@@ -86,6 +86,16 @@ class AuthController extends GetxController {
     }
   }
 
+  final RxBool isLoggingOut = false.obs;
+
+  Future<void> triggerLogoutTransition() async {
+    isLoggingOut.value = true;
+    // Wait for the animation to complete
+    await Future.delayed(const Duration(milliseconds: 700));
+    await logout();
+    isLoggingOut.value = false;
+  }
+
   Future<void> logout() async {
     await _authService.logout();
     user.value = null;

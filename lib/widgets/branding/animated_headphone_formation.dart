@@ -54,78 +54,72 @@ class _AnimatedHeadphoneFormationState extends State<AnimatedHeadphoneFormation>
   void initState() {
     super.initState();
 
+    // 4.5s total duration for the center animation
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 2000),
+      duration: const Duration(milliseconds: 4500),
     );
 
-    // Path 1 (Top Left): 0ms -> 1000ms
+    // Float & Assemble Phase (0.0s to 2.5s) -> 0.0 to 0.555
     _p1Progress = CurvedAnimation(
       parent: _controller,
-      curve: const Interval(0.0, 0.50, curve: Curves.easeInOutCubic),
+      curve: const Interval(0.0, 0.555, curve: Curves.easeInOutCubic),
     );
 
-    // Path 2 (Top Right): 70ms -> 1070ms
     _p2Progress = CurvedAnimation(
       parent: _controller,
-      curve: const Interval(0.035, 0.535, curve: Curves.easeInOutCubic),
+      curve: const Interval(0.02, 0.555, curve: Curves.easeInOutCubic),
     );
 
-    // Path 3 (Bottom Left): 120ms -> 1120ms
     _p3Progress = CurvedAnimation(
       parent: _controller,
-      curve: const Interval(0.060, 0.560, curve: Curves.easeInOutCubic),
+      curve: const Interval(0.04, 0.555, curve: Curves.easeInOutCubic),
     );
 
-    // Path 4 (Bottom Right): 180ms -> 1180ms
     _p4Progress = CurvedAnimation(
       parent: _controller,
-      curve: const Interval(0.090, 0.590, curve: Curves.easeInOutCubic),
+      curve: const Interval(0.06, 0.555, curve: Curves.easeInOutCubic),
     );
 
-    // Merge Glow: Peaks exactly as they converge around 1.1s (0.55), fades by 1.35s (0.675)
-    _mergeGlow = TweenSequence<double>([
-      TweenSequenceItem(tween: Tween(begin: 0.0, end: 1.0).chain(CurveTween(curve: Curves.easeIn)), weight: 50),
-      TweenSequenceItem(tween: Tween(begin: 1.0, end: 0.0).chain(CurveTween(curve: Curves.easeOut)), weight: 50),
-    ]).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.50, 0.675),
-    ));
-
-    // Headphone Reveal: 1.15s (0.575) to 1.5s (0.75)
+    // Headphone Reveal (2.5s to 3.0s) -> 0.555 to 0.666
     _headphoneOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0.575, 0.75, curve: Curves.easeOutCubic),
+        curve: const Interval(0.555, 0.666, curve: Curves.easeOutCubic),
       ),
     );
 
-    _headphoneScale = Tween<double>(begin: 0.75, end: 1.0).animate(
+    _headphoneScale = Tween<double>(begin: 0.85, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0.575, 0.75, curve: Curves.easeOutBack),
+        curve: const Interval(0.555, 0.666, curve: Curves.easeOutBack),
       ),
     );
+
+    // Merge Glow (3.0s to 3.8s) -> 0.666 to 0.844
+    _mergeGlow = TweenSequence<double>([
+      TweenSequenceItem(tween: Tween(begin: 0.0, end: 1.0).chain(CurveTween(curve: Curves.easeIn)), weight: 30),
+      TweenSequenceItem(tween: Tween(begin: 1.0, end: 0.0).chain(CurveTween(curve: Curves.easeOut)), weight: 70),
+    ]).animate(CurvedAnimation(
+      parent: _controller,
+      curve: const Interval(0.666, 0.844),
+    ));
     
-    // Idle Pulse: 1.6s to 2.0s
-    _idlePulse = Tween<double>(begin: 1.0, end: 1.03).animate(
+    // Idle Pulse (3.8s to 4.5s) -> 0.844 to 1.0
+    _idlePulse = Tween<double>(begin: 1.0, end: 1.02).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0.8, 1.0, curve: Curves.easeInOutSine),
+        curve: const Interval(0.844, 1.0, curve: Curves.easeInOutSine),
       ),
     );
+
+    _controller.forward();
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _reducedMotion = MediaQuery.disableAnimationsOf(context);
-    
-    if (_reducedMotion) {
-      _controller.value = 1.0;
-    } else if (!_controller.isAnimating && !_controller.isCompleted) {
-      _controller.forward();
-    }
   }
 
   @override

@@ -26,8 +26,9 @@ class SearchView extends StatelessWidget {
   Widget build(BuildContext context) {
     final search = Get.find<SearchController>();
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Colors.transparent,
       body: SafeArea(
+        bottom: false,
         child: Column(
           children: [
             const _SearchField(),

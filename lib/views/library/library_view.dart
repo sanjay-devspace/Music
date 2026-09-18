@@ -8,6 +8,7 @@ import 'package:tunehive/app/theme/app_motion.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_typography.dart';
 import 'package:tunehive/core/animation/fade_slide.dart';
+import 'package:tunehive/core/responsive/responsive.dart';
 import 'package:tunehive/controllers/library_controller.dart';
 import 'package:tunehive/controllers/player_controller.dart';
 import 'package:tunehive/widgets/empty_state.dart';
@@ -30,9 +31,11 @@ class _LibraryViewState extends State<LibraryView> {
   @override
   Widget build(BuildContext context) {
     final library = Get.find<LibraryController>();
+    final r = Responsive.of(context);
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Colors.transparent,
       body: SafeArea(
+        bottom: false,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -62,104 +65,48 @@ class _LibraryViewState extends State<LibraryView> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Material(
-                      color: AppColors.surface,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(AppRadius.lg),
-                        side: const BorderSide(color: AppColors.divider),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: InkWell(
-                        onTap: () => context.push(RoutePaths.likedSongs),
-                        borderRadius: BorderRadius.circular(AppRadius.lg),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12),
-                          child: Column(
-                            children: const [
-                              Icon(Icons.favorite_rounded, color: AppColors.primary, size: 24),
-                              SizedBox(height: 6),
-                              Text(
-                                'Liked Songs',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColors.textSecondary,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final useWrap = constraints.maxWidth < 360;
+                  final cards = [
+                    _buildFeatureCard(
+                      context,
+                      'Liked Songs',
+                      Icons.favorite_rounded,
+                      RoutePaths.likedSongs,
                     ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Material(
-                      color: AppColors.surface,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(AppRadius.lg),
-                        side: const BorderSide(color: AppColors.divider),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: InkWell(
-                        onTap: () => context.push(RoutePaths.playlists),
-                        borderRadius: BorderRadius.circular(AppRadius.lg),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12),
-                          child: Column(
-                            children: const [
-                              Icon(Icons.queue_music_rounded, color: AppColors.primary, size: 24),
-                              SizedBox(height: 6),
-                              Text(
-                                'Playlists',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColors.textSecondary,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                    _buildFeatureCard(
+                      context,
+                      'Playlists',
+                      Icons.queue_music_rounded,
+                      RoutePaths.playlists,
                     ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Material(
-                      color: AppColors.surface,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(AppRadius.lg),
-                        side: const BorderSide(color: AppColors.divider),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: InkWell(
-                        onTap: () => context.push(RoutePaths.recentlyPlayed),
-                        borderRadius: BorderRadius.circular(AppRadius.lg),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12),
-                          child: Column(
-                            children: const [
-                              Icon(Icons.history_rounded, color: AppColors.primary, size: 24),
-                              SizedBox(height: 6),
-                              Text(
-                                'Recently Played',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColors.textSecondary,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                    _buildFeatureCard(
+                      context,
+                      'Recent', // Shortened for space
+                      Icons.history_rounded,
+                      RoutePaths.recentlyPlayed,
                     ),
-                  ),
-                ],
+                  ];
+
+                  if (useWrap) {
+                    return Wrap(
+                      spacing: 12,
+                      runSpacing: 12,
+                      children: cards.map((c) => SizedBox(width: (constraints.maxWidth - 12) / 2, child: c)).toList(),
+                    );
+                  }
+
+                  return Row(
+                    children: [
+                      Expanded(child: cards[0]),
+                      const SizedBox(width: 12),
+                      Expanded(child: cards[1]),
+                      const SizedBox(width: 12),
+                      Expanded(child: cards[2]),
+                    ],
+                  );
+                },
               ),
             ),
             const SizedBox(height: 8),
@@ -174,6 +121,40 @@ class _LibraryViewState extends State<LibraryView> {
               }),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFeatureCard(BuildContext context, String title, IconData icon, String route) {
+    return Material(
+      color: AppColors.surface,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppRadius.lg),
+        side: const BorderSide(color: AppColors.divider),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: () => context.push(route),
+        borderRadius: BorderRadius.circular(AppRadius.lg),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            children: [
+              Icon(icon, color: AppColors.primary, size: 24),
+              const SizedBox(height: 6),
+              Text(
+                title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.textSecondary,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'route_names.dart';
@@ -24,6 +25,10 @@ import 'package:tunehive/views/profile/connected_providers_view.dart';
 import 'package:tunehive/views/notifications/notification_center_view.dart';
 import 'package:tunehive/views/search/search_results_view.dart';
 
+import 'package:tunehive/widgets/navigation/swipeable_branch_container.dart';
+import 'package:tunehive/controllers/shell_controller.dart';
+import 'package:get/get.dart';
+
 final List<RouteBase> appRoutes = [
     GoRoute(
       path: RoutePaths.splash,
@@ -45,9 +50,27 @@ final List<RouteBase> appRoutes = [
       name: RouteNames.register,
       builder: (context, state) => const RegisterView(),
     ),
-    StatefulShellRoute.indexedStack(
-      builder: (context, state, navigationShell) => AppShellView(
-        navigationShell: navigationShell,
+    StatefulShellRoute(
+      navigatorContainerBuilder: (context, navigationShell, children) {
+        return SwipeableBranchContainer(
+          currentIndex: navigationShell.currentIndex,
+          children: children,
+          onChange: (index) {
+            Get.find<ShellController>().onIndexChanged(index);
+            navigationShell.goBranch(
+              index,
+              initialLocation: index == navigationShell.currentIndex,
+            );
+          },
+        );
+      },
+      pageBuilder: (context, state, navigationShell) => CustomTransitionPage(
+        key: state.pageKey,
+        child: AppShellView(navigationShell: navigationShell),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(opacity: animation, child: child);
+        },
+        transitionDuration: const Duration(milliseconds: 600),
       ),
       branches: [
         StatefulShellBranch(routes: [

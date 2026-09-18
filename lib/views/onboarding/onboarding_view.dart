@@ -55,72 +55,64 @@ class _OnboardingViewState extends State<OnboardingView>
 
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 2000),
+      duration: const Duration(milliseconds: 5000),
     );
 
-    // The headphone formation handles its own 2.0s lifecycle internally.
-
-    // Title: 0.95s (0.475) to 1.45s (0.725)
+    // Title: 3.8s (0.76) to 4.3s (0.86)
     _titleOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0.475, 0.725, curve: Curves.easeOutCubic),
+        curve: const Interval(0.76, 0.86, curve: Curves.easeOutCubic),
       ),
     );
     _titleSlide = Tween<Offset>(begin: const Offset(0.0, 0.2), end: Offset.zero).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0.475, 0.725, curve: Curves.easeOutCubic),
+        curve: const Interval(0.76, 0.86, curve: Curves.easeOutCubic),
       ),
     );
 
-    // Description: 1.25s (0.625) to 1.75s (0.875)
+    // Description: 4.0s (0.80) to 4.5s (0.90)
     _descOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0.625, 0.875, curve: Curves.easeOutCubic),
+        curve: const Interval(0.80, 0.90, curve: Curves.easeOutCubic),
       ),
     );
     _descSlide = Tween<Offset>(begin: const Offset(0.0, 0.1), end: Offset.zero).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0.625, 0.875, curve: Curves.easeOutCubic),
+        curve: const Interval(0.80, 0.90, curve: Curves.easeOutCubic),
       ),
     );
 
-    // Button: 1.55s (0.775) to 2.0s (1.0)
+    // Button: 4.2s (0.84) to 4.7s (0.94)
     _buttonOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0.775, 1.0, curve: Curves.easeOutCubic),
+        curve: const Interval(0.84, 0.94, curve: Curves.easeOutCubic),
       ),
     );
     _buttonScale = Tween<double>(begin: 0.94, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0.775, 1.0, curve: Curves.easeOutCubic),
+        curve: const Interval(0.84, 0.94, curve: Curves.easeOutCubic),
       ),
     );
     _buttonSlide = Tween<Offset>(begin: const Offset(0.0, 0.1), end: Offset.zero).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0.775, 1.0, curve: Curves.easeOutCubic),
+        curve: const Interval(0.84, 0.94, curve: Curves.easeOutCubic),
       ),
     );
+
+    _controller.forward();
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _reducedMotion = MediaQuery.disableAnimationsOf(context);
-    
-    if (_reducedMotion) {
-      _controller.value = 1.0;
-    } else {
-      if (!_controller.isAnimating && !_controller.isCompleted) {
-        _controller.forward();
-      }
-    }
   }
 
   @override
@@ -136,7 +128,20 @@ class _OnboardingViewState extends State<OnboardingView>
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Stack(
+        fit: StackFit.expand,
         children: [
+          // Static background image
+          Image.asset(
+            'assets/images/musbg2.png',
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return Container(color: AppColors.background);
+            },
+          ),
+          // Subtle dark overlay to ensure text readability
+          Container(
+            color: Colors.black.withOpacity(0.40),
+          ),
           // Ambient radial glow (coral)
           Positioned(
             top: -100,
@@ -246,18 +251,10 @@ class _OnboardingViewState extends State<OnboardingView>
                     },
                     child: SizedBox(
                       width: double.infinity,
-                      child: FilledButton(
+                      child: _PremiumButton(
                         onPressed: () => context.go(RoutePaths.home),
-                        style: FilledButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 18),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(AppRadius.lg),
-                          ),
-                          backgroundColor: AppColors.primary,
-                          foregroundColor: AppColors.onPrimary,
-                          textStyle: AppTextStyles.label.copyWith(fontSize: responsive.fontSize.body),
-                        ),
-                        child: const Text('Turn on your music'),
+                        text: 'Turn on your music',
+                        fontSize: responsive.fontSize.body,
                       ),
                     ),
                   ),
@@ -270,6 +267,76 @@ class _OnboardingViewState extends State<OnboardingView>
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _PremiumButton extends StatefulWidget {
+  const _PremiumButton({
+    required this.onPressed,
+    required this.text,
+    required this.fontSize,
+  });
+
+  final VoidCallback onPressed;
+  final String text;
+  final double fontSize;
+
+  @override
+  State<_PremiumButton> createState() => _PremiumButtonState();
+}
+
+class _PremiumButtonState extends State<_PremiumButton> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _scale;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 150),
+    );
+    _scale = Tween<double>(begin: 1.0, end: 0.97).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _onTapDown(TapDownDetails details) => _controller.forward();
+  void _onTapUp(TapUpDetails details) {
+    _controller.reverse();
+    widget.onPressed();
+  }
+  void _onTapCancel() => _controller.reverse();
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTapDown: _onTapDown,
+      onTapUp: _onTapUp,
+      onTapCancel: _onTapCancel,
+      child: ScaleTransition(
+        scale: _scale,
+        child: FilledButton(
+          onPressed: widget.onPressed,
+          style: FilledButton.styleFrom(
+            padding: const EdgeInsets.symmetric(vertical: 18),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppRadius.lg),
+            ),
+            backgroundColor: AppColors.primary,
+            foregroundColor: AppColors.onPrimary,
+            textStyle: AppTextStyles.label.copyWith(fontSize: widget.fontSize),
+          ),
+          child: Text(widget.text),
+        ),
       ),
     );
   }

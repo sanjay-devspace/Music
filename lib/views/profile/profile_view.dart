@@ -26,13 +26,19 @@ class ProfileView extends StatelessWidget {
     final r = Responsive.of(context);
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Colors.transparent,
       body: SafeArea(
+        bottom: false,
         child: Center(
           child: ConstrainedBox(
             constraints: BoxConstraints(maxWidth: r.maxContentWidth),
             child: ListView(
-              padding: EdgeInsets.all(r.isPhone ? 20 : 32),
+              padding: EdgeInsets.fromLTRB(
+                r.isPhone ? 20 : 32,
+                r.isPhone ? 20 : 32,
+                r.isPhone ? 20 : 32,
+                MediaQuery.paddingOf(context).bottom + (r.isPhone ? 20 : 32),
+              ),
               children: [
                 Center(
               child: Column(
@@ -288,7 +294,8 @@ class _ProfileMenu extends StatelessWidget {
       ),
     );
     if (confirmed != true) return;
-    await Get.find<AuthController>().logout();
+    final auth = Get.find<AuthController>();
+    await auth.triggerLogoutTransition();
     if (context.mounted) {
       context.go(RoutePaths.onboarding);
     }

@@ -495,7 +495,12 @@ class _CreditsCard extends StatelessWidget {
                   ? null
                   : () => context.go(RoutePaths.albumWith(song.albumId!)),
             ),
-          const _CreditRow(label: 'Source', value: 'TuneHive Records'),
+          _CreditRow(
+            label: 'Source',
+            value: song.sourceProvider == 'jiosaavn' 
+                ? 'JioSaavn' 
+                : (song.sourceProvider == 'tunehive' ? 'TuneHive Records' : song.sourceProvider.capitalizeFirst ?? 'Unknown'),
+          ),
         ],
       ),
     );

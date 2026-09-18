@@ -80,10 +80,9 @@ class PlayerService {
     try {
       _currentSong = song;
       _emit();
-      final url = streamUrl ?? await _musicService.getStreamUrl(song.id);
-      if (url == null) {
-        // Simulated playback for catalog providers without stream licensing
-        // (Demo/Mock). Keep state consistent so the UI behaves realistically.
+      final url = streamUrl ?? song.audioUrl ?? await _musicService.getStreamUrl(song.id);
+      debugPrint('PlayerService: Playing url: $url');
+      if (url == null || url.isEmpty) {
         _duration = song.duration;
         _position = Duration.zero;
         _state = PlaybackState.playing;
@@ -91,11 +90,20 @@ class PlayerService {
         _emit();
         return;
       }
-      await _player.setUrl(url);
+      _tickerSub?.cancel();
+      _fakeTicker?.cancel();
+      _fakeTicker = null;
+      _tickerSub = null;
+      
+      final uri = Uri.parse(url);
+      await _player.setAudioSource(
+        AudioSource.uri(uri),
+      ).timeout(const Duration(seconds: 10));
       _player.play();
     } on AppException {
       rethrow;
     } catch (e) {
+      debugPrint('PlayerService error: $e');
       throw PlaybackException(
         message: 'Playback could not be started for "${song.title}".',
         cause: e,

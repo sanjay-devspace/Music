@@ -78,26 +78,22 @@ class _AnimatedTuneHiveLogoState extends State<AnimatedTuneHiveLogo>
         curve: const Interval(0.4, 1.0, curve: Curves.easeOutCubic),
       ),
     );
+
+    if (widget.animateEntrance) {
+      _entranceController.forward();
+    } else {
+      _entranceController.value = 1.0;
+    }
+
+    if (widget.loopWaveform) {
+      _waveController.repeat();
+    }
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _reducedMotion = MediaQuery.disableAnimationsOf(context);
-    
-    if (_reducedMotion) {
-      _entranceController.value = 1.0;
-    } else {
-      if (widget.animateEntrance && !_entranceController.isAnimating && !_entranceController.isCompleted) {
-        _entranceController.forward();
-      } else if (!widget.animateEntrance) {
-        _entranceController.value = 1.0;
-      }
-
-      if (widget.loopWaveform && !_waveController.isAnimating) {
-        _waveController.repeat();
-      }
-    }
   }
 
   @override

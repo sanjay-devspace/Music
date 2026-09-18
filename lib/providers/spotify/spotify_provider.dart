@@ -13,9 +13,9 @@ import 'package:tunehive/providers/spotify/spotify_mapper.dart';
 class SpotifyProvider extends MusicProvider {
   SpotifyProvider({
     SpotifyApi? api,
-    SpotifyAuthService auth = const SpotifyAuthService(),
-  })  : _api = api ?? SpotifyApi(auth: auth),
-        _auth = auth;
+    SpotifyAuthService? auth,
+  })  : _api = api ?? SpotifyApi(auth: auth ?? SpotifyAuthService()),
+        _auth = auth ?? SpotifyAuthService();
 
   final SpotifyApi _api;
   final SpotifyAuthService _auth;
