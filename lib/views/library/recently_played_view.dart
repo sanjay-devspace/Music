@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_spacing.dart';
 import 'package:tunehive/app/theme/app_typography.dart';
 import 'package:tunehive/core/animation/fade_slide.dart';
@@ -18,7 +18,7 @@ class RecentlyPlayedView extends StatelessWidget {
     final library = Get.find<LibraryController>();
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundDeep,
+      backgroundColor: TuneHiveColors.charcoalBlack,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,7 +33,7 @@ class RecentlyPlayedView extends StatelessWidget {
                   IconButton(
                     onPressed: () => context.pop(),
                     icon: const Icon(Icons.arrow_back_rounded),
-                    color: AppColors.textPrimary,
+                    color: TuneHiveColors.coolWhite,
                   ),
                   Text(
                     'Recently Played',
@@ -41,7 +41,7 @@ class RecentlyPlayedView extends StatelessWidget {
                       fontFamily: AppTypography.fontFamily,
                       fontSize: 20,
                       fontWeight: FontWeight.w800,
-                      color: AppColors.textPrimary,
+                      color: TuneHiveColors.coolWhite,
                     ),
                   ),
                 ],

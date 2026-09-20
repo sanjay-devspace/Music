@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_spacing.dart';
 import 'package:tunehive/app/theme/app_typography.dart';
 import 'package:tunehive/core/animation/fade_slide.dart';
@@ -20,7 +20,7 @@ class LikedSongsView extends StatelessWidget {
     final player = Get.find<PlayerController>();
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundDeep,
+      backgroundColor: TuneHiveColors.charcoalBlack,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +35,7 @@ class LikedSongsView extends StatelessWidget {
                   IconButton(
                     onPressed: () => context.pop(),
                     icon: const Icon(Icons.arrow_back_rounded),
-                    color: AppColors.textPrimary,
+                    color: TuneHiveColors.coolWhite,
                   ),
                   Expanded(
                     child: Column(
@@ -47,7 +47,7 @@ class LikedSongsView extends StatelessWidget {
                             fontFamily: AppTypography.fontFamily,
                             fontSize: 20,
                             fontWeight: FontWeight.w800,
-                            color: AppColors.textPrimary,
+                            color: TuneHiveColors.coolWhite,
                           ),
                         ),
                         Obx(
@@ -56,7 +56,7 @@ class LikedSongsView extends StatelessWidget {
                             style: TextStyle(
                               fontFamily: AppTypography.fontFamily,
                               fontSize: 13,
-                              color: AppColors.textMuted,
+                              color: TuneHiveColors.mutedText,
                             ),
                           ),
                         ),

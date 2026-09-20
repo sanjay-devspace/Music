@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_typography.dart';
 import 'package:tunehive/controllers/auth_controller.dart';
@@ -27,7 +27,7 @@ class _NotificationCenterViewState extends State<NotificationCenterView> {
     final auth = Get.find<AuthController>();
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: TuneHiveColors.charcoalBlack,
       body: SafeArea(
         child: Column(
           children: [
@@ -74,7 +74,7 @@ class _NotificationCenterViewState extends State<NotificationCenterView> {
                                   fontFamily: AppTypography.fontFamily,
                                 ),
                               ),
-                              backgroundColor: AppColors.surface,
+                              backgroundColor: TuneHiveColors.cardSurface,
                             ),
                           );
                           setState(() {
@@ -117,7 +117,7 @@ class _NotificationCenterViewState extends State<NotificationCenterView> {
           IconButton(
             onPressed: () => context.pop(),
             icon: const Icon(Icons.arrow_back_rounded),
-            color: AppColors.textPrimary,
+            color: TuneHiveColors.coolWhite,
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
           ),
@@ -129,7 +129,7 @@ class _NotificationCenterViewState extends State<NotificationCenterView> {
                 fontFamily: AppTypography.fontFamily,
                 fontSize: 20,
                 fontWeight: FontWeight.w800,
-                color: AppColors.textPrimary,
+                color: TuneHiveColors.coolWhite,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -142,7 +142,7 @@ class _NotificationCenterViewState extends State<NotificationCenterView> {
               children: [
                 const Icon(
                   Icons.notifications_none_rounded,
-                  color: AppColors.textMuted,
+                  color: TuneHiveColors.mutedText,
                   size: 22,
                 ),
                 if (count > 0)
@@ -152,7 +152,7 @@ class _NotificationCenterViewState extends State<NotificationCenterView> {
                     child: Container(
                       padding: const EdgeInsets.all(4),
                       decoration: const BoxDecoration(
-                        color: AppColors.primary,
+                        color: TuneHiveColors.electricBlue,
                         shape: BoxShape.circle,
                       ),
                       child: Text(
@@ -161,7 +161,7 @@ class _NotificationCenterViewState extends State<NotificationCenterView> {
                           fontFamily: AppTypography.fontFamily,
                           fontSize: 9,
                           fontWeight: FontWeight.w700,
-                          color: AppColors.onPrimary,
+                          color: TuneHiveColors.coolWhite,
                           height: 1,
                         ),
                       ),
@@ -197,7 +197,7 @@ class _NotificationCenterViewState extends State<NotificationCenterView> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: selected ? AppColors.primary : AppColors.surface,
+          color: selected ? TuneHiveColors.electricBlue : TuneHiveColors.cardSurface,
           borderRadius: BorderRadius.circular(AppRadius.full),
         ),
         child: Text(
@@ -206,7 +206,7 @@ class _NotificationCenterViewState extends State<NotificationCenterView> {
             fontFamily: AppTypography.fontFamily,
             fontSize: 13,
             fontWeight: FontWeight.w600,
-            color: selected ? AppColors.onPrimary : AppColors.textSecondary,
+            color: selected ? TuneHiveColors.coolWhite : TuneHiveColors.coolWhite,
           ),
         ),
       ),
@@ -226,7 +226,7 @@ class _NotificationCenterViewState extends State<NotificationCenterView> {
       child: Padding(
         padding: const EdgeInsets.only(bottom: 10),
         child: Material(
-          color: AppColors.surface,
+          color: TuneHiveColors.cardSurface,
           borderRadius: BorderRadius.circular(AppRadius.md),
           clipBehavior: Clip.antiAlias,
           child: Padding(
@@ -238,14 +238,14 @@ class _NotificationCenterViewState extends State<NotificationCenterView> {
                   width: 38,
                   height: 38,
                   decoration: BoxDecoration(
-                    color: AppColors.primary.withValues(alpha: 0.15),
+                    color: TuneHiveColors.electricBlue.withValues(alpha: 0.15),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
                     isMusic
                         ? Icons.music_note_rounded
                         : Icons.announcement_rounded,
-                    color: AppColors.primary,
+                    color: TuneHiveColors.electricBlue,
                     size: 18,
                   ),
                 ),
@@ -260,7 +260,7 @@ class _NotificationCenterViewState extends State<NotificationCenterView> {
                           fontFamily: AppTypography.fontFamily,
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.textPrimary,
+                          color: TuneHiveColors.coolWhite,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -271,7 +271,7 @@ class _NotificationCenterViewState extends State<NotificationCenterView> {
                         style: TextStyle(
                           fontFamily: AppTypography.fontFamily,
                           fontSize: 13,
-                          color: AppColors.textSecondary,
+                          color: TuneHiveColors.coolWhite,
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -282,7 +282,7 @@ class _NotificationCenterViewState extends State<NotificationCenterView> {
                         style: TextStyle(
                           fontFamily: AppTypography.fontFamily,
                           fontSize: 12,
-                          color: AppColors.textMuted,
+                          color: TuneHiveColors.mutedText,
                         ),
                       ),
                     ],
@@ -295,7 +295,7 @@ class _NotificationCenterViewState extends State<NotificationCenterView> {
                       width: 8,
                       height: 8,
                       decoration: const BoxDecoration(
-                        color: AppColors.primary,
+                        color: TuneHiveColors.electricBlue,
                         shape: BoxShape.circle,
                       ),
                     ),

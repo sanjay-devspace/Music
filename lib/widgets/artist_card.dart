@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/models/artist_model.dart';
 import 'package:tunehive/widgets/artwork_image.dart';
 
@@ -38,7 +38,7 @@ class ArtistCard extends StatelessWidget {
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: AppColors.textPrimary,
+              color: TuneHiveColors.coolWhite,
             ),
           ),
           if (showFollowers && artist.followersText.isNotEmpty) ...[
@@ -47,7 +47,7 @@ class ArtistCard extends StatelessWidget {
               artist.followersText,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontSize: 11, color: AppColors.textMuted),
+              style: const TextStyle(fontSize: 11, color: TuneHiveColors.mutedText),
             ),
           ],
         ],
@@ -82,7 +82,7 @@ class ArtistChip extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textPrimary,
+                  color: TuneHiveColors.coolWhite,
                 ),
               ),
             ),

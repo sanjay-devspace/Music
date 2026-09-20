@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_motion.dart';
 import 'package:tunehive/controllers/player_controller.dart';
 import 'package:tunehive/controllers/shell_controller.dart';
@@ -88,7 +88,7 @@ class AppShellView extends StatelessWidget {
 
         if (isDesktop) {
           return Scaffold(
-            backgroundColor: AppColors.background,
+            backgroundColor: TuneHiveColors.charcoalBlack,
             body: Row(
               children: [
                 AppSidebar(
@@ -143,6 +143,7 @@ class AppShellView extends StatelessWidget {
         final totalBottomInset = navHeight + safeBottom + navBottomGap + miniPlayerTotalHeight + 16.0;
 
         return Scaffold(
+          extendBody: true,
           backgroundColor: Colors.transparent, // Background handled by AppBackground
           resizeToAvoidBottomInset: false, // Prevents floating nav from jumping above keyboard
           body: Stack(

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:tunehive/app/routes/route_names.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_typography.dart';
 import 'package:tunehive/controllers/auth_controller.dart';
@@ -30,7 +30,7 @@ class _SettingsViewState extends State<SettingsView> {
     final user = auth.user.value;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: TuneHiveColors.charcoalBlack,
       body: SafeArea(
         child: Column(
           children: [
@@ -53,7 +53,7 @@ class _SettingsViewState extends State<SettingsView> {
                                   fontFamily: AppTypography.fontFamily,
                                 ),
                               ),
-                              backgroundColor: AppColors.surface,
+                              backgroundColor: TuneHiveColors.cardSurface,
                             ),
                           );
                         },
@@ -63,7 +63,7 @@ class _SettingsViewState extends State<SettingsView> {
                             fontFamily: AppTypography.fontFamily,
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
+                            color: TuneHiveColors.coolWhite,
                           ),
                         ),
                         subtitle: Text(
@@ -71,14 +71,14 @@ class _SettingsViewState extends State<SettingsView> {
                           style: TextStyle(
                             fontFamily: AppTypography.fontFamily,
                             fontSize: 13,
-                            color: AppColors.textMuted,
+                            color: TuneHiveColors.mutedText,
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                         trailing: const Icon(
                           Icons.chevron_right,
-                          color: AppColors.textMuted,
+                          color: TuneHiveColors.mutedText,
                           size: 20,
                         ),
                       ),
@@ -92,7 +92,7 @@ class _SettingsViewState extends State<SettingsView> {
                                   fontFamily: AppTypography.fontFamily,
                                 ),
                               ),
-                              backgroundColor: AppColors.surface,
+                              backgroundColor: TuneHiveColors.cardSurface,
                             ),
                           );
                         },
@@ -102,7 +102,7 @@ class _SettingsViewState extends State<SettingsView> {
                             fontFamily: AppTypography.fontFamily,
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
+                            color: TuneHiveColors.coolWhite,
                           ),
                         ),
                         trailing: Row(
@@ -113,13 +113,13 @@ class _SettingsViewState extends State<SettingsView> {
                               style: TextStyle(
                                 fontFamily: AppTypography.fontFamily,
                                 fontSize: 13,
-                                color: AppColors.textMuted,
+                                color: TuneHiveColors.mutedText,
                               ),
                             ),
                             const SizedBox(width: 4),
                             const Icon(
                               Icons.chevron_right,
-                              color: AppColors.textMuted,
+                              color: TuneHiveColors.mutedText,
                               size: 20,
                             ),
                           ],
@@ -140,10 +140,10 @@ class _SettingsViewState extends State<SettingsView> {
                             fontFamily: AppTypography.fontFamily,
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
+                            color: TuneHiveColors.coolWhite,
                           ),
                         ),
-                        activeThumbColor: AppColors.primary,
+                        activeThumbColor: TuneHiveColors.electricBlue,
                       ),
                       SwitchListTile(
                         value: _crossfade,
@@ -154,10 +154,10 @@ class _SettingsViewState extends State<SettingsView> {
                             fontFamily: AppTypography.fontFamily,
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
+                            color: TuneHiveColors.coolWhite,
                           ),
                         ),
-                        activeThumbColor: AppColors.primary,
+                        activeThumbColor: TuneHiveColors.electricBlue,
                       ),
                       SwitchListTile(
                         value: _normalizeVolume,
@@ -168,10 +168,10 @@ class _SettingsViewState extends State<SettingsView> {
                             fontFamily: AppTypography.fontFamily,
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
+                            color: TuneHiveColors.coolWhite,
                           ),
                         ),
-                        activeThumbColor: AppColors.primary,
+                        activeThumbColor: TuneHiveColors.electricBlue,
                       ),
                     ],
                   ),
@@ -189,7 +189,7 @@ class _SettingsViewState extends State<SettingsView> {
                                   fontFamily: AppTypography.fontFamily,
                                 ),
                               ),
-                              backgroundColor: AppColors.surface,
+                              backgroundColor: TuneHiveColors.cardSurface,
                             ),
                           );
                         },
@@ -199,7 +199,7 @@ class _SettingsViewState extends State<SettingsView> {
                             fontFamily: AppTypography.fontFamily,
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
+                            color: TuneHiveColors.coolWhite,
                           ),
                         ),
                         trailing: Row(
@@ -210,13 +210,13 @@ class _SettingsViewState extends State<SettingsView> {
                               style: TextStyle(
                                 fontFamily: AppTypography.fontFamily,
                                 fontSize: 13,
-                                color: AppColors.textMuted,
+                                color: TuneHiveColors.mutedText,
                               ),
                             ),
                             const SizedBox(width: 4),
                             const Icon(
                               Icons.chevron_right,
-                              color: AppColors.textMuted,
+                              color: TuneHiveColors.mutedText,
                               size: 20,
                             ),
                           ],
@@ -232,7 +232,7 @@ class _SettingsViewState extends State<SettingsView> {
                                   fontFamily: AppTypography.fontFamily,
                                 ),
                               ),
-                              backgroundColor: AppColors.surface,
+                              backgroundColor: TuneHiveColors.cardSurface,
                             ),
                           );
                         },
@@ -242,7 +242,7 @@ class _SettingsViewState extends State<SettingsView> {
                             fontFamily: AppTypography.fontFamily,
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
+                            color: TuneHiveColors.coolWhite,
                           ),
                         ),
                         trailing: Row(
@@ -253,13 +253,13 @@ class _SettingsViewState extends State<SettingsView> {
                               style: TextStyle(
                                 fontFamily: AppTypography.fontFamily,
                                 fontSize: 13,
-                                color: AppColors.textMuted,
+                                color: TuneHiveColors.mutedText,
                               ),
                             ),
                             const SizedBox(width: 4),
                             const Icon(
                               Icons.chevron_right,
-                              color: AppColors.textMuted,
+                              color: TuneHiveColors.mutedText,
                               size: 20,
                             ),
                           ],
@@ -281,10 +281,10 @@ class _SettingsViewState extends State<SettingsView> {
                             fontFamily: AppTypography.fontFamily,
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
+                            color: TuneHiveColors.coolWhite,
                           ),
                         ),
-                        activeThumbColor: AppColors.primary,
+                        activeThumbColor: TuneHiveColors.electricBlue,
                       ),
                       SwitchListTile(
                         value: _newReleases,
@@ -295,10 +295,10 @@ class _SettingsViewState extends State<SettingsView> {
                             fontFamily: AppTypography.fontFamily,
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
+                            color: TuneHiveColors.coolWhite,
                           ),
                         ),
-                        activeThumbColor: AppColors.primary,
+                        activeThumbColor: TuneHiveColors.electricBlue,
                       ),
                       SwitchListTile(
                         value: _weeklyPlaylists,
@@ -309,10 +309,10 @@ class _SettingsViewState extends State<SettingsView> {
                             fontFamily: AppTypography.fontFamily,
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
+                            color: TuneHiveColors.coolWhite,
                           ),
                         ),
-                        activeThumbColor: AppColors.primary,
+                        activeThumbColor: TuneHiveColors.electricBlue,
                       ),
                     ],
                   ),
@@ -330,7 +330,7 @@ class _SettingsViewState extends State<SettingsView> {
                                   fontFamily: AppTypography.fontFamily,
                                 ),
                               ),
-                              backgroundColor: AppColors.surface,
+                              backgroundColor: TuneHiveColors.cardSurface,
                             ),
                           );
                         },
@@ -340,7 +340,7 @@ class _SettingsViewState extends State<SettingsView> {
                             fontFamily: AppTypography.fontFamily,
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
+                            color: TuneHiveColors.coolWhite,
                           ),
                         ),
                         trailing: Row(
@@ -351,13 +351,13 @@ class _SettingsViewState extends State<SettingsView> {
                               style: TextStyle(
                                 fontFamily: AppTypography.fontFamily,
                                 fontSize: 13,
-                                color: AppColors.textMuted,
+                                color: TuneHiveColors.mutedText,
                               ),
                             ),
                             const SizedBox(width: 4),
                             const Icon(
                               Icons.chevron_right,
-                              color: AppColors.textMuted,
+                              color: TuneHiveColors.mutedText,
                               size: 20,
                             ),
                           ],
@@ -373,7 +373,7 @@ class _SettingsViewState extends State<SettingsView> {
                                   fontFamily: AppTypography.fontFamily,
                                 ),
                               ),
-                              backgroundColor: AppColors.surface,
+                              backgroundColor: TuneHiveColors.cardSurface,
                             ),
                           );
                         },
@@ -383,7 +383,7 @@ class _SettingsViewState extends State<SettingsView> {
                             fontFamily: AppTypography.fontFamily,
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
+                            color: TuneHiveColors.coolWhite,
                           ),
                         ),
                         trailing: Row(
@@ -394,13 +394,13 @@ class _SettingsViewState extends State<SettingsView> {
                               style: TextStyle(
                                 fontFamily: AppTypography.fontFamily,
                                 fontSize: 13,
-                                color: AppColors.textMuted,
+                                color: TuneHiveColors.mutedText,
                               ),
                             ),
                             const SizedBox(width: 4),
                             const Icon(
                               Icons.chevron_right,
-                              color: AppColors.textMuted,
+                              color: TuneHiveColors.mutedText,
                               size: 20,
                             ),
                           ],
@@ -419,7 +419,7 @@ class _SettingsViewState extends State<SettingsView> {
                             fontFamily: AppTypography.fontFamily,
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
+                            color: TuneHiveColors.coolWhite,
                           ),
                         ),
                         trailing: Text(
@@ -427,7 +427,7 @@ class _SettingsViewState extends State<SettingsView> {
                           style: TextStyle(
                             fontFamily: AppTypography.fontFamily,
                             fontSize: 13,
-                            color: AppColors.textMuted,
+                            color: TuneHiveColors.mutedText,
                           ),
                         ),
                       ),
@@ -441,7 +441,7 @@ class _SettingsViewState extends State<SettingsView> {
                                   fontFamily: AppTypography.fontFamily,
                                 ),
                               ),
-                              backgroundColor: AppColors.surface,
+                              backgroundColor: TuneHiveColors.cardSurface,
                             ),
                           );
                         },
@@ -451,12 +451,12 @@ class _SettingsViewState extends State<SettingsView> {
                             fontFamily: AppTypography.fontFamily,
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
+                            color: TuneHiveColors.coolWhite,
                           ),
                         ),
                         trailing: const Icon(
                           Icons.chevron_right,
-                          color: AppColors.textMuted,
+                          color: TuneHiveColors.mutedText,
                           size: 20,
                         ),
                       ),
@@ -470,7 +470,7 @@ class _SettingsViewState extends State<SettingsView> {
                                   fontFamily: AppTypography.fontFamily,
                                 ),
                               ),
-                              backgroundColor: AppColors.surface,
+                              backgroundColor: TuneHiveColors.cardSurface,
                             ),
                           );
                         },
@@ -480,12 +480,12 @@ class _SettingsViewState extends State<SettingsView> {
                             fontFamily: AppTypography.fontFamily,
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
+                            color: TuneHiveColors.coolWhite,
                           ),
                         ),
                         trailing: const Icon(
                           Icons.chevron_right,
-                          color: AppColors.textMuted,
+                          color: TuneHiveColors.mutedText,
                           size: 20,
                         ),
                       ),
@@ -502,7 +502,7 @@ class _SettingsViewState extends State<SettingsView> {
                         child: OutlinedButton(
                           onPressed: () => _showLogoutDialog(context),
                           style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: AppColors.primary),
+                            side: const BorderSide(color: TuneHiveColors.electricBlue),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(AppRadius.lg),
                             ),
@@ -513,7 +513,7 @@ class _SettingsViewState extends State<SettingsView> {
                               fontFamily: AppTypography.fontFamily,
                               fontSize: 15,
                               fontWeight: FontWeight.w700,
-                              color: AppColors.primary,
+                              color: TuneHiveColors.electricBlue,
                             ),
                           ),
                         ),
@@ -537,7 +537,7 @@ class _SettingsViewState extends State<SettingsView> {
           IconButton(
             onPressed: () => context.pop(),
             icon: const Icon(Icons.arrow_back_rounded),
-            color: AppColors.textPrimary,
+            color: TuneHiveColors.coolWhite,
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
           ),
@@ -549,7 +549,7 @@ class _SettingsViewState extends State<SettingsView> {
                 fontFamily: AppTypography.fontFamily,
                 fontSize: 20,
                 fontWeight: FontWeight.w800,
-                color: AppColors.textPrimary,
+                color: TuneHiveColors.coolWhite,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -577,12 +577,12 @@ class _SettingsViewState extends State<SettingsView> {
                 fontFamily: AppTypography.fontFamily,
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
-                color: AppColors.textMuted,
+                color: TuneHiveColors.mutedText,
               ),
             ),
           ),
           Material(
-            color: AppColors.surface,
+            color: TuneHiveColors.cardSurface,
             borderRadius: BorderRadius.circular(AppRadius.lg),
             clipBehavior: Clip.antiAlias,
             child: Column(
@@ -594,7 +594,7 @@ class _SettingsViewState extends State<SettingsView> {
                       height: 1,
                       indent: 20,
                       endIndent: 20,
-                      color: AppColors.divider,
+                      color: TuneHiveColors.elevatedSurface,
                     ),
                 ],
               ],
@@ -609,7 +609,7 @@ class _SettingsViewState extends State<SettingsView> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: AppColors.surface,
+        backgroundColor: TuneHiveColors.cardSurface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppRadius.lg),
         ),
@@ -619,7 +619,7 @@ class _SettingsViewState extends State<SettingsView> {
             fontFamily: AppTypography.fontFamily,
             fontSize: 18,
             fontWeight: FontWeight.w700,
-            color: AppColors.textPrimary,
+            color: TuneHiveColors.coolWhite,
           ),
         ),
         content: Text(
@@ -627,7 +627,7 @@ class _SettingsViewState extends State<SettingsView> {
           style: TextStyle(
             fontFamily: AppTypography.fontFamily,
             fontSize: 14,
-            color: AppColors.textSecondary,
+            color: TuneHiveColors.coolWhite,
           ),
         ),
         actions: [
@@ -637,7 +637,7 @@ class _SettingsViewState extends State<SettingsView> {
               'Cancel',
               style: TextStyle(
                 fontFamily: AppTypography.fontFamily,
-                color: AppColors.textSecondary,
+                color: TuneHiveColors.coolWhite,
               ),
             ),
           ),
@@ -654,7 +654,7 @@ class _SettingsViewState extends State<SettingsView> {
               style: TextStyle(
                 fontFamily: AppTypography.fontFamily,
                 fontWeight: FontWeight.w700,
-                color: AppColors.primary,
+                color: TuneHiveColors.electricBlue,
               ),
             ),
           ),

@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_motion.dart';
 
 /// Animated equalizer bars used behind album art and inside the player.
@@ -11,8 +11,8 @@ class AudioWaveform extends StatefulWidget {
     this.barCount = 48,
     this.height = 44,
     this.active = false,
-    this.color = AppColors.primary,
-    this.inactiveColor = AppColors.divider,
+    this.color = TuneHiveColors.electricBlue,
+    this.inactiveColor = TuneHiveColors.elevatedSurface,
     this.barWidth = 3,
   });
 

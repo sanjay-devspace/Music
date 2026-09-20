@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_motion.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_shadows.dart';
@@ -36,8 +36,8 @@ class _PlayButtonState extends State<PlayButton> {
   @override
   Widget build(BuildContext context) {
     final iconSize = widget.size * 0.46;
-    final background = widget.filled ? AppColors.primary : AppColors.white;
-    final foreground = widget.filled ? AppColors.onPrimary : AppColors.black;
+    final background = widget.filled ? TuneHiveColors.electricBlue : TuneHiveColors.coolWhite;
+    final foreground = widget.filled ? TuneHiveColors.coolWhite : TuneHiveColors.charcoalBlack;
 
     final Widget inner = widget.isLoading
         ? SizedBox(
@@ -95,7 +95,7 @@ class PlayNowPill extends StatelessWidget {
   const PlayNowPill({
     super.key,
     this.onPressed,
-    this.backgroundColor = AppColors.primary,
+    this.backgroundColor = TuneHiveColors.electricBlue,
   });
 
   final VoidCallback? onPressed;
@@ -115,7 +115,7 @@ class PlayNowPill extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               const Icon(Icons.play_arrow_rounded,
-                  size: 18, color: AppColors.onPrimary),
+                  size: 18, color: TuneHiveColors.coolWhite),
               const SizedBox(width: 6),
               Text(
                 'PLAY NOW',
@@ -124,7 +124,7 @@ class PlayNowPill extends StatelessWidget {
                   fontSize: 12,
                   fontWeight: FontWeight.w800,
                   letterSpacing: 1.2,
-                  color: AppColors.onPrimary,
+                  color: TuneHiveColors.coolWhite,
                 ),
               ),
             ],

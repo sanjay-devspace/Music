@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' hide RepeatMode;
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_spacing.dart';
 import 'package:tunehive/app/theme/app_typography.dart';
@@ -21,7 +21,7 @@ class QueueView extends StatelessWidget {
     final player = Get.find<PlayerController>();
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundDeep,
+      backgroundColor: TuneHiveColors.charcoalBlack,
       body: SafeArea(
         child: Column(
           children: [
@@ -75,7 +75,7 @@ class QueueView extends StatelessWidget {
           IconButton(
             onPressed: () => context.pop(),
             icon: const Icon(Icons.arrow_back_rounded),
-            color: AppColors.textPrimary,
+            color: TuneHiveColors.coolWhite,
           ),
           Text(
             'Queue',
@@ -83,7 +83,7 @@ class QueueView extends StatelessWidget {
               fontFamily: AppTypography.fontFamily,
               fontSize: 20,
               fontWeight: FontWeight.w800,
-              color: AppColors.textPrimary,
+              color: TuneHiveColors.coolWhite,
             ),
           ),
           const Spacer(),
@@ -92,7 +92,7 @@ class QueueView extends StatelessWidget {
                 ? IconButton(
                     onPressed: () => player.clearQueue(),
                     icon: const Icon(Icons.delete_sweep_rounded),
-                    color: AppColors.textMuted,
+                    color: TuneHiveColors.mutedText,
                   )
                 : const SizedBox.shrink(),
           ),
@@ -112,7 +112,7 @@ class QueueView extends StatelessWidget {
         ),
         padding: EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: TuneHiveColors.cardSurface,
           borderRadius: BorderRadius.circular(AppRadius.lg),
         ),
         child: Column(
@@ -136,7 +136,7 @@ class QueueView extends StatelessWidget {
                           fontFamily: AppTypography.fontFamily,
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.textPrimary,
+                          color: TuneHiveColors.coolWhite,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -147,7 +147,7 @@ class QueueView extends StatelessWidget {
                         style: TextStyle(
                           fontFamily: AppTypography.fontFamily,
                           fontSize: 13,
-                          color: AppColors.textMuted,
+                          color: TuneHiveColors.mutedText,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -160,8 +160,8 @@ class QueueView extends StatelessWidget {
             SizedBox(height: AppSpacing.sm),
             LinearProgressIndicator(
               value: player.progress.value,
-              color: AppColors.primary,
-              backgroundColor: AppColors.divider,
+              color: TuneHiveColors.electricBlue,
+              backgroundColor: TuneHiveColors.elevatedSurface,
               minHeight: 2,
               borderRadius: BorderRadius.circular(AppRadius.full),
             ),
@@ -175,7 +175,7 @@ class QueueView extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: AppTypography.fontFamily,
                       fontSize: 11,
-                      color: AppColors.textMuted,
+                      color: TuneHiveColors.mutedText,
                     ),
                   ),
                 ),
@@ -185,7 +185,7 @@ class QueueView extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: AppTypography.fontFamily,
                       fontSize: 11,
-                      color: AppColors.textMuted,
+                      color: TuneHiveColors.mutedText,
                     ),
                   ),
                 ),
@@ -214,7 +214,7 @@ class QueueView extends StatelessWidget {
                 fontFamily: AppTypography.fontFamily,
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
-                color: AppColors.textPrimary,
+                color: TuneHiveColors.coolWhite,
               ),
             ),
           ],
@@ -240,7 +240,7 @@ class QueueView extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           border: isCurrent
-              ? Border(left: BorderSide(color: AppColors.primary, width: 3))
+              ? Border(left: BorderSide(color: TuneHiveColors.electricBlue, width: 3))
               : null,
         ),
         child: Row(
@@ -254,7 +254,7 @@ class QueueView extends StatelessWidget {
                   fontFamily: AppTypography.fontFamily,
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
-                  color: isCurrent ? AppColors.primary : AppColors.textMuted,
+                  color: isCurrent ? TuneHiveColors.electricBlue : TuneHiveColors.mutedText,
                 ),
               ),
             ),
@@ -270,8 +270,8 @@ class QueueView extends StatelessWidget {
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                       color: isCurrent
-                          ? AppColors.primary
-                          : AppColors.textPrimary,
+                          ? TuneHiveColors.electricBlue
+                          : TuneHiveColors.coolWhite,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -281,7 +281,7 @@ class QueueView extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: AppTypography.fontFamily,
                       fontSize: 12,
-                      color: AppColors.textMuted,
+                      color: TuneHiveColors.mutedText,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -294,13 +294,13 @@ class QueueView extends StatelessWidget {
               style: TextStyle(
                 fontFamily: AppTypography.fontFamily,
                 fontSize: 12,
-                color: AppColors.textMuted,
+                color: TuneHiveColors.mutedText,
               ),
             ),
             IconButton(
               onPressed: () => player.removeQueueItem(index),
               icon: const Icon(Icons.close_rounded, size: 18),
-              color: AppColors.textMuted,
+              color: TuneHiveColors.mutedText,
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
             ),
@@ -317,8 +317,8 @@ class QueueView extends StatelessWidget {
         vertical: AppSpacing.sm,
       ),
       decoration: BoxDecoration(
-        color: AppColors.surface,
-        border: Border(top: BorderSide(color: AppColors.divider, width: 0.5)),
+        color: TuneHiveColors.cardSurface,
+        border: Border(top: BorderSide(color: TuneHiveColors.elevatedSurface, width: 0.5)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -329,15 +329,15 @@ class QueueView extends StatelessWidget {
               icon: Icon(
                 Icons.shuffle_rounded,
                 color: player.isShuffle.value
-                    ? AppColors.primary
-                    : AppColors.textMuted,
+                    ? TuneHiveColors.electricBlue
+                    : TuneHiveColors.mutedText,
               ),
             ),
           ),
           IconButton(
             onPressed: () => player.previous(),
             icon: const Icon(Icons.skip_previous_rounded),
-            color: AppColors.textPrimary,
+            color: TuneHiveColors.coolWhite,
           ),
           Obx(
             () => PlayButton(
@@ -350,7 +350,7 @@ class QueueView extends StatelessWidget {
           IconButton(
             onPressed: () => player.next(),
             icon: const Icon(Icons.skip_next_rounded),
-            color: AppColors.textPrimary,
+            color: TuneHiveColors.coolWhite,
           ),
           Obx(
             () => IconButton(
@@ -362,8 +362,8 @@ class QueueView extends StatelessWidget {
                     ? Icons.repeat_rounded
                     : Icons.repeat_one_rounded,
                 color: player.repeatMode.value != RepeatMode.off
-                    ? AppColors.primary
-                    : AppColors.textMuted,
+                    ? TuneHiveColors.electricBlue
+                    : TuneHiveColors.mutedText,
               ),
             ),
           ),

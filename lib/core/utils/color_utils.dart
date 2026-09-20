@@ -1,3 +1,4 @@
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:palette_generator/palette_generator.dart';
@@ -18,8 +19,8 @@ class ArtworkPalette {
 
   /// Deep-navy theme fallback used when artwork can't be resolved.
   static final ArtworkPalette fallback = ArtworkPalette(
-    ambient: const Color(0xFF15262D),
-    glow: const Color(0xFFFF5B63),
+    ambient: TuneHiveColors.cardSurface,
+    glow: TuneHiveColors.electricBlue,
   );
 
   static final Map<String, ArtworkPalette> _cache = {};

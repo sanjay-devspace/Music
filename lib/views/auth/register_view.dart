@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tunehive/app/routes/route_names.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_motion.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_spacing.dart';
@@ -50,7 +50,7 @@ class _RegisterViewState extends State<RegisterView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: TuneHiveColors.charcoalBlack,
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -91,7 +91,7 @@ class _RegisterViewState extends State<RegisterView> {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [AppColors.surface, AppColors.backgroundDeep],
+          colors: [TuneHiveColors.cardSurface, TuneHiveColors.charcoalBlack],
         ),
       ),
       child: Center(
@@ -106,12 +106,12 @@ class _RegisterViewState extends State<RegisterView> {
                   width: 120,
                   height: 120,
                   decoration: BoxDecoration(
-                    color: AppColors.primary.withValues(alpha: 0.12),
+                    color: TuneHiveColors.electricBlue.withValues(alpha: 0.12),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
                     Icons.equalizer_rounded,
-                    color: AppColors.primary,
+                    color: TuneHiveColors.electricBlue,
                     size: 64,
                   ),
                 ),
@@ -135,7 +135,7 @@ class _RegisterViewState extends State<RegisterView> {
                   'Discover, save, and share\nthe music you love.',
                   textAlign: TextAlign.center,
                   style: AppTextStyles.body.copyWith(
-                    color: AppColors.textSecondary,
+                    color: TuneHiveColors.coolWhite,
                     fontSize: 18,
                     height: 1.5,
                   ),
@@ -200,7 +200,7 @@ class _RegisterViewState extends State<RegisterView> {
       child: Center(
         child: Icon(
           Icons.equalizer_rounded,
-          color: AppColors.primary,
+          color: TuneHiveColors.electricBlue,
           size: 48,
         ),
       ),
@@ -226,7 +226,7 @@ class _RegisterViewState extends State<RegisterView> {
           child: Text(
             'Join the hive',
             style: AppTextStyles.body.copyWith(
-              color: AppColors.textSecondary,
+              color: TuneHiveColors.coolWhite,
               fontSize: 14,
             ),
           ),
@@ -278,7 +278,7 @@ class _RegisterViewState extends State<RegisterView> {
         suffixIcon: IconButton(
           icon: Icon(
             _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-            color: AppColors.textMuted,
+            color: TuneHiveColors.mutedText,
             size: 20,
           ),
           onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
@@ -303,7 +303,7 @@ class _RegisterViewState extends State<RegisterView> {
         suffixIcon: IconButton(
           icon: Icon(
             _obscureConfirmPassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-            color: AppColors.textMuted,
+            color: TuneHiveColors.mutedText,
             size: 20,
           ),
           onPressed: () => setState(() => _obscureConfirmPassword = !_obscureConfirmPassword),
@@ -321,13 +321,13 @@ class _RegisterViewState extends State<RegisterView> {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.error.withValues(alpha: 0.1),
+        color: Colors.red.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: AppColors.error.withValues(alpha: 0.3)),
+        border: Border.all(color: Colors.red.withValues(alpha: 0.3)),
       ),
       child: Row(
         children: [
-          const Icon(Icons.error_outline, color: AppColors.error, size: 18),
+          const Icon(Icons.error_outline, color: Colors.red, size: 18),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
             child: Text(
@@ -335,7 +335,7 @@ class _RegisterViewState extends State<RegisterView> {
               style: TextStyle(
                 fontFamily: AppTypography.fontFamily,
                 fontSize: 13,
-                color: AppColors.error,
+                color: Colors.red,
               ),
             ),
           ),
@@ -352,9 +352,9 @@ class _RegisterViewState extends State<RegisterView> {
         child: FilledButton(
           onPressed: _isLoading ? null : _handleRegister,
           style: FilledButton.styleFrom(
-            backgroundColor: AppColors.primary,
-            foregroundColor: AppColors.onPrimary,
-            disabledBackgroundColor: AppColors.primary.withValues(alpha: 0.5),
+            backgroundColor: TuneHiveColors.electricBlue,
+            foregroundColor: TuneHiveColors.coolWhite,
+            disabledBackgroundColor: TuneHiveColors.electricBlue.withValues(alpha: 0.5),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppRadius.lg),
             ),
@@ -370,7 +370,7 @@ class _RegisterViewState extends State<RegisterView> {
                   height: 22,
                   child: CircularProgressIndicator(
                     strokeWidth: 2.5,
-                    color: AppColors.onPrimary,
+                    color: TuneHiveColors.coolWhite,
                   ),
                 )
               : const Text('Create Account'),
@@ -384,7 +384,7 @@ class _RegisterViewState extends State<RegisterView> {
       delay: AppMotion.staggerBase + AppMotion.staggerStep * 7,
       child: Row(
         children: [
-          const Expanded(child: Divider(color: AppColors.divider, height: 1)),
+          const Expanded(child: Divider(color: TuneHiveColors.elevatedSurface, height: 1)),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
             child: Text(
@@ -392,11 +392,11 @@ class _RegisterViewState extends State<RegisterView> {
               style: TextStyle(
                 fontFamily: AppTypography.fontFamily,
                 fontSize: 12,
-                color: AppColors.textMuted,
+                color: TuneHiveColors.mutedText,
               ),
             ),
           ),
-          const Expanded(child: Divider(color: AppColors.divider, height: 1)),
+          const Expanded(child: Divider(color: TuneHiveColors.elevatedSurface, height: 1)),
         ],
       ),
     );
@@ -438,7 +438,7 @@ class _RegisterViewState extends State<RegisterView> {
             style: TextStyle(
               fontFamily: AppTypography.fontFamily,
               fontSize: 14,
-              color: AppColors.textSecondary,
+              color: TuneHiveColors.coolWhite,
             ),
           ),
           GestureDetector(
@@ -449,7 +449,7 @@ class _RegisterViewState extends State<RegisterView> {
                 fontFamily: AppTypography.fontFamily,
                 fontSize: 14,
                 fontWeight: FontWeight.w700,
-                color: AppColors.primary,
+                color: TuneHiveColors.electricBlue,
               ),
             ),
           ),
@@ -490,44 +490,44 @@ class _AuthTextField extends StatelessWidget {
       style: TextStyle(
         fontFamily: AppTypography.fontFamily,
         fontSize: 15,
-        color: AppColors.textPrimary,
+        color: TuneHiveColors.coolWhite,
       ),
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(
           fontFamily: AppTypography.fontFamily,
           fontSize: 15,
-          color: AppColors.textMuted,
+          color: TuneHiveColors.mutedText,
         ),
-        prefixIcon: Icon(prefixIcon, color: AppColors.textMuted, size: 20),
+        prefixIcon: Icon(prefixIcon, color: TuneHiveColors.mutedText, size: 20),
         suffixIcon: suffixIcon,
         filled: true,
-        fillColor: AppColors.surface,
+        fillColor: TuneHiveColors.cardSurface,
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.lg),
-          borderSide: BorderSide(color: AppColors.divider),
+          borderSide: BorderSide(color: TuneHiveColors.elevatedSurface),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.lg),
-          borderSide: BorderSide(color: AppColors.divider),
+          borderSide: BorderSide(color: TuneHiveColors.elevatedSurface),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.lg),
-          borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
+          borderSide: const BorderSide(color: TuneHiveColors.electricBlue, width: 1.5),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.lg),
-          borderSide: const BorderSide(color: AppColors.error),
+          borderSide: const BorderSide(color: Colors.red),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.lg),
-          borderSide: const BorderSide(color: AppColors.error, width: 1.5),
+          borderSide: const BorderSide(color: Colors.red, width: 1.5),
         ),
         errorStyle: TextStyle(
           fontFamily: AppTypography.fontFamily,
           fontSize: 12,
-          color: AppColors.error,
+          color: Colors.red,
         ),
       ),
     );
@@ -554,9 +554,9 @@ class _SocialButton extends StatelessWidget {
       child: OutlinedButton(
         onPressed: onTap,
         style: OutlinedButton.styleFrom(
-          foregroundColor: AppColors.textPrimary,
-          backgroundColor: AppColors.surface,
-          side: const BorderSide(color: AppColors.divider),
+          foregroundColor: TuneHiveColors.coolWhite,
+          backgroundColor: TuneHiveColors.cardSurface,
+          side: const BorderSide(color: TuneHiveColors.elevatedSurface),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppRadius.lg),
           ),
@@ -569,7 +569,7 @@ class _SocialButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 20, color: AppColors.textPrimary),
+            Icon(icon, size: 20, color: TuneHiveColors.coolWhite),
             const SizedBox(width: AppSpacing.sm),
             Text(label),
           ],

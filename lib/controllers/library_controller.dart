@@ -21,9 +21,14 @@ class LibraryController extends GetxController {
   void onInit() {
     super.onInit();
     _player = Get.find<PlayerController>();
-    load();
     // Sync liked songs whenever the player's favorites change.
     ever(_player.likedIds, (_) => _syncLiked());
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+    load();
   }
 
   Future<void> load() async {

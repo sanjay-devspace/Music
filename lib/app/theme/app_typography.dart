@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 
 /// Typography tokens for TUNEHIVE.
 ///
@@ -31,7 +31,7 @@ abstract class AppTextStyles {
     fontWeight: AppTypography.displayWeight,
     letterSpacing: -1.5,
     height: 1.05,
-    color: AppColors.textPrimary,
+    color: TuneHiveColors.coolWhite,
   );
 
   static const TextStyle displayMedium = TextStyle(
@@ -40,7 +40,7 @@ abstract class AppTextStyles {
     fontWeight: AppTypography.displayWeight,
     letterSpacing: -1,
     height: 1.1,
-    color: AppColors.textPrimary,
+    color: TuneHiveColors.coolWhite,
   );
 
   static const TextStyle headline = TextStyle(
@@ -49,7 +49,7 @@ abstract class AppTextStyles {
     fontWeight: AppTypography.headlineWeight,
     letterSpacing: -0.5,
     height: 1.15,
-    color: AppColors.textPrimary,
+    color: TuneHiveColors.coolWhite,
   );
 
   static const TextStyle title = TextStyle(
@@ -57,7 +57,7 @@ abstract class AppTextStyles {
     fontSize: AppTypography.titleSize,
     fontWeight: AppTypography.titleWeight,
     letterSpacing: -0.3,
-    color: AppColors.textPrimary,
+    color: TuneHiveColors.coolWhite,
   );
 
   static const TextStyle body = TextStyle(
@@ -65,7 +65,7 @@ abstract class AppTextStyles {
     fontSize: AppTypography.bodySize,
     fontWeight: FontWeight.w400,
     height: 1.5,
-    color: AppColors.textSecondary,
+    color: TuneHiveColors.coolWhite,
   );
 
   static const TextStyle label = TextStyle(
@@ -73,7 +73,7 @@ abstract class AppTextStyles {
     fontSize: AppTypography.labelSize,
     fontWeight: AppTypography.labelWeight,
     letterSpacing: 0.1,
-    color: AppColors.textPrimary,
+    color: TuneHiveColors.coolWhite,
   );
 
   static const TextStyle caption = TextStyle(
@@ -81,6 +81,6 @@ abstract class AppTextStyles {
     fontSize: AppTypography.captionSize,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.2,
-    color: AppColors.textMuted,
+    color: TuneHiveColors.mutedText,
   );
 }

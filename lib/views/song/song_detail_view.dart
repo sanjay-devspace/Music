@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:tunehive/app/routes/route_names.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_spacing.dart';
 import 'package:tunehive/app/theme/app_typography.dart';
@@ -66,7 +66,7 @@ class _SongDetailViewState extends State<SongDetailView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: AppColors.background, body: _buildBody());
+    return Scaffold(backgroundColor: TuneHiveColors.charcoalBlack, body: _buildBody());
   }
 
   Widget _buildBody() {
@@ -117,7 +117,7 @@ class _SongDetailBody extends StatelessWidget {
           pinned: true,
           stretch: true,
           expandedHeight: headerHeight,
-          backgroundColor: AppColors.background,
+          backgroundColor: TuneHiveColors.charcoalBlack,
           elevation: 0,
           scrolledUnderElevation: 0,
           leading: const _CircleAction(icon: Icons.arrow_back_rounded),
@@ -142,7 +142,7 @@ class _SongDetailBody extends StatelessWidget {
                         Color(0x660D181D),
                         Color(0x000D181D),
                         Color(0xCC15262D),
-                        AppColors.background,
+                        TuneHiveColors.charcoalBlack,
                       ],
                       stops: [0.0, 0.35, 0.85, 1.0],
                     ),
@@ -172,7 +172,7 @@ class _SongDetailBody extends StatelessWidget {
                       fontSize: 11,
                       fontWeight: FontWeight.w700,
                       letterSpacing: 2,
-                      color: AppColors.primary,
+                      color: TuneHiveColors.electricBlue,
                     ),
                   ),
                 ),
@@ -188,7 +188,7 @@ class _SongDetailBody extends StatelessWidget {
                       fontWeight: FontWeight.w800,
                       letterSpacing: -0.6,
                       height: 1.1,
-                      color: AppColors.textPrimary,
+                      color: TuneHiveColors.coolWhite,
                     ),
                   ),
                 ),
@@ -212,7 +212,7 @@ class _SongDetailBody extends StatelessWidget {
                             fontFamily: AppTypography.fontFamily,
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textSecondary,
+                            color: TuneHiveColors.coolWhite,
                           ),
                         ),
                       if (song.albumName != null) ...[
@@ -222,7 +222,7 @@ class _SongDetailBody extends StatelessWidget {
                           ),
                           child: Text(
                             '•',
-                            style: TextStyle(color: AppColors.textMuted),
+                            style: TextStyle(color: TuneHiveColors.mutedText),
                           ),
                         ),
                         _LinkText(
@@ -291,7 +291,7 @@ class _CircleAction extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Material(
-        color: AppColors.black.withValues(alpha: 0.32),
+        color: TuneHiveColors.charcoalBlack.withValues(alpha: 0.32),
         shape: const CircleBorder(),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
@@ -311,7 +311,7 @@ class _CircleAction extends StatelessWidget {
           child: SizedBox(
             width: 40,
             height: 40,
-            child: Icon(icon, size: 20, color: AppColors.textPrimary),
+            child: Icon(icon, size: 20, color: TuneHiveColors.coolWhite),
           ),
         ),
       ),
@@ -339,9 +339,9 @@ class _LinkText extends StatelessWidget {
             fontFamily: AppTypography.fontFamily,
             fontSize: 15,
             fontWeight: FontWeight.w600,
-            color: muted ? AppColors.textMuted : AppColors.textSecondary,
+            color: muted ? TuneHiveColors.mutedText : TuneHiveColors.coolWhite,
             decoration: onTap == null ? null : TextDecoration.underline,
-            decorationColor: AppColors.textMuted,
+            decorationColor: TuneHiveColors.mutedText,
           ),
         ),
       ),
@@ -378,9 +378,9 @@ class _ActionsRow extends StatelessWidget {
         const SizedBox(width: AppSpacing.lg),
         Container(
           decoration: BoxDecoration(
-            color: AppColors.surface,
+            color: TuneHiveColors.cardSurface,
             shape: BoxShape.circle,
-            border: Border.all(color: AppColors.divider),
+            border: Border.all(color: TuneHiveColors.elevatedSurface),
           ),
           child: Obx(
             () => FavoriteButton(
@@ -429,14 +429,14 @@ class _MetaPill extends StatelessWidget {
         vertical: AppSpacing.sm,
       ),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: TuneHiveColors.cardSurface,
         borderRadius: BorderRadius.circular(AppRadius.full),
-        border: Border.all(color: AppColors.divider),
+        border: Border.all(color: TuneHiveColors.elevatedSurface),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 15, color: AppColors.textMuted),
+          Icon(icon, size: 15, color: TuneHiveColors.mutedText),
           const SizedBox(width: AppSpacing.sm),
           Text(
             label,
@@ -444,7 +444,7 @@ class _MetaPill extends StatelessWidget {
               fontFamily: AppTypography.fontFamily,
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: AppColors.textSecondary,
+              color: TuneHiveColors.coolWhite,
             ),
           ),
         ],
@@ -463,9 +463,9 @@ class _CreditsCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: TuneHiveColors.cardSurface,
         borderRadius: BorderRadius.circular(AppRadius.lg),
-        border: Border.all(color: AppColors.divider),
+        border: Border.all(color: TuneHiveColors.elevatedSurface),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -476,7 +476,7 @@ class _CreditsCard extends StatelessWidget {
               fontFamily: AppTypography.fontFamily,
               fontSize: 16,
               fontWeight: FontWeight.w800,
-              color: AppColors.textPrimary,
+              color: TuneHiveColors.coolWhite,
             ),
           ),
           const SizedBox(height: AppSpacing.md),
@@ -531,7 +531,7 @@ class _CreditRow extends StatelessWidget {
                   fontFamily: AppTypography.fontFamily,
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.textMuted,
+                  color: TuneHiveColors.mutedText,
                 ),
               ),
             ),
@@ -545,8 +545,8 @@ class _CreditRow extends StatelessWidget {
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                   color: onTap == null
-                      ? AppColors.textPrimary
-                      : AppColors.textSecondary,
+                      ? TuneHiveColors.coolWhite
+                      : TuneHiveColors.coolWhite,
                 ),
               ),
             ),
@@ -554,7 +554,7 @@ class _CreditRow extends StatelessWidget {
               const Icon(
                 Icons.chevron_right_rounded,
                 size: 18,
-                color: AppColors.textMuted,
+                color: TuneHiveColors.mutedText,
               ),
           ],
         ),
@@ -577,7 +577,7 @@ class _SectionTitle extends StatelessWidget {
         fontSize: 20,
         fontWeight: FontWeight.w800,
         letterSpacing: -0.4,
-        color: AppColors.textPrimary,
+        color: TuneHiveColors.coolWhite,
       ),
     );
   }
@@ -599,7 +599,7 @@ class _SongCarousel extends StatelessWidget {
           style: TextStyle(
             fontFamily: AppTypography.fontFamily,
             fontSize: 13,
-            color: AppColors.textMuted,
+            color: TuneHiveColors.mutedText,
           ),
         ),
       );

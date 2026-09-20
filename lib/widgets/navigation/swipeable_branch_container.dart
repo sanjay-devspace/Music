@@ -57,6 +57,8 @@ class _SwipeableBranchContainerState extends State<SwipeableBranchContainer> {
     });
   }
 
+  bool _isJumping = false;
+
   @override
   void didUpdateWidget(covariant SwipeableBranchContainer oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -72,7 +74,9 @@ class _SwipeableBranchContainerState extends State<SwipeableBranchContainer> {
       if (_pageController.hasClients && !_isAnimatingFromTap) {
         // Fallback jump if GoRouter changes index externally without animation
         if (_pageController.page?.round() != widget.currentIndex) {
+          _isJumping = true;
           _pageController.jumpToPage(widget.currentIndex);
+          _isJumping = false;
         }
       }
     }
@@ -86,7 +90,7 @@ class _SwipeableBranchContainerState extends State<SwipeableBranchContainer> {
   }
 
   void _onPageChanged(int index) {
-    if (!_isAnimatingFromTap) {
+    if (!_isAnimatingFromTap && !_isJumping) {
       // Swiped manually by the user
       widget.onChange(index);
     }

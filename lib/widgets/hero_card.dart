@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_shadows.dart';
 import 'package:tunehive/app/theme/app_typography.dart';
@@ -92,7 +92,7 @@ class HeroCard extends StatelessWidget {
                             fontSize: 24,
                             fontWeight: FontWeight.w900,
                             letterSpacing: 1.5,
-                            color: AppColors.white,
+                            color: TuneHiveColors.coolWhite,
                             height: 1.1,
                           ),
                         ),
@@ -106,8 +106,8 @@ class HeroCard extends StatelessWidget {
                                 ? Icons.favorite_rounded
                                 : Icons.favorite_border_rounded,
                             color: isFavorited
-                                ? AppColors.primary
-                                : AppColors.white,
+                                ? TuneHiveColors.electricBlue
+                                : TuneHiveColors.coolWhite,
                           ),
                         ),
                     ],
@@ -124,7 +124,7 @@ class HeroCard extends StatelessWidget {
                       fontFamily: AppTypography.fontFamily,
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.white.withValues(alpha: 0.85),
+                      color: TuneHiveColors.coolWhite.withValues(alpha: 0.85),
                       height: 1.35,
                     ),
                   ),
@@ -154,12 +154,12 @@ class _HeroPlaceholder extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [AppColors.backgroundGradientStart, AppColors.backgroundGradientEnd],
+          colors: [TuneHiveColors.cardSurface, TuneHiveColors.charcoalBlack],
         ),
       ),
       child: Center(
         child: Icon(Icons.equalizer_rounded,
-            color: AppColors.primary, size: 40),
+            color: TuneHiveColors.electricBlue, size: 40),
       ),
     );
   }

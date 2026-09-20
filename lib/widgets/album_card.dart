@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/models/album_model.dart';
 import 'package:tunehive/widgets/artwork_image.dart';
@@ -42,7 +42,7 @@ class AlbumCard extends StatelessWidget {
                   right: 8,
                   bottom: 8,
                   child: Material(
-                    color: AppColors.primary,
+                    color: TuneHiveColors.electricBlue,
                     shape: const CircleBorder(),
                     child: InkWell(
                       customBorder: const CircleBorder(),
@@ -50,7 +50,7 @@ class AlbumCard extends StatelessWidget {
                       child: const SizedBox(
                         width: 40,
                         height: 40,
-                        child: Icon(Icons.play_arrow_rounded, color: Color(0xFF0B1200), size: 24),
+                        child: Icon(Icons.play_arrow_rounded, color: TuneHiveColors.charcoalBlack, size: 24),
                       ),
                     ),
                   ),
@@ -67,7 +67,7 @@ class AlbumCard extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textPrimary,
+                  color: TuneHiveColors.coolWhite,
                 ),
               ),
             ),
@@ -77,7 +77,7 @@ class AlbumCard extends StatelessWidget {
                 album.artistName,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 12, color: AppColors.textMuted),
+                style: const TextStyle(fontSize: 12, color: TuneHiveColors.mutedText),
               ),
             ),
           ],

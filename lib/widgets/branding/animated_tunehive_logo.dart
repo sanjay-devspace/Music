@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_shadows.dart';
 
 class AnimatedTuneHiveLogo extends StatefulWidget {
@@ -8,8 +8,8 @@ class AnimatedTuneHiveLogo extends StatefulWidget {
     super.key,
     this.animateEntrance = true,
     this.loopWaveform = true,
-    this.textColor = AppColors.textPrimary,
-    this.iconColor = AppColors.primary,
+    this.textColor = TuneHiveColors.coolWhite,
+    this.iconColor = TuneHiveColors.electricBlue,
     this.textSize = 28.0,
     this.iconSize = 30.0,
   });

@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'app_colors.dart';
+import '../../core/theme/tunehive_colors.dart';
 import 'app_radius.dart';
 import 'app_typography.dart';
 
-/// Centralized Material 3 theme for TUNEHIVE — Deep Navy + Coral + White.
-///
-/// Wires the color tokens, typography and component styles into the
-/// framework. Custom widgets reference the tokens directly; framework
-/// surfaces (buttons, inputs, overlays) pick their look up from here.
+/// Centralized Material 3 theme for TUNEHIVE — Deep Navy + Royal Blue + Electric Blue.
 class AppTheme {
   AppTheme._();
 
@@ -17,25 +13,25 @@ class AppTheme {
       brightness: Brightness.dark,
       useMaterial3: true,
       fontFamily: AppTypography.fontFamily,
-      scaffoldBackgroundColor: AppColors.background,
+      scaffoldBackgroundColor: TuneHiveColors.charcoalBlack,
       colorScheme: const ColorScheme.dark(
-        primary: AppColors.primary,
-        onPrimary: AppColors.onPrimary,
-        secondary: AppColors.primaryLight,
-        onSecondary: AppColors.onPrimary,
-        surface: AppColors.surface,
-        onSurface: AppColors.textPrimary,
-        surfaceContainerHighest: AppColors.surfaceLight,
-        onSurfaceVariant: AppColors.textSecondary,
-        outline: AppColors.divider,
-        error: AppColors.error,
+        primary: TuneHiveColors.electricBlue,
+        onPrimary: TuneHiveColors.coolWhite,
+        secondary: TuneHiveColors.electricBlue,
+        onSecondary: TuneHiveColors.coolWhite,
+        surface: TuneHiveColors.cardSurface,
+        onSurface: TuneHiveColors.coolWhite,
+        surfaceContainerHighest: TuneHiveColors.elevatedSurface,
+        onSurfaceVariant: TuneHiveColors.coolWhite,
+        outline: TuneHiveColors.elevatedSurface,
+        error: Colors.red,
       ),
       splashFactory: InkSparkle.splashFactory,
     );
 
     return base.copyWith(
       textTheme: base.textTheme
-          .apply(bodyColor: AppColors.textPrimary, displayColor: AppColors.textPrimary)
+          .apply(bodyColor: TuneHiveColors.coolWhite, displayColor: TuneHiveColors.coolWhite)
           .copyWith(
             displayLarge: AppTextStyles.displayLarge,
             displayMedium: AppTextStyles.displayMedium,
@@ -55,12 +51,12 @@ class AppTheme {
         systemOverlayStyle: SystemUiOverlayStyle.light,
         titleTextStyle: AppTextStyles.title,
       ),
-      iconTheme: const IconThemeData(color: AppColors.textPrimary, size: 24),
-      dividerTheme: const DividerThemeData(color: AppColors.divider, thickness: 1, space: 1),
+      iconTheme: const IconThemeData(color: TuneHiveColors.coolWhite, size: 24),
+      dividerTheme: const DividerThemeData(color: TuneHiveColors.elevatedSurface, thickness: 1, space: 1),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.surface,
-        hintStyle: const TextStyle(color: AppColors.textMuted, fontWeight: FontWeight.w500),
+        fillColor: TuneHiveColors.cardSurface,
+        hintStyle: const TextStyle(color: TuneHiveColors.mutedText, fontWeight: FontWeight.w500),
         contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.lg),
@@ -72,13 +68,13 @@ class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.lg),
-          borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
+          borderSide: const BorderSide(color: TuneHiveColors.electricBlue, width: 1.5),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primary,
-          foregroundColor: AppColors.onPrimary,
+          backgroundColor: TuneHiveColors.electricBlue,
+          foregroundColor: TuneHiveColors.coolWhite,
           elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 18),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.lg)),
@@ -87,8 +83,8 @@ class AppTheme {
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
-          backgroundColor: AppColors.primary,
-          foregroundColor: AppColors.onPrimary,
+          backgroundColor: TuneHiveColors.electricBlue,
+          foregroundColor: TuneHiveColors.coolWhite,
           elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 18),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.lg)),
@@ -96,27 +92,27 @@ class AppTheme {
         ),
       ),
       snackBarTheme: SnackBarThemeData(
-        backgroundColor: AppColors.surfaceLight,
+        backgroundColor: TuneHiveColors.elevatedSurface,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.md)),
-        contentTextStyle: const TextStyle(color: AppColors.textPrimary),
+        contentTextStyle: const TextStyle(color: TuneHiveColors.coolWhite),
       ),
       tooltipTheme: TooltipThemeData(
         decoration: BoxDecoration(
-          color: AppColors.surfaceLight,
+          color: TuneHiveColors.elevatedSurface,
           borderRadius: BorderRadius.circular(AppRadius.sm),
         ),
-        textStyle: const TextStyle(color: AppColors.textPrimary),
+        textStyle: const TextStyle(color: TuneHiveColors.coolWhite),
       ),
       progressIndicatorTheme: const ProgressIndicatorThemeData(
-        color: AppColors.primary,
-        linearTrackColor: AppColors.dividerStrong,
+        color: TuneHiveColors.electricBlue,
+        linearTrackColor: TuneHiveColors.elevatedSurface,
       ),
       sliderTheme: SliderThemeData(
-        activeTrackColor: AppColors.primary,
-        inactiveTrackColor: AppColors.dividerStrong,
-        thumbColor: AppColors.primary,
-        overlayColor: AppColors.primary.withValues(alpha: 0.12),
+        activeTrackColor: TuneHiveColors.electricBlue,
+        inactiveTrackColor: TuneHiveColors.elevatedSurface,
+        thumbColor: TuneHiveColors.coolWhite,
+        overlayColor: const Color(0x4D006BFF), // Glow
         trackHeight: 3,
       ),
     );

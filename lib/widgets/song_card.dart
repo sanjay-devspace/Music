@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/models/song_model.dart';
 import 'package:tunehive/widgets/artwork_image.dart';
@@ -78,7 +78,7 @@ class CompactSongItem extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.textPrimary,
+                      color: TuneHiveColors.coolWhite,
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -86,7 +86,7 @@ class CompactSongItem extends StatelessWidget {
                     song.artistName,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 13, color: AppColors.textMuted),
+                    style: const TextStyle(fontSize: 13, color: TuneHiveColors.mutedText),
                   ),
                 ],
               ),
@@ -94,7 +94,7 @@ class CompactSongItem extends StatelessWidget {
             if (song.duration > Duration.zero)
               Text(
                 song.durationText,
-                style: const TextStyle(fontSize: 12, color: AppColors.textMuted),
+                style: const TextStyle(fontSize: 12, color: TuneHiveColors.mutedText),
               ),
           ],
         ),
@@ -160,7 +160,7 @@ class ArtworkSongCard extends StatelessWidget {
                         isFavorited: song.isFavorited,
                         onPressed: onFavorite,
                         size: 16,
-                        iconColor: AppColors.white,
+                        iconColor: TuneHiveColors.coolWhite,
                       ),
                     ),
                   ),
@@ -176,7 +176,7 @@ class ArtworkSongCard extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textPrimary,
+                  color: TuneHiveColors.coolWhite,
                 ),
               ),
             ),
@@ -186,7 +186,7 @@ class ArtworkSongCard extends StatelessWidget {
                 song.artistName,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 12, color: AppColors.textMuted),
+                style: const TextStyle(fontSize: 12, color: TuneHiveColors.mutedText),
               ),
             ),
           ],
@@ -205,7 +205,7 @@ class _PlayOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: AppColors.primary,
+      color: TuneHiveColors.electricBlue,
       shape: const CircleBorder(),
       child: InkWell(
         customBorder: const CircleBorder(),
@@ -213,7 +213,7 @@ class _PlayOverlay extends StatelessWidget {
         child: SizedBox(
           width: size,
           height: size,
-          child: Icon(Icons.play_arrow_rounded, color: AppColors.onPrimary, size: size * 0.55),
+          child: Icon(Icons.play_arrow_rounded, color: TuneHiveColors.coolWhite, size: size * 0.55),
         ),
       ),
     );
@@ -259,7 +259,7 @@ class ListSongItem extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.textPrimary,
+                      color: TuneHiveColors.coolWhite,
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -267,7 +267,7 @@ class ListSongItem extends StatelessWidget {
                     song.artistName,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 13, color: AppColors.textMuted),
+                    style: const TextStyle(fontSize: 13, color: TuneHiveColors.mutedText),
                   ),
                 ],
               ),
@@ -275,7 +275,7 @@ class ListSongItem extends StatelessWidget {
             if (song.duration > Duration.zero)
               Text(
                 song.durationText,
-                style: const TextStyle(fontSize: 12, color: AppColors.textMuted),
+                style: const TextStyle(fontSize: 12, color: TuneHiveColors.mutedText),
               ),
             const SizedBox(width: 8),
             IconButton(
@@ -283,14 +283,14 @@ class ListSongItem extends StatelessWidget {
               visualDensity: VisualDensity.compact,
               icon: Icon(
                 song.isFavorited ? Icons.favorite_rounded : Icons.favorite_border_rounded,
-                color: song.isFavorited ? AppColors.primary : AppColors.textMuted,
+                color: song.isFavorited ? TuneHiveColors.electricBlue : TuneHiveColors.mutedText,
                 size: 20,
               ),
             ),
             IconButton(
               onPressed: onMore,
               visualDensity: VisualDensity.compact,
-              icon: const Icon(Icons.more_vert, color: AppColors.textMuted, size: 20),
+              icon: const Icon(Icons.more_vert, color: TuneHiveColors.mutedText, size: 20),
             ),
           ],
         ),

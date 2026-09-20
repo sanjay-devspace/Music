@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:tunehive/app/routes/route_names.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_motion.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_spacing.dart';
@@ -88,7 +88,7 @@ class _SearchResultsViewState extends State<SearchResultsView> {
     final hPad = r.isPhoneSmall ? 12.0 : AppSpacing.lg;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: TuneHiveColors.charcoalBlack,
       body: SafeArea(
         child: Column(
           children: [
@@ -123,7 +123,7 @@ class _SearchResultsViewState extends State<SearchResultsView> {
             onPressed: () => context.pop(),
             icon: const Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppColors.textPrimary,
+              color: TuneHiveColors.coolWhite,
               size: 20,
             ),
           ),
@@ -141,39 +141,39 @@ class _SearchResultsViewState extends State<SearchResultsView> {
               style: TextStyle(
                 fontFamily: AppTypography.fontFamily,
                 fontSize: 15,
-                color: AppColors.textPrimary,
+                color: TuneHiveColors.coolWhite,
               ),
-              cursorColor: AppColors.primary,
+              cursorColor: TuneHiveColors.electricBlue,
               decoration: InputDecoration(
                 hintText: 'Search songs, artists, albums',
                 hintStyle: TextStyle(
                   fontFamily: AppTypography.fontFamily,
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.textMuted,
+                  color: TuneHiveColors.mutedText,
                 ),
                 prefixIcon: const Icon(
                   Icons.search_rounded,
-                  color: AppColors.textSecondary,
+                  color: TuneHiveColors.coolWhite,
                 ),
                 filled: true,
-                fillColor: AppColors.surface,
+                fillColor: TuneHiveColors.cardSurface,
                 contentPadding: const EdgeInsets.symmetric(
                   vertical: 12,
                   horizontal: 14,
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(AppRadius.lg),
-                  borderSide: const BorderSide(color: AppColors.divider),
+                  borderSide: const BorderSide(color: TuneHiveColors.elevatedSurface),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(AppRadius.lg),
-                  borderSide: const BorderSide(color: AppColors.divider),
+                  borderSide: const BorderSide(color: TuneHiveColors.elevatedSurface),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(AppRadius.lg),
                   borderSide: const BorderSide(
-                    color: AppColors.primary,
+                    color: TuneHiveColors.electricBlue,
                     width: 1.4,
                   ),
                 ),
@@ -391,7 +391,7 @@ class _SectionHeader extends StatelessWidget {
           fontFamily: AppTypography.fontFamily,
           fontSize: 17,
           fontWeight: FontWeight.w700,
-          color: AppColors.textPrimary,
+          color: TuneHiveColors.coolWhite,
           letterSpacing: -0.3,
         ),
       ),

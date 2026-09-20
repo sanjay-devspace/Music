@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_spacing.dart';
 
 /// App-level loading indicator that respects the current theme.
@@ -15,7 +15,7 @@ class AppLoader extends StatelessWidget {
       height: size,
       child: const CircularProgressIndicator(
         strokeWidth: 3,
-        color: AppColors.primary,
+        color: TuneHiveColors.electricBlue,
       ),
     );
   }
@@ -82,9 +82,9 @@ class _ShimmerState extends State<Shimmer> with SingleTickerProviderStateMixin {
               begin: Alignment(dx / rect.width - 1, 0),
               end: Alignment(dx / rect.width, 0),
               colors: const [
-                AppColors.surface,
-                AppColors.surfaceLight,
-                AppColors.surface,
+                TuneHiveColors.cardSurface,
+                TuneHiveColors.elevatedSurface,
+                TuneHiveColors.cardSurface,
               ],
               stops: const [0.0, 0.5, 1.0],
             ).createShader(rect);
@@ -120,7 +120,7 @@ class ShimmerBox extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: TuneHiveColors.cardSurface,
         borderRadius: BorderRadius.circular(borderRadius),
       ),
     );
@@ -138,10 +138,10 @@ class CircleAvatarPlaceholder extends StatelessWidget {
       width: size,
       height: size,
       decoration: const BoxDecoration(
-        color: AppColors.surfaceLight,
+        color: TuneHiveColors.elevatedSurface,
         shape: BoxShape.circle,
       ),
-      child: Icon(Icons.person, color: AppColors.textMuted, size: size * 0.5),
+      child: Icon(Icons.person, color: TuneHiveColors.mutedText, size: size * 0.5),
     );
   }
 }
@@ -157,12 +157,12 @@ class ArtworkPlaceholder extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: TuneHiveColors.cardSurface,
         borderRadius: BorderRadius.circular(12),
       ),
       child: const Center(
         child: Icon(Icons.music_note_rounded,
-            color: AppColors.textMuted, size: 36),
+            color: TuneHiveColors.mutedText, size: 36),
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:tunehive/widgets/skeleton_loader.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 
 /// Cached artwork image with placeholder and error fallbacks.
@@ -42,10 +42,10 @@ class ArtworkImage extends StatelessWidget {
         width: width,
         height: height,
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: TuneHiveColors.cardSurface,
           borderRadius: BorderRadius.circular(radius),
         ),
-        child: Icon(placeholderIcon, size: height * 0.32, color: AppColors.textMuted),
+        child: Icon(placeholderIcon, size: height * 0.32, color: TuneHiveColors.mutedText),
       );
     }
 
@@ -61,8 +61,8 @@ class ArtworkImage extends StatelessWidget {
         errorWidget: (context, url, error) => Container(
           width: width,
           height: height,
-          color: AppColors.surface,
-          child: Icon(placeholderIcon, size: height * 0.32, color: AppColors.textMuted),
+          color: TuneHiveColors.cardSurface,
+          child: Icon(placeholderIcon, size: height * 0.32, color: TuneHiveColors.mutedText),
         ),
       ),
     );
@@ -82,8 +82,8 @@ class ArtistAvatar extends StatelessWidget {
       return Container(
         width: size,
         height: size,
-        decoration: const BoxDecoration(color: AppColors.surfaceLight, shape: BoxShape.circle),
-        child: Icon(Icons.person, size: size * 0.45, color: AppColors.textMuted),
+        decoration: const BoxDecoration(color: TuneHiveColors.elevatedSurface, shape: BoxShape.circle),
+        child: Icon(Icons.person, size: size * 0.45, color: TuneHiveColors.mutedText),
       );
     }
     return ClipOval(
@@ -95,14 +95,14 @@ class ArtistAvatar extends StatelessWidget {
         placeholder: (_, __) => Container(
           width: size,
           height: size,
-          color: AppColors.surfaceLight,
-          child: Icon(Icons.person, size: size * 0.45, color: AppColors.textMuted),
+          color: TuneHiveColors.elevatedSurface,
+          child: Icon(Icons.person, size: size * 0.45, color: TuneHiveColors.mutedText),
         ),
         errorWidget: (_, __, ___) => Container(
           width: size,
           height: size,
-          color: AppColors.surfaceLight,
-          child: Icon(Icons.person, size: size * 0.45, color: AppColors.textMuted),
+          color: TuneHiveColors.elevatedSurface,
+          child: Icon(Icons.person, size: size * 0.45, color: TuneHiveColors.mutedText),
         ),
       ),
     );

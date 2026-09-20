@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_motion.dart';
 
 /// Library of screen transition builders.
@@ -108,8 +108,8 @@ class ImmersiveBackground extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            AppColors.backgroundGradientStart,
-            AppColors.backgroundGradientEnd,
+            TuneHiveColors.cardSurface,
+            TuneHiveColors.charcoalBlack,
           ],
         ),
       ),

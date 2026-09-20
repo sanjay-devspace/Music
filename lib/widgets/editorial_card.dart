@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_motion.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_typography.dart';
@@ -93,7 +93,7 @@ class _EditorialCardState extends State<EditorialCard> {
                     right: 12,
                     top: 12,
                     child: Material(
-                      color: AppColors.primary,
+                      color: TuneHiveColors.electricBlue,
                       shape: const CircleBorder(),
                       clipBehavior: Clip.antiAlias,
                       child: InkWell(
@@ -103,7 +103,7 @@ class _EditorialCardState extends State<EditorialCard> {
                           height: 38,
                           child: Icon(
                             Icons.play_arrow_rounded,
-                            color: AppColors.onPrimary,
+                            color: TuneHiveColors.coolWhite,
                             size: 22,
                           ),
                         ),
@@ -128,7 +128,7 @@ class _EditorialCardState extends State<EditorialCard> {
                           fontFamily: AppTypography.fontFamily,
                           fontSize: 16,
                           fontWeight: FontWeight.w800,
-                          color: AppColors.white,
+                          color: TuneHiveColors.coolWhite,
                           letterSpacing: -0.2,
                           height: 1.15,
                         ),
@@ -143,7 +143,7 @@ class _EditorialCardState extends State<EditorialCard> {
                             fontFamily: AppTypography.fontFamily,
                             fontSize: 11,
                             fontWeight: FontWeight.w500,
-                            color: AppColors.white.withValues(alpha: 0.8),
+                            color: TuneHiveColors.coolWhite.withValues(alpha: 0.8),
                           ),
                         ),
                       ],
@@ -164,10 +164,10 @@ class _ArtworkPlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const DecoratedBox(
-      decoration: BoxDecoration(color: AppColors.surfaceLight),
+      decoration: BoxDecoration(color: TuneHiveColors.elevatedSurface),
       child: Center(
         child: Icon(Icons.music_note_rounded,
-            color: AppColors.textMuted, size: 32),
+            color: TuneHiveColors.mutedText, size: 32),
       ),
     );
   }

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:tunehive/app/routes/route_names.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_spacing.dart';
 import 'package:tunehive/app/theme/app_typography.dart';
@@ -75,7 +75,7 @@ class _ArtistDetailViewState extends State<ArtistDetailView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: AppColors.background, body: _buildBody());
+    return Scaffold(backgroundColor: TuneHiveColors.charcoalBlack, body: _buildBody());
   }
 
   Widget _buildBody() {
@@ -267,7 +267,7 @@ class _ArtistHeader extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [AppColors.surfaceLight, AppColors.background],
+          colors: [TuneHiveColors.elevatedSurface, TuneHiveColors.charcoalBlack],
         ),
       ),
       child: SafeArea(
@@ -284,7 +284,7 @@ class _ArtistHeader extends StatelessWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Material(
-                  color: AppColors.black.withValues(alpha: 0.28),
+                  color: TuneHiveColors.charcoalBlack.withValues(alpha: 0.28),
                   shape: const CircleBorder(),
                   clipBehavior: Clip.antiAlias,
                   child: InkWell(
@@ -301,7 +301,7 @@ class _ArtistHeader extends StatelessWidget {
                       child: Icon(
                         Icons.arrow_back_rounded,
                         size: 20,
-                        color: AppColors.textPrimary,
+                        color: TuneHiveColors.coolWhite,
                       ),
                     ),
                   ),
@@ -315,7 +315,7 @@ class _ArtistHeader extends StatelessWidget {
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.primary.withValues(alpha: 0.28),
+                        color: TuneHiveColors.electricBlue.withValues(alpha: 0.28),
                         blurRadius: 60,
                         spreadRadius: 4,
                       ),
@@ -339,7 +339,7 @@ class _ArtistHeader extends StatelessWidget {
                     fontSize: 28,
                     fontWeight: FontWeight.w800,
                     letterSpacing: -0.6,
-                    color: AppColors.textPrimary,
+                    color: TuneHiveColors.coolWhite,
                   ),
                 ),
               ),
@@ -351,7 +351,7 @@ class _ArtistHeader extends StatelessWidget {
                     fontFamily: AppTypography.fontFamily,
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.textSecondary,
+                    color: TuneHiveColors.coolWhite,
                   ),
                 ),
               if (artist.genres.isNotEmpty) ...[
@@ -409,9 +409,9 @@ class _GenreChip extends StatelessWidget {
         vertical: 6,
       ),
       decoration: BoxDecoration(
-        color: AppColors.black.withValues(alpha: 0.22),
+        color: TuneHiveColors.charcoalBlack.withValues(alpha: 0.22),
         borderRadius: BorderRadius.circular(AppRadius.full),
-        border: Border.all(color: AppColors.dividerStrong),
+        border: Border.all(color: TuneHiveColors.elevatedSurface),
       ),
       child: Text(
         label,
@@ -419,7 +419,7 @@ class _GenreChip extends StatelessWidget {
           fontFamily: AppTypography.fontFamily,
           fontSize: 12,
           fontWeight: FontWeight.w600,
-          color: AppColors.textPrimary,
+          color: TuneHiveColors.coolWhite,
         ),
       ),
     );
@@ -461,7 +461,7 @@ class _SectionTitle extends StatelessWidget {
         fontSize: 20,
         fontWeight: FontWeight.w800,
         letterSpacing: -0.4,
-        color: AppColors.textPrimary,
+        color: TuneHiveColors.coolWhite,
       ),
     );
   }
@@ -479,9 +479,9 @@ class _AboutCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: TuneHiveColors.cardSurface,
         borderRadius: BorderRadius.circular(AppRadius.lg),
-        border: Border.all(color: AppColors.divider),
+        border: Border.all(color: TuneHiveColors.elevatedSurface),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -492,7 +492,7 @@ class _AboutCard extends StatelessWidget {
               fontFamily: AppTypography.fontFamily,
               fontSize: 14,
               height: 1.55,
-              color: AppColors.textSecondary,
+              color: TuneHiveColors.coolWhite,
             ),
           ),
           if (followersText.isNotEmpty) ...[
@@ -502,7 +502,7 @@ class _AboutCard extends StatelessWidget {
                 const Icon(
                   Icons.people_alt_rounded,
                   size: 16,
-                  color: AppColors.textMuted,
+                  color: TuneHiveColors.mutedText,
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 Text(
@@ -511,7 +511,7 @@ class _AboutCard extends StatelessWidget {
                     fontFamily: AppTypography.fontFamily,
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.textMuted,
+                    color: TuneHiveColors.mutedText,
                   ),
                 ),
               ],
@@ -538,8 +538,8 @@ class _PrimaryAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final background = active ? AppColors.surface : AppColors.primary;
-    final foreground = active ? AppColors.textPrimary : AppColors.onPrimary;
+    final background = active ? TuneHiveColors.cardSurface : TuneHiveColors.electricBlue;
+    final foreground = active ? TuneHiveColors.coolWhite : TuneHiveColors.coolWhite;
     return Material(
       color: background,
       borderRadius: BorderRadius.circular(AppRadius.full),
@@ -554,7 +554,7 @@ class _PrimaryAction extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppRadius.full),
             border: Border.all(
-              color: active ? AppColors.dividerStrong : AppColors.primary,
+              color: active ? TuneHiveColors.elevatedSurface : TuneHiveColors.electricBlue,
             ),
           ),
           child: Row(
@@ -603,8 +603,8 @@ class _SecondaryAction extends StatelessWidget {
         ),
       ),
       style: OutlinedButton.styleFrom(
-        foregroundColor: AppColors.textPrimary,
-        side: const BorderSide(color: AppColors.dividerStrong),
+        foregroundColor: TuneHiveColors.coolWhite,
+        side: const BorderSide(color: TuneHiveColors.elevatedSurface),
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.lg,
           vertical: AppSpacing.md,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_typography.dart';
 import 'package:tunehive/core/animation/fade_slide.dart';
@@ -24,7 +24,7 @@ class _ConnectedProvidersViewState extends State<ConnectedProvidersView> {
     final providers = service.providers;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: TuneHiveColors.charcoalBlack,
       body: SafeArea(
         child: Column(
           children: [
@@ -39,7 +39,7 @@ class _ConnectedProvidersViewState extends State<ConnectedProvidersView> {
                     child: Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: AppColors.surfaceLight,
+                        color: TuneHiveColors.elevatedSurface,
                         borderRadius: BorderRadius.circular(AppRadius.lg),
                       ),
                       child: Text(
@@ -48,7 +48,7 @@ class _ConnectedProvidersViewState extends State<ConnectedProvidersView> {
                         style: TextStyle(
                           fontFamily: AppTypography.fontFamily,
                           fontSize: 13,
-                          color: AppColors.textSecondary,
+                          color: TuneHiveColors.coolWhite,
                           height: 1.4,
                         ),
                       ),
@@ -65,15 +65,15 @@ class _ConnectedProvidersViewState extends State<ConnectedProvidersView> {
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 12),
                         child: Material(
-                          color: AppColors.surface,
+                          color: TuneHiveColors.cardSurface,
                           borderRadius: BorderRadius.circular(AppRadius.lg),
                           clipBehavior: Clip.antiAlias,
                           child: Container(
                             decoration: BoxDecoration(
                               border: Border.all(
                                 color: isActive
-                                    ? AppColors.primary
-                                    : AppColors.divider,
+                                    ? TuneHiveColors.electricBlue
+                                    : TuneHiveColors.elevatedSurface,
                                 width: isActive ? 1.5 : 0.5,
                               ),
                               borderRadius: BorderRadius.circular(AppRadius.lg),
@@ -93,7 +93,7 @@ class _ConnectedProvidersViewState extends State<ConnectedProvidersView> {
                                         fontFamily: AppTypography.fontFamily,
                                         fontSize: 15,
                                         fontWeight: FontWeight.w600,
-                                        color: AppColors.textPrimary,
+                                        color: TuneHiveColors.coolWhite,
                                       ),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
@@ -107,7 +107,7 @@ class _ConnectedProvidersViewState extends State<ConnectedProvidersView> {
                                         vertical: 3,
                                       ),
                                       decoration: BoxDecoration(
-                                        color: AppColors.primary,
+                                        color: TuneHiveColors.electricBlue,
                                         borderRadius: BorderRadius.circular(
                                           AppRadius.full,
                                         ),
@@ -118,7 +118,7 @@ class _ConnectedProvidersViewState extends State<ConnectedProvidersView> {
                                           fontFamily: AppTypography.fontFamily,
                                           fontSize: 9,
                                           fontWeight: FontWeight.w700,
-                                          color: AppColors.onPrimary,
+                                          color: TuneHiveColors.coolWhite,
                                           letterSpacing: 0.5,
                                         ),
                                       ),
@@ -131,7 +131,7 @@ class _ConnectedProvidersViewState extends State<ConnectedProvidersView> {
                                 style: TextStyle(
                                   fontFamily: AppTypography.fontFamily,
                                   fontSize: 13,
-                                  color: AppColors.textMuted,
+                                  color: TuneHiveColors.mutedText,
                                 ),
                               ),
                               trailing: toggling
@@ -140,14 +140,14 @@ class _ConnectedProvidersViewState extends State<ConnectedProvidersView> {
                                       height: 24,
                                       child: CircularProgressIndicator(
                                         strokeWidth: 2,
-                                        color: AppColors.primary,
+                                        color: TuneHiveColors.electricBlue,
                                       ),
                                     )
                                   : Switch(
                                       value: isActive,
                                       onChanged: (value) =>
                                           _onToggle(provider.id, value),
-                                      activeThumbColor: AppColors.primary,
+                                      activeThumbColor: TuneHiveColors.electricBlue,
                                     ),
                             ),
                           ),
@@ -180,7 +180,7 @@ class _ConnectedProvidersViewState extends State<ConnectedProvidersView> {
               'Connected to ${service.providerFor(id).displayName}',
               style: const TextStyle(fontFamily: AppTypography.fontFamily),
             ),
-            backgroundColor: AppColors.surface,
+            backgroundColor: TuneHiveColors.cardSurface,
           ),
         );
       }
@@ -192,7 +192,7 @@ class _ConnectedProvidersViewState extends State<ConnectedProvidersView> {
               'Disconnected from ${service.providerFor(id).displayName}',
               style: const TextStyle(fontFamily: AppTypography.fontFamily),
             ),
-            backgroundColor: AppColors.surface,
+            backgroundColor: TuneHiveColors.cardSurface,
           ),
         );
       }
@@ -209,7 +209,7 @@ class _ConnectedProvidersViewState extends State<ConnectedProvidersView> {
           IconButton(
             onPressed: () => context.pop(),
             icon: const Icon(Icons.arrow_back_rounded),
-            color: AppColors.textPrimary,
+            color: TuneHiveColors.coolWhite,
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
           ),
@@ -221,7 +221,7 @@ class _ConnectedProvidersViewState extends State<ConnectedProvidersView> {
                 fontFamily: AppTypography.fontFamily,
                 fontSize: 20,
                 fontWeight: FontWeight.w800,
-                color: AppColors.textPrimary,
+                color: TuneHiveColors.coolWhite,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -249,19 +249,19 @@ class _ProviderIcon extends StatelessWidget {
         icon = Icons.music_note_rounded;
         break;
       case 'apple_music':
-        color = AppColors.textPrimary;
+        color = TuneHiveColors.coolWhite;
         icon = Icons.apple_rounded;
         break;
       case 'local':
-        color = AppColors.warning;
+        color = Colors.orange;
         icon = Icons.folder_rounded;
         break;
       case 'mock':
-        color = AppColors.primary;
+        color = TuneHiveColors.electricBlue;
         icon = Icons.equalizer_rounded;
         break;
       default:
-        color = AppColors.textSecondary;
+        color = TuneHiveColors.coolWhite;
         icon = Icons.library_music_rounded;
         break;
     }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_shadows.dart';
 import 'package:tunehive/core/responsive/responsive.dart';
@@ -40,10 +40,22 @@ class FloatingPillNavigation extends StatelessWidget {
     final isSmall = responsive.isPhoneSmall;
     final safeBottom = MediaQuery.viewPaddingOf(context).bottom;
 
-    final height = isSmall ? 64.0 : responsive.isPhone ? 68.0 : 72.0;
-    final iconSize = isSmall ? 22.0 : 24.0;
-    
-    return _NavbarEntrance(
+    final height = isSmall ? 52.0 : responsive.isPhone ? 56.0 : 62.0;
+    final iconSize = isSmall ? 20.0 : 22.0;
+    final horizontalMargin = isSmall ? 10.0 : 16.0;
+    final groupGap = isSmall ? 8.0 : 12.0;
+    final bottomGap = isSmall ? 8.0 : 10.0;
+
+    final leading = _items.where((t) => t.$3 == 0).toList();
+    final secondary = _items.where((t) => t.$3 != 0).toList();
+
+    return Padding(
+      padding: EdgeInsets.fromLTRB(
+        horizontalMargin,
+        0,
+        horizontalMargin,
+        safeBottom + bottomGap,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
@@ -54,56 +66,18 @@ class FloatingPillNavigation extends StatelessWidget {
             isSmall: isSmall,
             currentIndex: currentIndex,
             onTap: onTap,
-            items: _items,
+            items: leading,
+          ),
+          SizedBox(width: groupGap),
+          _PillGroup(
+            height: height,
+            iconSize: iconSize,
+            isSmall: isSmall,
+            currentIndex: currentIndex,
+            onTap: onTap,
+            items: secondary,
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _NavbarEntrance extends StatefulWidget {
-  const _NavbarEntrance({required this.child});
-  final Widget child;
-
-  @override
-  State<_NavbarEntrance> createState() => _NavbarEntranceState();
-}
-
-class _NavbarEntranceState extends State<_NavbarEntrance> with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-  late final Animation<double> _opacity;
-  late final Animation<Offset> _slide;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 600),
-    );
-    _opacity = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic),
-    );
-    _slide = Tween<Offset>(begin: const Offset(0, 0.4), end: Offset.zero).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic),
-    );
-    _controller.forward();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return FadeTransition(
-      opacity: _opacity,
-      child: SlideTransition(
-        position: _slide,
-        child: widget.child,
       ),
     );
   }
@@ -131,33 +105,28 @@ class _PillGroup extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: AppColors.backgroundDeep,
+        color: TuneHiveColors.charcoalBlack,
         borderRadius: BorderRadius.circular(AppRadius.full),
-        border: Border.all(color: AppColors.divider),
+        border: Border.all(color: TuneHiveColors.elevatedSurface),
         boxShadow: AppShadows.floating,
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 7),
-        child: Stack(
+        padding: const EdgeInsets.all(4),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
-
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                for (var i = 0; i < items.length; i++)
-                  NavigationItem(
-                    icon: items[i].$1,
-                    label: items[i].$2,
-                    selected: currentIndex == items[i].$3,
-                    onTap: () => onTap(items[i].$3),
-                    iconSize: iconSize,
-                    itemHeight: height - 14,
-                    labelMaxWidth: isSmall ? 72 : 96,
-                    activePadding: isSmall ? 16 : 20,
-                    inactivePadding: isSmall ? 14 : 16,
-                  ),
-              ],
-            ),
+            for (var i = 0; i < items.length; i++)
+              NavigationItem(
+                icon: items[i].$1,
+                label: items[i].$2,
+                selected: currentIndex == items[i].$3,
+                onTap: () => onTap(items[i].$3),
+                iconSize: iconSize,
+                itemHeight: height - 8,
+                labelMaxWidth: isSmall ? 72 : 96,
+                activePadding: isSmall ? 14 : 16,
+                inactivePadding: isSmall ? 10 : 12,
+              ),
           ],
         ),
       ),

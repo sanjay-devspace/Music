@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 
 /// Horizontal category chip (All / Party / Blues / Chill...).
@@ -24,7 +24,7 @@ class CategoryChip extends StatelessWidget {
       curve: Curves.easeOutCubic,
       margin: const EdgeInsets.only(right: 10),
       child: Material(
-        color: selected ? AppColors.primary : AppColors.surface,
+        color: selected ? TuneHiveColors.electricBlue : TuneHiveColors.cardSurface,
         borderRadius: BorderRadius.circular(AppRadius.full),
         child: InkWell(
           borderRadius: BorderRadius.circular(AppRadius.full),
@@ -34,7 +34,7 @@ class CategoryChip extends StatelessWidget {
 child: Text(
                 label,
                 style: TextStyle(
-                  color: selected ? AppColors.onPrimary : AppColors.textSecondary,
+                  color: selected ? TuneHiveColors.coolWhite : TuneHiveColors.coolWhite,
                   fontWeight: selected ? FontWeight.w800 : FontWeight.w500,
                   fontSize: 14,
                 ),

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:tunehive/app/routes/route_names.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_typography.dart';
 import 'package:tunehive/controllers/player_controller.dart';
@@ -23,7 +23,7 @@ class PlayerView extends StatelessWidget {
   Widget build(BuildContext context) {
     final player = Get.find<PlayerController>();
     return Scaffold(
-      backgroundColor: AppColors.backgroundDeep,
+      backgroundColor: TuneHiveColors.charcoalBlack,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
@@ -96,7 +96,7 @@ class _IdlePlayer extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           const Icon(Icons.equalizer_rounded,
-              size: 64, color: AppColors.primary),
+              size: 64, color: TuneHiveColors.electricBlue),
           const SizedBox(height: 12),
           const Text(
             'Nothing playing',
@@ -104,13 +104,13 @@ class _IdlePlayer extends StatelessWidget {
               fontFamily: AppTypography.fontFamily,
               fontSize: 18,
               fontWeight: FontWeight.w700,
-              color: AppColors.textPrimary,
+              color: TuneHiveColors.coolWhite,
             ),
           ),
           const SizedBox(height: 6),
           const Text(
             'Pick a song from Home or Search.',
-            style: TextStyle(fontSize: 13, color: AppColors.textMuted),
+            style: TextStyle(fontSize: 13, color: TuneHiveColors.mutedText),
           ),
         ],
       ),
@@ -130,7 +130,7 @@ IconButton(
           onPressed: () => context.push(RoutePaths.queue),
           visualDensity: VisualDensity.compact,
           icon: const Icon(Icons.queue_music_rounded,
-              color: AppColors.textSecondary),
+              color: TuneHiveColors.coolWhite),
         ),
       ],
     );
@@ -163,7 +163,7 @@ class _Artwork extends StatelessWidget {
                   borderRadius: BorderRadius.circular(AppRadius.player),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.background.withValues(alpha: 0.5),
+                      color: TuneHiveColors.charcoalBlack.withValues(alpha: 0.5),
                       blurRadius: 32,
                       offset: const Offset(0, 16),
                     ),
@@ -211,7 +211,7 @@ class _NowPlaying extends StatelessWidget {
             fontFamily: AppTypography.fontFamily,
             fontSize: 24,
             fontWeight: FontWeight.w800,
-            color: AppColors.textPrimary,
+            color: TuneHiveColors.coolWhite,
             letterSpacing: -0.4,
           ),
         ),
@@ -226,7 +226,7 @@ class _NowPlaying extends StatelessWidget {
             style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w500,
-              color: AppColors.textSecondary,
+              color: TuneHiveColors.coolWhite,
             ),
           );
         }),
@@ -238,7 +238,7 @@ class _NowPlaying extends StatelessWidget {
             visualDensity: VisualDensity.compact,
             icon: Icon(
               liked ? Icons.favorite_rounded : Icons.favorite_border,
-              color: liked ? AppColors.primary : AppColors.textMuted,
+              color: liked ? TuneHiveColors.electricBlue : TuneHiveColors.mutedText,
               size: 22,
             ),
           );
@@ -265,12 +265,12 @@ class _SeekArea extends StatelessWidget {
         SliderTheme(
           data: SliderTheme.of(context).copyWith(
             trackHeight: 4,
-            activeTrackColor: AppColors.primary,
-            inactiveTrackColor: AppColors.divider,
+            activeTrackColor: TuneHiveColors.electricBlue,
+            inactiveTrackColor: TuneHiveColors.elevatedSurface,
             thumbShape:
                 const RoundSliderThumbShape(enabledThumbRadius: 7),
             overlayShape: SliderComponentShape.noOverlay,
-            thumbColor: AppColors.primary,
+            thumbColor: TuneHiveColors.electricBlue,
           ),
           child: Obx(() => Slider(
                 value: player.progress.value.clamp(0.0, 1.0).toDouble(),
@@ -286,14 +286,14 @@ class _SeekArea extends StatelessWidget {
                 () => Text(
                   _fmt(player.position.value),
                   style: const TextStyle(
-                      fontSize: 11, color: AppColors.textMuted),
+                      fontSize: 11, color: TuneHiveColors.mutedText),
                 ),
               ),
               Obx(
                 () => Text(
                   _fmt(player.duration.value),
                   style: const TextStyle(
-                      fontSize: 11, color: AppColors.textMuted),
+                      fontSize: 11, color: TuneHiveColors.mutedText),
                 ),
               ),
             ],
@@ -322,8 +322,8 @@ class _TransportControls extends StatelessWidget {
               return IconButton(
                 onPressed: hasPrev ? player.previous : null,
                 iconSize: 34,
-                color: AppColors.textPrimary,
-                disabledColor: AppColors.textMuted.withValues(alpha: 0.3),
+                color: TuneHiveColors.coolWhite,
+                disabledColor: TuneHiveColors.mutedText.withValues(alpha: 0.3),
                 icon: const Icon(Icons.skip_previous_rounded),
                 padding: const EdgeInsets.all(12), // Minimum practical touch area (44px)
               );
@@ -343,8 +343,8 @@ class _TransportControls extends StatelessWidget {
               return IconButton(
                 onPressed: hasNext ? player.next : null,
                 iconSize: 34,
-                color: AppColors.textPrimary,
-                disabledColor: AppColors.textMuted.withValues(alpha: 0.3),
+                color: TuneHiveColors.coolWhite,
+                disabledColor: TuneHiveColors.mutedText.withValues(alpha: 0.3),
                 icon: const Icon(Icons.skip_next_rounded),
                 padding: const EdgeInsets.all(12),
               );

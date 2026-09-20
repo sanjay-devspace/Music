@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 
 /// Section title with an action link (e.g. "See all >").
 class SectionHeader extends StatelessWidget {
@@ -26,7 +26,7 @@ class SectionHeader extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
-                color: AppColors.textPrimary,
+                color: TuneHiveColors.coolWhite,
                 letterSpacing: -0.3,
               ),
             ),
@@ -34,7 +34,7 @@ class SectionHeader extends StatelessWidget {
           if (onSeeAll != null)
             TextButton(
               onPressed: onSeeAll,
-              style: TextButton.styleFrom(foregroundColor: AppColors.textMuted),
+              style: TextButton.styleFrom(foregroundColor: TuneHiveColors.mutedText),
               child: const Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 
 /// A selectable listening mood used by the "Your Mood" row on Home.
 class MoodModel {
@@ -30,7 +30,7 @@ class HeroFeature {
     required this.subtitle,
     required this.description,
     required this.artworkUrl,
-    this.accent = AppColors.primary,
+    this.accent = TuneHiveColors.electricBlue,
   });
 
   final String id;

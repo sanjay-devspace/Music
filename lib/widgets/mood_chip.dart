@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_motion.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_shadows.dart';
@@ -31,10 +31,10 @@ class MoodChip extends StatelessWidget {
           duration: AppMotion.standard,
           curve: AppMotion.easeOut,
           decoration: BoxDecoration(
-            color: selected ? AppColors.primary : AppColors.surface,
+            color: selected ? TuneHiveColors.electricBlue : TuneHiveColors.cardSurface,
             borderRadius: BorderRadius.circular(AppRadius.full),
             border: Border.all(
-              color: selected ? AppColors.primary : AppColors.divider,
+              color: selected ? TuneHiveColors.electricBlue : TuneHiveColors.elevatedSurface,
             ),
             boxShadow: selected ? AppShadows.coralGlow : null,
           ),
@@ -59,8 +59,8 @@ class MoodChip extends StatelessWidget {
                         key: ValueKey('${mood.id}-$selected'),
                         size: 18,
                         color: selected
-                            ? AppColors.onPrimary
-                            : AppColors.textSecondary,
+                            ? TuneHiveColors.coolWhite
+                            : TuneHiveColors.coolWhite,
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -72,8 +72,8 @@ class MoodChip extends StatelessWidget {
                         fontWeight:
                             selected ? FontWeight.w700 : FontWeight.w600,
                         color: selected
-                            ? AppColors.onPrimary
-                            : AppColors.textSecondary,
+                            ? TuneHiveColors.coolWhite
+                            : TuneHiveColors.coolWhite,
                       ),
                     ),
                   ],

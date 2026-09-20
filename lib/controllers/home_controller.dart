@@ -62,6 +62,11 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
     _player = Get.find<PlayerController>();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
     load();
   }
 

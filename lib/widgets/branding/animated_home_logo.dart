@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_typography.dart';
 import 'package:tunehive/core/responsive/responsive.dart';
 
@@ -143,7 +143,7 @@ class _AnimatedHomeLogoState extends State<AnimatedHomeLogo> with TickerProvider
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.primary.withValues(alpha: _glowOpacity.value),
+                            color: TuneHiveColors.electricBlue.withValues(alpha: _glowOpacity.value),
                             blurRadius: 16,
                             spreadRadius: 4,
                           ),
@@ -153,7 +153,7 @@ class _AnimatedHomeLogoState extends State<AnimatedHomeLogo> with TickerProvider
                   ),
                 // Icon
                 _reducedMotion
-                    ? const Icon(Icons.equalizer_rounded, color: AppColors.primary, size: 26)
+                    ? const Icon(Icons.equalizer_rounded, color: TuneHiveColors.electricBlue, size: 26)
                     : SizedBox(
                         width: 24,
                         height: 24,
@@ -187,7 +187,7 @@ class _AnimatedHomeLogoState extends State<AnimatedHomeLogo> with TickerProvider
                 fontSize: widget.responsive.isPhone ? 18 : 20,
                 fontWeight: FontWeight.w900,
                 letterSpacing: 3,
-                color: AppColors.textPrimary,
+                color: TuneHiveColors.coolWhite,
               ),
             ),
           ),
@@ -237,7 +237,7 @@ class _EqualizerWave extends StatelessWidget {
               width: 3.5,
               height: height.clamp(2.0, 24.0),
               decoration: BoxDecoration(
-                color: AppColors.primary,
+                color: TuneHiveColors.electricBlue,
                 borderRadius: BorderRadius.circular(2),
               ),
             );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_motion.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 
@@ -38,8 +38,8 @@ class _AppSidebarState extends State<AppSidebar> {
       curve: AppMotion.easeOut,
       width: _expanded ? 220 : 72,
       decoration: const BoxDecoration(
-        color: AppColors.backgroundDeep,
-        border: Border(right: BorderSide(color: AppColors.divider)),
+        color: TuneHiveColors.charcoalBlack,
+        border: Border(right: BorderSide(color: TuneHiveColors.elevatedSurface)),
       ),
       child: Column(
         children: [
@@ -51,10 +51,10 @@ class _AppSidebarState extends State<AppSidebar> {
                 if (!_expanded)
                   IconButton(
                     onPressed: _toggle,
-                    icon: const Icon(Icons.menu_rounded, color: AppColors.primary),
+                    icon: const Icon(Icons.menu_rounded, color: TuneHiveColors.electricBlue),
                   )
                 else ...[
-                  const Icon(Icons.equalizer_rounded, color: AppColors.primary, size: 28),
+                  const Icon(Icons.equalizer_rounded, color: TuneHiveColors.electricBlue, size: 28),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Row(
@@ -66,7 +66,7 @@ class _AppSidebarState extends State<AppSidebar> {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                              color: AppColors.textPrimary,
+                              color: TuneHiveColors.coolWhite,
                               fontWeight: FontWeight.w900,
                               fontSize: 18,
                               letterSpacing: 1,
@@ -79,7 +79,7 @@ class _AppSidebarState extends State<AppSidebar> {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                              color: AppColors.primary,
+                              color: TuneHiveColors.electricBlue,
                               fontWeight: FontWeight.w900,
                               fontSize: 18,
                               letterSpacing: 1,
@@ -89,7 +89,7 @@ class _AppSidebarState extends State<AppSidebar> {
                         const Spacer(),
                         IconButton(
                           onPressed: _toggle,
-                          icon: const Icon(Icons.menu_rounded, color: AppColors.textMuted),
+                          icon: const Icon(Icons.menu_rounded, color: TuneHiveColors.mutedText),
                         ),
                       ],
                     ),
@@ -170,7 +170,7 @@ class _SidebarItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
       child: Material(
         color: selected
-            ? AppColors.primary.withValues(alpha: 0.12)
+            ? TuneHiveColors.electricBlue.withValues(alpha: 0.12)
             : Colors.transparent,
         borderRadius: BorderRadius.circular(AppRadius.md),
         child: InkWell(
@@ -186,13 +186,13 @@ class _SidebarItem extends StatelessWidget {
                         Icon(
                           icon,
                           size: 22,
-                          color: selected ? AppColors.primary : AppColors.textMuted,
+                          color: selected ? TuneHiveColors.electricBlue : TuneHiveColors.mutedText,
                         ),
                         const SizedBox(width: 12),
                         Text(
                           label,
                           style: TextStyle(
-                            color: selected ? AppColors.primary : AppColors.textSecondary,
+                            color: selected ? TuneHiveColors.electricBlue : TuneHiveColors.coolWhite,
                             fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
                           ),
                         ),
@@ -203,7 +203,7 @@ class _SidebarItem extends StatelessWidget {
                     child: Icon(
                       icon,
                       size: 22,
-                      color: selected ? AppColors.primary : AppColors.textMuted,
+                      color: selected ? TuneHiveColors.electricBlue : TuneHiveColors.mutedText,
                     ),
                   ),
           ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tunehive/app/routes/route_names.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_shadows.dart';
 import 'package:tunehive/app/theme/app_typography.dart';
@@ -126,7 +126,7 @@ class _OnboardingViewState extends State<OnboardingView>
     final responsive = OnboardingResponsive(context);
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: TuneHiveColors.charcoalBlack,
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -135,7 +135,7 @@ class _OnboardingViewState extends State<OnboardingView>
             'assets/images/musbg2.png',
             fit: BoxFit.cover,
             errorBuilder: (context, error, stackTrace) {
-              return Container(color: AppColors.background);
+              return Container(color: TuneHiveColors.charcoalBlack);
             },
           ),
           // Subtle dark overlay to ensure text readability
@@ -153,7 +153,7 @@ class _OnboardingViewState extends State<OnboardingView>
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    AppColors.primary.withValues(alpha: 0.12),
+                    TuneHiveColors.electricBlue.withValues(alpha: 0.12),
                     Colors.transparent,
                   ],
                 ),
@@ -225,7 +225,7 @@ class _OnboardingViewState extends State<OnboardingView>
                     child: Text(
                       'Dive into a world of music — millions of songs, custom playlists, and every genre you love.',
                       style: AppTextStyles.body.copyWith(
-                        color: AppColors.textSecondary,
+                        color: TuneHiveColors.coolWhite,
                         height: 1.5,
                         fontSize: responsive.fontSize.body,
                       ),
@@ -331,8 +331,8 @@ class _PremiumButtonState extends State<_PremiumButton> with SingleTickerProvide
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppRadius.lg),
             ),
-            backgroundColor: AppColors.primary,
-            foregroundColor: AppColors.onPrimary,
+            backgroundColor: TuneHiveColors.electricBlue,
+            foregroundColor: TuneHiveColors.coolWhite,
             textStyle: AppTextStyles.label.copyWith(fontSize: widget.fontSize),
           ),
           child: Text(widget.text),

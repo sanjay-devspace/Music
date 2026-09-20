@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 
 /// A single large circular playback control (play, next, shuffle, repeat).
 class PlayerControl extends StatelessWidget {
@@ -11,7 +11,7 @@ class PlayerControl extends StatelessWidget {
     this.active = false,
     this.activeIcon,
     this.color,
-    this.activeColor = AppColors.primary,
+    this.activeColor = TuneHiveColors.electricBlue,
   });
 
   final IconData icon;
@@ -24,7 +24,7 @@ class PlayerControl extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color effectiveColor = active ? activeColor : AppColors.textPrimary;
+    final Color effectiveColor = active ? activeColor : TuneHiveColors.coolWhite;
     final IconData effectiveIcon = active && activeIcon != null ? activeIcon! : icon;
 
     return Semantics(
@@ -64,7 +64,7 @@ class PlayPauseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: AppColors.primary,
+      color: TuneHiveColors.electricBlue,
       shape: const CircleBorder(),
       elevation: 0,
       child: InkWell(
@@ -125,7 +125,7 @@ class _SizedAnimatedIconState extends State<SizedAnimatedIcon>
         height: widget.size,
         child: Icon(
           widget.isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
-          color: const Color(0xFF0B1200),
+          color: TuneHiveColors.charcoalBlack,
           size: widget.size * 0.55,
         ),
       ),

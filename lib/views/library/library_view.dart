@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:tunehive/app/routes/route_names.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_motion.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_typography.dart';
@@ -47,7 +47,7 @@ class _LibraryViewState extends State<LibraryView> {
                 child: Row(
                   children: [
                     const Icon(Icons.library_music_rounded,
-                        color: AppColors.primary, size: 24),
+                        color: TuneHiveColors.electricBlue, size: 24),
                     const SizedBox(width: 10),
                     Text(
                       'Your Library',
@@ -55,7 +55,7 @@ class _LibraryViewState extends State<LibraryView> {
                         fontFamily: AppTypography.fontFamily,
                         fontSize: 22,
                         fontWeight: FontWeight.w800,
-                        color: AppColors.textPrimary,
+                        color: TuneHiveColors.coolWhite,
                         letterSpacing: -0.4,
                       ),
                     ),
@@ -128,10 +128,10 @@ class _LibraryViewState extends State<LibraryView> {
 
   Widget _buildFeatureCard(BuildContext context, String title, IconData icon, String route) {
     return Material(
-      color: AppColors.surface,
+      color: TuneHiveColors.cardSurface,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppRadius.lg),
-        side: const BorderSide(color: AppColors.divider),
+        side: const BorderSide(color: TuneHiveColors.elevatedSurface),
       ),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -141,7 +141,7 @@ class _LibraryViewState extends State<LibraryView> {
           padding: const EdgeInsets.all(12),
           child: Column(
             children: [
-              Icon(icon, color: AppColors.primary, size: 24),
+              Icon(icon, color: TuneHiveColors.electricBlue, size: 24),
               const SizedBox(height: 6),
               Text(
                 title,
@@ -150,7 +150,7 @@ class _LibraryViewState extends State<LibraryView> {
                 style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textSecondary,
+                  color: TuneHiveColors.coolWhite,
                 ),
               ),
             ],
@@ -187,8 +187,8 @@ class _LibraryViewState extends State<LibraryView> {
     }
     return RefreshIndicator(
       onRefresh: library.refreshLibrary,
-      color: AppColors.primary,
-      backgroundColor: AppColors.surface,
+      color: TuneHiveColors.electricBlue,
+      backgroundColor: TuneHiveColors.cardSurface,
       child: ListView.builder(
         physics: const AlwaysScrollableScrollPhysics(),
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -202,7 +202,7 @@ class _LibraryViewState extends State<LibraryView> {
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w700,
-                  color: AppColors.textSecondary,
+                  color: TuneHiveColors.coolWhite,
                 ),
               ),
             );
@@ -305,10 +305,10 @@ class _PillTab extends StatelessWidget {
         curve: Curves.easeOutCubic,
         padding: const EdgeInsets.symmetric(horizontal: 14),
         decoration: BoxDecoration(
-          color: selected ? AppColors.primary : AppColors.surface,
+          color: selected ? TuneHiveColors.electricBlue : TuneHiveColors.cardSurface,
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
-            color: selected ? AppColors.primary : AppColors.divider,
+            color: selected ? TuneHiveColors.electricBlue : TuneHiveColors.elevatedSurface,
           ),
         ),
         child: Row(
@@ -316,7 +316,7 @@ class _PillTab extends StatelessWidget {
             Icon(
               icon,
               size: 17,
-              color: selected ? AppColors.onPrimary : AppColors.textMuted,
+              color: selected ? TuneHiveColors.coolWhite : TuneHiveColors.mutedText,
             ),
             const SizedBox(width: 7),
             Text(
@@ -325,7 +325,7 @@ class _PillTab extends StatelessWidget {
                 fontFamily: AppTypography.fontFamily,
                 fontSize: 13,
                 fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
-                color: selected ? AppColors.onPrimary : AppColors.textSecondary,
+                color: selected ? TuneHiveColors.coolWhite : TuneHiveColors.coolWhite,
               ),
             ),
           ],

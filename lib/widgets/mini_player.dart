@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_motion.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_shadows.dart';
@@ -59,9 +59,9 @@ class _MiniPlayerState extends State<MiniPlayer> {
           child: Container(
             height: 64,
             decoration: BoxDecoration(
-              color: AppColors.surface,
+              color: TuneHiveColors.cardSurface,
               borderRadius: BorderRadius.circular(AppRadius.lg),
-              border: Border.all(color: AppColors.divider),
+              border: Border.all(color: TuneHiveColors.elevatedSurface),
               boxShadow: AppShadows.floating,
             ),
             clipBehavior: Clip.antiAlias,
@@ -90,7 +90,7 @@ class _MiniPlayerState extends State<MiniPlayer> {
                               style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
-                                color: AppColors.textPrimary,
+                                color: TuneHiveColors.coolWhite,
                               ),
                             ),
                             const SizedBox(height: 2),
@@ -100,7 +100,7 @@ class _MiniPlayerState extends State<MiniPlayer> {
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                 fontSize: 12,
-                                color: AppColors.textMuted,
+                                color: TuneHiveColors.mutedText,
                               ),
                             ),
                           ],
@@ -114,8 +114,8 @@ class _MiniPlayerState extends State<MiniPlayer> {
                               ? Icons.favorite_rounded
                               : Icons.favorite_border_rounded,
                           color: widget.isFavorited
-                              ? AppColors.primary
-                              : AppColors.textMuted,
+                              ? TuneHiveColors.electricBlue
+                              : TuneHiveColors.mutedText,
                           size: 20,
                         ),
                       ),
@@ -125,7 +125,7 @@ class _MiniPlayerState extends State<MiniPlayer> {
                           widget.isPlaying
                               ? Icons.pause_rounded
                               : Icons.play_arrow_rounded,
-                          color: AppColors.textPrimary,
+                          color: TuneHiveColors.coolWhite,
                           size: 30,
                         ),
                         tooltip: widget.isPlaying ? 'Pause' : 'Play',
@@ -134,7 +134,7 @@ class _MiniPlayerState extends State<MiniPlayer> {
                         onPressed: widget.onNext,
                         icon: const Icon(
                           Icons.skip_next_rounded,
-                          color: AppColors.textPrimary,
+                          color: TuneHiveColors.coolWhite,
                         ),
                         tooltip: 'Next',
                       ),
@@ -149,8 +149,8 @@ class _MiniPlayerState extends State<MiniPlayer> {
                   child: LinearProgressIndicator(
                     value: widget.progress,
                     minHeight: 3,
-                    color: AppColors.primary,
-                    backgroundColor: AppColors.dividerStrong,
+                    color: TuneHiveColors.electricBlue,
+                    backgroundColor: TuneHiveColors.elevatedSurface,
                   ),
                 ),
               ],

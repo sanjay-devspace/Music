@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 
 /// Expressive empty state used across Library, Favorites, Playlists & Search.
 class EmptyState extends StatelessWidget {
@@ -30,10 +30,10 @@ class EmptyState extends StatelessWidget {
               width: 84,
               height: 84,
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: TuneHiveColors.cardSurface,
                 shape: BoxShape.circle,
               ),
-              child: Icon(icon, size: 36, color: AppColors.primary),
+              child: Icon(icon, size: 36, color: TuneHiveColors.electricBlue),
             ),
             const SizedBox(height: 20),
             Text(
@@ -42,7 +42,7 @@ class EmptyState extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
-                color: AppColors.textPrimary,
+                color: TuneHiveColors.coolWhite,
               ),
             ),
             if (message != null) ...[
@@ -50,7 +50,7 @@ class EmptyState extends StatelessWidget {
               Text(
                 message!,
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 14, color: AppColors.textSecondary),
+                style: const TextStyle(fontSize: 14, color: TuneHiveColors.coolWhite),
               ),
             ],
             if (actionLabel != null && onAction != null) ...[
@@ -58,8 +58,8 @@ class EmptyState extends StatelessWidget {
               FilledButton(
                 onPressed: onAction,
                 style: FilledButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  foregroundColor: const Color(0xFF0B1200),
+                  backgroundColor: TuneHiveColors.electricBlue,
+                  foregroundColor: TuneHiveColors.charcoalBlack,
                 ),
                 child: Text(actionLabel!),
               ),

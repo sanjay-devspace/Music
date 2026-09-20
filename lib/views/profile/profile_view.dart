@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:tunehive/app/routes/route_names.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_motion.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_shadows.dart';
@@ -51,9 +51,9 @@ class ProfileView extends StatelessWidget {
                       height: 96,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: AppColors.primary,
+                        color: TuneHiveColors.electricBlue,
                         border: Border.all(
-                          color: AppColors.surfaceLight,
+                          color: TuneHiveColors.elevatedSurface,
                           width: 4,
                         ),
                         boxShadow: AppShadows.coralGlow,
@@ -70,7 +70,7 @@ class ProfileView extends StatelessWidget {
                             fontFamily: AppTypography.fontFamily,
                             fontSize: 30,
                             fontWeight: FontWeight.w900,
-                            color: AppColors.onPrimary,
+                            color: TuneHiveColors.coolWhite,
                           ),
                         );
                       }),
@@ -83,7 +83,7 @@ class ProfileView extends StatelessWidget {
                           fontFamily: AppTypography.fontFamily,
                           fontSize: 22,
                           fontWeight: FontWeight.w800,
-                          color: AppColors.textPrimary,
+                          color: TuneHiveColors.coolWhite,
                           letterSpacing: -0.3,
                         ),
                       )),
@@ -93,7 +93,7 @@ class ProfileView extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.textMuted,
+                      color: TuneHiveColors.mutedText,
                     ),
                   ),
                 ],
@@ -163,13 +163,13 @@ class _StatTile extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 16),
           decoration: BoxDecoration(
-            color: AppColors.surface,
+            color: TuneHiveColors.cardSurface,
             borderRadius: BorderRadius.circular(AppRadius.lg),
-            border: Border.all(color: AppColors.divider),
+            border: Border.all(color: TuneHiveColors.elevatedSurface),
           ),
           child: Column(
             children: [
-              Icon(icon, size: 20, color: AppColors.primary),
+              Icon(icon, size: 20, color: TuneHiveColors.electricBlue),
               const SizedBox(height: 6),
               Text(
                 '$value',
@@ -178,7 +178,7 @@ class _StatTile extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 19,
                   fontWeight: FontWeight.w800,
-                  color: AppColors.textPrimary,
+                  color: TuneHiveColors.coolWhite,
                 ),
               ),
               const SizedBox(height: 2),
@@ -189,7 +189,7 @@ class _StatTile extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.textMuted,
+                  color: TuneHiveColors.mutedText,
                 ),
               ),
             ],
@@ -230,10 +230,10 @@ class _ProfileMenu extends StatelessWidget {
       () => _handleLogout(context),
     ];
     return Material(
-      color: AppColors.surface,
+      color: TuneHiveColors.cardSurface,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppRadius.lg),
-        side: const BorderSide(color: AppColors.divider),
+        side: const BorderSide(color: TuneHiveColors.elevatedSurface),
       ),
       clipBehavior: Clip.antiAlias,
       child: Column(
@@ -243,24 +243,24 @@ class _ProfileMenu extends StatelessWidget {
               children: [
                 ListTile(
                   onTap: actions[i],
-                  leading: Icon(items[i].$1, color: AppColors.textSecondary),
+                  leading: Icon(items[i].$1, color: TuneHiveColors.coolWhite),
                   title: Text(
                     items[i].$2,
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.textPrimary,
+                      color: TuneHiveColors.coolWhite,
                     ),
                   ),
                   trailing: const Icon(Icons.chevron_right,
-                      color: AppColors.textMuted, size: 20),
+                      color: TuneHiveColors.mutedText, size: 20),
                 ),
                 if (i < items.length - 1)
                   const Divider(
                     height: 1,
                     indent: 56,
                     endIndent: 20,
-                    color: AppColors.divider,
+                    color: TuneHiveColors.elevatedSurface,
                   ),
               ],
             ),
@@ -280,14 +280,14 @@ class _ProfileMenu extends StatelessWidget {
             onPressed: () => Navigator.of(dialogContext).pop(false),
             child: Text(
               'Cancel',
-              style: TextStyle(color: AppColors.textMuted),
+              style: TextStyle(color: TuneHiveColors.mutedText),
             ),
           ),
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(true),
             child: const Text(
               'Log Out',
-              style: TextStyle(color: AppColors.primary),
+              style: TextStyle(color: TuneHiveColors.electricBlue),
             ),
           ),
         ],

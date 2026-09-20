@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_shadows.dart';
 
 class BezierTween extends Tween<Offset> {
@@ -188,10 +188,10 @@ class _AnimatedHeadphoneFormationState extends State<AnimatedHeadphoneFormation>
                   height: 140 * _mergeGlow.value,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: AppColors.primary.withValues(alpha: 0.4 * _mergeGlow.value),
+                    color: TuneHiveColors.electricBlue.withValues(alpha: 0.4 * _mergeGlow.value),
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.primary.withValues(alpha: 0.8 * _mergeGlow.value),
+                        color: TuneHiveColors.electricBlue.withValues(alpha: 0.8 * _mergeGlow.value),
                         blurRadius: 40 * _mergeGlow.value,
                         spreadRadius: 10 * _mergeGlow.value,
                       )
@@ -277,12 +277,12 @@ class _MusicParticle extends StatelessWidget {
       height: 48,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: AppColors.surfaceLight,
-        border: Border.all(color: AppColors.primary.withValues(alpha: 0.3), width: 1.5),
+        color: TuneHiveColors.elevatedSurface,
+        border: Border.all(color: TuneHiveColors.electricBlue.withValues(alpha: 0.3), width: 1.5),
         boxShadow: AppShadows.coralGlow,
       ),
       alignment: Alignment.center,
-      child: Icon(icon, color: AppColors.primary, size: size),
+      child: Icon(icon, color: TuneHiveColors.electricBlue, size: size),
     );
   }
 }
@@ -297,10 +297,10 @@ class _FinalHeadphoneIcon extends StatelessWidget {
       height: 140,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: AppColors.primary,
+        color: TuneHiveColors.electricBlue,
         boxShadow: AppShadows.coralGlow,
         border: Border.all(
-          color: AppColors.surfaceLight.withValues(alpha: 0.5),
+          color: TuneHiveColors.elevatedSurface.withValues(alpha: 0.5),
           width: 4,
         ),
       ),
@@ -308,7 +308,7 @@ class _FinalHeadphoneIcon extends StatelessWidget {
       child: const Icon(
         Icons.headphones_rounded,
         size: 72,
-        color: AppColors.onPrimary,
+        color: TuneHiveColors.coolWhite,
       ),
     );
   }

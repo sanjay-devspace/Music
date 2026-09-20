@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_motion.dart';
 
 /// Favorite heart with a small bounce + shimmer on toggle.
@@ -9,7 +9,7 @@ class FavoriteButton extends StatefulWidget {
     required this.isFavorited,
     this.onPressed,
     this.size = 20,
-    this.color = AppColors.primary,
+    this.color = TuneHiveColors.electricBlue,
     this.iconColor,
   });
 
@@ -73,7 +73,7 @@ class _FavoriteButtonState extends State<FavoriteButton>
             active ? Icons.favorite_rounded : Icons.favorite_border_rounded,
             key: ValueKey(active),
             size: widget.size,
-            color: active ? widget.color : (widget.iconColor ?? AppColors.textMuted),
+            color: active ? widget.color : (widget.iconColor ?? TuneHiveColors.mutedText),
           ),
         ),
       ),

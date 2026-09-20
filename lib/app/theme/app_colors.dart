@@ -1,3 +1,4 @@
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:flutter/material.dart';
 
 /// TUNEHIVE centralized color system — Deep Navy + Coral + White.
@@ -6,13 +7,13 @@ import 'package:flutter/material.dart';
 /// values directly in views.
 abstract class AppColors {
   // ---- Brand accents -----------------------------------------------------
-  static const Color primary = Color(0xFFFF5B63); // Coral
+  static const Color primary = TuneHiveColors.electricBlue; // Coral
   static const Color primaryDark = Color(0xFFE94B54); // Coral dark
   static const Color primaryLight = Color(0xFFFF767D); // Coral light
   static const Color onPrimary = Color(0xFF050708); // Black on coral
 
   // ---- Backgrounds (deep navy) ------------------------------------------
-  static const Color background = Color(0xFF15262D); // Primary navy
+  static const Color background = TuneHiveColors.cardSurface; // Primary navy
   static const Color backgroundDeep = Color(0xFF0D181D); // Deep navy
   static const Color surface = Color(0xFF1B2D34); // Surface
   static const Color surfaceLight = Color(0xFF24383F); // Surface light
@@ -57,13 +58,13 @@ abstract class AppColors {
 
 /// Semantic color shortcuts for dark theme context.
 abstract class ThemeColors {
-  static const background = AppColors.background;
-  static const backgroundDeep = AppColors.backgroundDeep;
-  static const surface = AppColors.surface;
-  static const surfaceLight = AppColors.surfaceLight;
-  static const textPrimary = AppColors.textPrimary;
-  static const textSecondary = AppColors.textSecondary;
-  static const textMuted = AppColors.textMuted;
-  static const primary = AppColors.primary;
-  static const divider = AppColors.divider;
+  static const background = TuneHiveColors.charcoalBlack;
+  static const backgroundDeep = TuneHiveColors.charcoalBlack;
+  static const surface = TuneHiveColors.cardSurface;
+  static const surfaceLight = TuneHiveColors.elevatedSurface;
+  static const textPrimary = TuneHiveColors.coolWhite;
+  static const textSecondary = TuneHiveColors.coolWhite;
+  static const textMuted = TuneHiveColors.mutedText;
+  static const primary = TuneHiveColors.electricBlue;
+  static const divider = TuneHiveColors.elevatedSurface;
 }

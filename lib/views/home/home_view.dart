@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:tunehive/app/routes/route_names.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_motion.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_typography.dart';
@@ -16,11 +16,11 @@ import 'package:tunehive/models/playlist_model.dart';
 import 'package:tunehive/models/song_model.dart';
 import 'package:tunehive/widgets/error_state.dart';
 import 'package:tunehive/widgets/hero_card.dart';
+import 'package:tunehive/widgets/hero_carousel.dart';
 import 'package:tunehive/widgets/mood_chip.dart';
 import 'package:tunehive/widgets/skeleton_loader.dart';
 import 'package:tunehive/widgets/song_card.dart';
 import 'package:tunehive/widgets/branding/animated_home_logo.dart';
-import 'package:tunehive/controllers/shell_controller.dart';
 
 import 'home_responsive.dart';
 
@@ -37,32 +37,23 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     final home = Get.find<HomeController>();
-    final shell = Get.find<ShellController>(); // Add ShellController to access shared scroll offset
 
     return Scaffold(
       backgroundColor: Colors.transparent, // Let global background show through
-      body: NotificationListener<ScrollNotification>(
-        onNotification: (scrollInfo) {
-          if (scrollInfo.metrics.axis == Axis.vertical) {
-            shell.backgroundScrollOffset.value = scrollInfo.metrics.pixels;
-          }
-          return false;
-        },
-        child: Obx(() {
-          if (home.isLoading.value &&
-              home.trending.isEmpty &&
-              home.moods.isEmpty) {
-            return const HomeSkeleton();
-          }
-          if (home.errorMessage.value != null && home.trending.isEmpty) {
-            return ErrorState(
-              message: home.errorMessage.value,
-              onRetry: home.refreshHome,
-            );
-          }
-          return _HomeFeed(home: home);
-        }),
-      ),
+      body: Obx(() {
+        if (home.isLoading.value &&
+            home.trending.isEmpty &&
+            home.moods.isEmpty) {
+          return const HomeSkeleton();
+        }
+        if (home.errorMessage.value != null && home.trending.isEmpty) {
+          return ErrorState(
+            message: home.errorMessage.value,
+            onRetry: home.refreshHome,
+          );
+        }
+        return _HomeFeed(home: home);
+      }),
     );
   }
 }
@@ -82,8 +73,8 @@ class _HomeFeed extends StatelessWidget {
     final hr = HomeResponsive(r);
     return RefreshIndicator(
       onRefresh: home.refreshHome,
-      color: AppColors.primary,
-      backgroundColor: AppColors.surface,
+      color: TuneHiveColors.electricBlue,
+      backgroundColor: TuneHiveColors.cardSurface,
       child: SafeArea(
         bottom: false,
         child: CustomScrollView(
@@ -110,14 +101,19 @@ class _HomeFeed extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: hr.sectionGap),
-                  _MoodRow(home: home, r: r, staggerStep: hr.staggerStep),
-                  SizedBox(height: hr.sectionGap),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: hr.horizontalPadding),
-                    child: _HeroSection(home: home, r: r),
-                  ),
-                  SizedBox(height: hr.sectionGap),
+                  if (home.moods.isNotEmpty) ...[
+                    SizedBox(height: r.isPhoneSmall ? 16 : 24),
+                    _MoodRow(home: home, r: r, staggerStep: hr.staggerStep),
+                  ],
+                  SizedBox(height: r.isPhoneSmall ? 16 : 24),
+                  Obx(() {
+                    final songs = home.trending.take(5).toList();
+                    return HeroCarousel(
+                      songs: songs,
+                      height: r.isPhoneSmall ? 210 : r.isTablet ? 250 : 280,
+                    );
+                  }),
+                  SizedBox(height: r.isPhoneSmall ? 20 : 28),
                   _TrendingSection(home: home, r: r, hr: hr),
                 ]),
               ),
@@ -195,7 +191,7 @@ class _BellButton extends StatelessWidget {
           onPressed: () => context.push(RoutePaths.notificationCenter),
           visualDensity: VisualDensity.compact,
           icon: const Icon(Icons.notifications_none_rounded,
-              color: AppColors.textSecondary, size: 26),
+              color: TuneHiveColors.coolWhite, size: 26),
         ),
         Positioned(
           top: 6,
@@ -204,7 +200,7 @@ class _BellButton extends StatelessWidget {
             width: 8,
             height: 8,
             decoration: const BoxDecoration(
-              color: AppColors.primary,
+              color: TuneHiveColors.electricBlue,
               shape: BoxShape.circle,
             ),
           ),
@@ -231,7 +227,7 @@ class _ProfileButton extends StatelessWidget {
         child: Container(
           width: 38,
           height: 38,
-          color: AppColors.primary,
+          color: TuneHiveColors.electricBlue,
           alignment: Alignment.center,
           child: Text(
             token,
@@ -239,7 +235,7 @@ class _ProfileButton extends StatelessWidget {
               fontFamily: AppTypography.fontFamily,
               fontSize: 14,
               fontWeight: FontWeight.w800,
-              color: AppColors.onPrimary,
+              color: TuneHiveColors.coolWhite,
             ),
           ),
         ),
@@ -268,7 +264,7 @@ class _Greeting extends StatelessWidget {
               fontFamily: AppTypography.fontFamily,
               fontSize: r.fontSize.title * 0.72,
               fontWeight: FontWeight.w600,
-              color: AppColors.textSecondary,
+              color: TuneHiveColors.coolWhite,
               letterSpacing: -0.2,
             ),
           ),
@@ -286,7 +282,7 @@ class _Greeting extends StatelessWidget {
               fontFamily: AppTypography.fontFamily,
               fontSize: r.fontSize.headline,
               fontWeight: FontWeight.w800,
-              color: AppColors.textPrimary,
+              color: TuneHiveColors.coolWhite,
               letterSpacing: -0.5,
               height: 1.1,
             ),
@@ -309,7 +305,7 @@ class _SearchBar extends StatelessWidget {
       duration: AppMotion.large,
       offset: const Offset(0, -0.02),
       child: Material(
-        color: AppColors.surface,
+        color: TuneHiveColors.cardSurface,
         borderRadius: BorderRadius.circular(AppRadius.lg),
         child: InkWell(
           onTap: () => context.go(RoutePaths.search),
@@ -319,12 +315,12 @@ class _SearchBar extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppRadius.lg),
-              border: Border.all(color: AppColors.divider),
+              border: Border.all(color: TuneHiveColors.elevatedSurface),
             ),
             child: Row(
               children: [
                 const Icon(Icons.search_rounded,
-                    color: AppColors.textMuted, size: 22),
+                    color: TuneHiveColors.mutedText, size: 22),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
@@ -333,12 +329,12 @@ class _SearchBar extends StatelessWidget {
                       fontFamily: AppTypography.fontFamily,
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.textMuted,
+                      color: TuneHiveColors.mutedText,
                     ),
                   ),
                 ),
                 const Icon(Icons.tune_rounded,
-                    color: AppColors.textSecondary, size: 20),
+                    color: TuneHiveColors.coolWhite, size: 20),
               ],
             ),
           ),
@@ -361,6 +357,8 @@ class _MoodRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (home.moods.isEmpty) return const SizedBox.shrink();
+
     final hr = HomeResponsive(r);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -453,65 +451,6 @@ class _MoodRow extends StatelessWidget {
 }
 
 // ---------------------------------------------------------------------------
-// Hero
-// ---------------------------------------------------------------------------
-
-class _HeroSection extends StatelessWidget {
-  const _HeroSection({required this.home, required this.r});
-
-  final HomeController home;
-  final Responsive r;
-
-  @override
-  Widget build(BuildContext context) {
-    final hr = HomeResponsive(r);
-    final feature = home.activeHero;
-    return Column(
-      children: [
-        SizedBox(height: 12),
-        ScaleIn(
-          delay: const Duration(milliseconds: 200),
-          duration: AppMotion.hero,
-          curve: AppMotion.easeOut,
-          child: AspectRatio(
-            aspectRatio: r.isPhoneSmall ? 1.4 : r.isTablet ? 1.8 : 1.6,
-            child: HeroCard(
-              feature: feature,
-              height: double.infinity,
-              onPlay: () {
-                final list = home.trending;
-                if (list.isNotEmpty) home.playSong(list.first, fromList: list);
-              },
-              onFavorite: () => Get.find<PlayerController>()
-                  .toggleFavorite(home.trending.isNotEmpty ? home.trending.first : null),
-              isFavorited: home.trending.isNotEmpty &&
-                  Get.find<PlayerController>().isLiked(home.trending.first.id),
-            ),
-          ),
-        ),
-        const SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            for (var i = 0; i < home.heroFeatures.length; i++)
-              AnimatedContainer(
-                duration: AppMotion.micro,
-                width: i == 0 ? 18 : 6,
-                height: 6,
-                margin: const EdgeInsets.symmetric(horizontal: 3),
-                decoration: BoxDecoration(
-                  color: i == 0 ? AppColors.primary : AppColors.divider,
-                  borderRadius: BorderRadius.circular(AppRadius.full),
-                ),
-              ),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-// ---------------------------------------------------------------------------
 // Shared section pieces
 // ---------------------------------------------------------------------------
 
@@ -539,7 +478,7 @@ class _SectionTitle extends StatelessWidget {
                   fontFamily: AppTypography.fontFamily,
                   fontSize: hr.sectionTitleSize,
                   fontWeight: FontWeight.w800,
-                  color: AppColors.textPrimary,
+                  color: TuneHiveColors.coolWhite,
                   letterSpacing: -0.4,
                 ),
               ),

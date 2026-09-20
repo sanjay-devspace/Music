@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tunehive/app/routes/route_names.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_spacing.dart';
 import 'package:tunehive/app/theme/app_typography.dart';
@@ -77,7 +77,7 @@ class _PlaylistsViewState extends State<PlaylistsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundDeep,
+      backgroundColor: TuneHiveColors.charcoalBlack,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,7 +101,7 @@ class _PlaylistsViewState extends State<PlaylistsView> {
           IconButton(
             onPressed: () => context.pop(),
             icon: const Icon(Icons.arrow_back_rounded),
-            color: AppColors.textPrimary,
+            color: TuneHiveColors.coolWhite,
           ),
           Text(
             'Playlists',
@@ -109,7 +109,7 @@ class _PlaylistsViewState extends State<PlaylistsView> {
               fontFamily: AppTypography.fontFamily,
               fontSize: 20,
               fontWeight: FontWeight.w800,
-              color: AppColors.textPrimary,
+              color: TuneHiveColors.coolWhite,
             ),
           ),
         ],
@@ -209,7 +209,7 @@ class _PlaylistsViewState extends State<PlaylistsView> {
         height: 220,
         decoration: BoxDecoration(
           border: Border.all(
-            color: AppColors.divider,
+            color: TuneHiveColors.elevatedSurface,
             width: 1.5,
             style: BorderStyle.solid,
           ),
@@ -218,7 +218,7 @@ class _PlaylistsViewState extends State<PlaylistsView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.add_rounded, size: 36, color: AppColors.textMuted),
+            Icon(Icons.add_rounded, size: 36, color: TuneHiveColors.mutedText),
             SizedBox(height: AppSpacing.sm),
             Text(
               'New Playlist',
@@ -226,7 +226,7 @@ class _PlaylistsViewState extends State<PlaylistsView> {
                 fontFamily: AppTypography.fontFamily,
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
-                color: AppColors.textMuted,
+                color: TuneHiveColors.mutedText,
               ),
             ),
           ],

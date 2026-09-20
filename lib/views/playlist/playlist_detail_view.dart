@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:tunehive/app/routes/route_names.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_radius.dart';
 import 'package:tunehive/app/theme/app_spacing.dart';
 import 'package:tunehive/app/theme/app_typography.dart';
@@ -57,7 +57,7 @@ class _PlaylistDetailViewState extends State<PlaylistDetailView> {
   Widget build(BuildContext context) {
     final playlist = _playlist;
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: TuneHiveColors.charcoalBlack,
       body: SafeArea(
         child: playlist == null
             ? _PlaylistNotFound(onBack: () => _goBack(context))
@@ -89,7 +89,7 @@ class _PlaylistNotFound extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(AppSpacing.lg),
             child: Material(
-              color: AppColors.surface,
+              color: TuneHiveColors.cardSurface,
               shape: const CircleBorder(),
               clipBehavior: Clip.antiAlias,
               child: InkWell(
@@ -100,7 +100,7 @@ class _PlaylistNotFound extends StatelessWidget {
                   child: Icon(
                     Icons.arrow_back_rounded,
                     size: 20,
-                    color: AppColors.textPrimary,
+                    color: TuneHiveColors.coolWhite,
                   ),
                 ),
               ),
@@ -211,7 +211,7 @@ class _TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: AppColors.surface,
+      color: TuneHiveColors.cardSurface,
       shape: const CircleBorder(),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -228,7 +228,7 @@ class _TopBar extends StatelessWidget {
           child: Icon(
             Icons.arrow_back_rounded,
             size: 20,
-            color: AppColors.textPrimary,
+            color: TuneHiveColors.coolWhite,
           ),
         ),
       ),
@@ -277,7 +277,7 @@ class _PlaylistHeader extends StatelessWidget {
             fontWeight: FontWeight.w800,
             letterSpacing: -0.6,
             height: 1.1,
-            color: AppColors.textPrimary,
+            color: TuneHiveColors.coolWhite,
           ),
         ),
         if (playlist.description != null &&
@@ -293,7 +293,7 @@ class _PlaylistHeader extends StatelessWidget {
               fontSize: 14,
               fontWeight: FontWeight.w500,
               height: 1.45,
-              color: AppColors.textSecondary,
+              color: TuneHiveColors.coolWhite,
             ),
           ),
         ],
@@ -306,7 +306,7 @@ class _PlaylistHeader extends StatelessWidget {
             fontFamily: AppTypography.fontFamily,
             fontSize: 13,
             fontWeight: FontWeight.w500,
-            color: AppColors.textMuted,
+            color: TuneHiveColors.mutedText,
           ),
         ),
         const SizedBox(height: AppSpacing.lg),
@@ -365,7 +365,7 @@ class _PrimaryAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: onTap == null ? AppColors.surfaceLight : AppColors.primary,
+      color: onTap == null ? TuneHiveColors.elevatedSurface : TuneHiveColors.electricBlue,
       borderRadius: BorderRadius.circular(AppRadius.full),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -382,8 +382,8 @@ class _PrimaryAction extends StatelessWidget {
                 icon,
                 size: 20,
                 color: onTap == null
-                    ? AppColors.textMuted
-                    : AppColors.onPrimary,
+                    ? TuneHiveColors.mutedText
+                    : TuneHiveColors.coolWhite,
               ),
               const SizedBox(width: AppSpacing.sm),
               Text(
@@ -393,8 +393,8 @@ class _PrimaryAction extends StatelessWidget {
                   fontSize: 14,
                   fontWeight: FontWeight.w800,
                   color: onTap == null
-                      ? AppColors.textMuted
-                      : AppColors.onPrimary,
+                      ? TuneHiveColors.mutedText
+                      : TuneHiveColors.coolWhite,
                 ),
               ),
             ],
@@ -429,8 +429,8 @@ class _SecondaryAction extends StatelessWidget {
         ),
       ),
       style: OutlinedButton.styleFrom(
-        foregroundColor: AppColors.textPrimary,
-        side: const BorderSide(color: AppColors.dividerStrong),
+        foregroundColor: TuneHiveColors.coolWhite,
+        side: const BorderSide(color: TuneHiveColors.elevatedSurface),
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.lg,
           vertical: AppSpacing.md,
@@ -458,7 +458,7 @@ class _TrackList extends StatelessWidget {
           'This playlist has no tracks yet.',
           style: TextStyle(
             fontFamily: AppTypography.fontFamily,
-            color: AppColors.textMuted,
+            color: TuneHiveColors.mutedText,
           ),
         ),
       );
@@ -473,7 +473,7 @@ class _TrackList extends StatelessWidget {
             fontFamily: AppTypography.fontFamily,
             fontSize: 18,
             fontWeight: FontWeight.w800,
-            color: AppColors.textPrimary,
+            color: TuneHiveColors.coolWhite,
           ),
         ),
         const SizedBox(height: AppSpacing.md),
@@ -517,7 +517,7 @@ class _TrackRow extends StatelessWidget {
                   fontFamily: AppTypography.fontFamily,
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textMuted,
+                  color: TuneHiveColors.mutedText,
                 ),
               ),
             ),
@@ -533,7 +533,7 @@ class _TrackRow extends StatelessWidget {
                       fontFamily: AppTypography.fontFamily,
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.textPrimary,
+                      color: TuneHiveColors.coolWhite,
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -544,7 +544,7 @@ class _TrackRow extends StatelessWidget {
                     style: const TextStyle(
                       fontFamily: AppTypography.fontFamily,
                       fontSize: 12,
-                      color: AppColors.textMuted,
+                      color: TuneHiveColors.mutedText,
                     ),
                   ),
                 ],
@@ -556,7 +556,7 @@ class _TrackRow extends StatelessWidget {
                 style: const TextStyle(
                   fontFamily: AppTypography.fontFamily,
                   fontSize: 12,
-                  color: AppColors.textMuted,
+                  color: TuneHiveColors.mutedText,
                 ),
               ),
             const SizedBox(width: AppSpacing.sm),

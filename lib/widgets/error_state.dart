@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 
 /// User-friendly error presentation with retry.
 class ErrorState extends StatelessWidget {
@@ -22,7 +22,7 @@ class ErrorState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.cloud_off_rounded, size: 56, color: AppColors.textMuted),
+            Icon(Icons.cloud_off_rounded, size: 56, color: TuneHiveColors.mutedText),
             const SizedBox(height: 16),
             Text(
               title,
@@ -30,7 +30,7 @@ class ErrorState extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
-                color: AppColors.textPrimary,
+                color: TuneHiveColors.coolWhite,
               ),
             ),
             if (message != null) ...[
@@ -38,7 +38,7 @@ class ErrorState extends StatelessWidget {
               Text(
                 message!,
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 14, color: AppColors.textSecondary),
+                style: const TextStyle(fontSize: 14, color: TuneHiveColors.coolWhite),
               ),
             ],
             if (onRetry != null) ...[

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:tunehive/app/routes/route_names.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 import 'package:tunehive/app/theme/app_motion.dart';
 import 'package:tunehive/app/theme/app_spacing.dart';
 import 'package:tunehive/app/theme/app_typography.dart';
@@ -55,13 +55,13 @@ class _SplashViewState extends State<SplashView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: TuneHiveColors.charcoalBlack,
       body: DecoratedBox(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [AppColors.backgroundGradientStart, AppColors.backgroundGradientEnd],
+            colors: [TuneHiveColors.cardSurface, TuneHiveColors.charcoalBlack],
           ),
         ),
         child: Center(
@@ -72,7 +72,7 @@ class _SplashViewState extends State<SplashView>
                 scale: Tween<double>(begin: 0.8, end: 1).animate(_logoScale),
                 child: const Icon(
                   Icons.equalizer_rounded,
-                  color: AppColors.primary,
+                  color: TuneHiveColors.electricBlue,
                   size: 64,
                 ),
               ),
@@ -86,7 +86,7 @@ class _SplashViewState extends State<SplashView>
                     fontSize: 28,
                     fontWeight: FontWeight.w900,
                     letterSpacing: 4,
-                    color: AppColors.textPrimary,
+                    color: TuneHiveColors.coolWhite,
                   ),
                 ),
               ),
@@ -100,7 +100,7 @@ class _SplashViewState extends State<SplashView>
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                     letterSpacing: 2,
-                    color: AppColors.textMuted,
+                    color: TuneHiveColors.mutedText,
                   ),
                 ),
               ),

@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:tunehive/app/theme/app_colors.dart';
+import 'package:tunehive/core/theme/tunehive_colors.dart';
 
 class AppBackground extends StatefulWidget {
   const AppBackground({
@@ -70,23 +70,18 @@ class _AppBackgroundState extends State<AppBackground>
             ? 0.0
             : Tween<double>(begin: 0.0, end: 0.015).evaluate(_breathingCtrl);
 
-        // Parallax scroll effect
-        final scrollDy = widget.scrollOffset.value * 0.15; // subtle movement
-
         return Opacity(
           opacity: entranceOpacity,
-          child: Transform.translate(
-            offset: Offset(0, -scrollDy),
-            child: Transform.scale(
-              scale: entranceScale + breathingScale,
-              child: Stack(
+          child: Transform.scale(
+            scale: entranceScale + breathingScale,
+            child: Stack(
                 fit: StackFit.expand,
                 children: [
                   // 1. Image
                   Image.asset(
                     'assets/images/musbg1.png',
                     fit: BoxFit.cover,
-                    errorBuilder: (c, e, s) => Container(color: AppColors.background),
+                    errorBuilder: (c, e, s) => Container(color: TuneHiveColors.charcoalBlack),
                   ),
 
                   // 2. Dark Gradient Overlay (Cinematic Navy/Black)
@@ -131,7 +126,7 @@ class _AppBackgroundState extends State<AppBackground>
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: const Color(0xFFFF5B63).withValues(
+                            color: TuneHiveColors.electricBlue.withValues(
                                 alpha: reducedMotion
                                     ? 0.1
                                     : 0.08 + (0.08 * _breathingCtrl.value)),
@@ -158,7 +153,6 @@ class _AppBackgroundState extends State<AppBackground>
                 ],
               ),
             ),
-          ),
         );
       },
     );
@@ -188,11 +182,11 @@ class _MusicParticlesPainter extends CustomPainter {
       // Color selection
       final colorType = random.nextInt(3);
       if (colorType == 0) {
-        paint.color = const Color(0xFFFF5B63).withValues(alpha: 0.2); // coral
+        paint.color = TuneHiveColors.electricBlue.withValues(alpha: 0.2); // coral
       } else if (colorType == 1) {
         paint.color = Colors.white.withValues(alpha: 0.15); // soft white
       } else {
-        paint.color = const Color(0xFF6B9CFF).withValues(alpha: 0.1); // subtle blue
+        paint.color = TuneHiveColors.electricBlue.withValues(alpha: 0.1); // subtle blue
       }
 
       // Calculate current position based on progress
